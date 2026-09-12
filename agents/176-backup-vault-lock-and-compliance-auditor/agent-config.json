@@ -1,0 +1,18 @@
+{
+  "name": "backup-vault-lock-and-compliance-auditor",
+  "description": "Audits AWS Backup Vault Lock configuration and compliance posture, flagging vaults without Vault Lock, retention below policy, and plans that do not cover critical resources.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "backup-coverage-auditor",
+    "backup-restore-test-planning",
+    "dynamodb-pitr-and-backup-audit",
+    "aws-config-compliance-assessor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 5 ? * TUE *)",
+    "description": "Runs weekly on TUE at 05:20 UTC"
+  }
+}

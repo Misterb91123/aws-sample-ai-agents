@@ -1,0 +1,16 @@
+{
+  "name": "public-exposure-surface-scanner",
+  "description": "Discovers all publicly accessible AWS resources and endpoints to maintain an accurate attack surface inventory.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 * * ? *)",
+    "description": "Runs daily at 07:40 UTC"
+  }
+}

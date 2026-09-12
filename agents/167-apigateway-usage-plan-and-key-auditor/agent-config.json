@@ -1,0 +1,16 @@
+{
+  "name": "apigateway-usage-plan-and-key-auditor",
+  "description": "Audits API Gateway usage plans, API keys, and throttling configuration to find unmetered keys, plans without limits, unused keys, and keys nearing their quota.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "savings-plan-advisor",
+    "apigateway-throttling-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 8 ? * WED *)",
+    "description": "Runs weekly on WED at 08:50 UTC"
+  }
+}

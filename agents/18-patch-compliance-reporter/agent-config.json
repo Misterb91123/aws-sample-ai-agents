@@ -1,0 +1,16 @@
+{
+  "name": "patch-compliance-reporter",
+  "description": "Reports on EC2, EKS node, and container image patching status, identifying systems with missing critical security updates.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "encryption-compliance-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * THU *)",
+    "description": "Runs weekly on THU at 08:00 UTC"
+  }
+}

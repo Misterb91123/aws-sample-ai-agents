@@ -1,0 +1,16 @@
+{
+  "name": "environment-parity-drift-reporter",
+  "description": "Detects configuration drift across dev, staging, and production environments that causes cross-environment failures.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "developer-environment-drift-detector",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 ? * WED *)",
+    "description": "Runs weekly on WED at 07:40 UTC"
+  }
+}

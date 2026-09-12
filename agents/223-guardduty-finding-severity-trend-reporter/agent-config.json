@@ -1,0 +1,16 @@
+{
+  "name": "guardduty-finding-severity-trend-reporter",
+  "description": "Reports GuardDuty finding severity trends over time, highlighting rising high-severity activity, recurring types, and aged unresolved findings by account.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "guardduty-finding-investigation",
+    "guardduty-trend-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:10 UTC"
+  }
+}

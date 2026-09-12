@@ -1,0 +1,17 @@
+{
+  "name": "waf-managed-rule-version-drift-monitor",
+  "description": "Detects AWS WAF managed rule group version drift by finding web ACLs pinned to outdated versions, versions nearing expiry, and rule groups not tracking the default version.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "eks-version-upgrade-planning",
+    "waf-blocked-traffic-analysis",
+    "waf-rate-based-rule-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 9 ? * WED *)",
+    "description": "Runs weekly on WED at 09:40 UTC"
+  }
+}

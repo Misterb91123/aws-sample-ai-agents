@@ -1,0 +1,18 @@
+{
+  "name": "auto-scaling-efficiency-auditor",
+  "description": "Audits Auto Scaling configurations for efficiency, identifying over/under-provisioned scaling, poor thresholds, and missed opportunities.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ami-and-os-lifecycle-management",
+    "capacity-planning-forecaster",
+    "container-image-lifecycle-manager"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 ? * THU *)",
+    "description": "Runs weekly on THU at 05:40 UTC"
+  }
+}

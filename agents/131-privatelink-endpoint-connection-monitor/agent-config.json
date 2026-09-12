@@ -1,0 +1,17 @@
+{
+  "name": "privatelink-endpoint-connection-monitor",
+  "description": "Monitors VPC endpoint services (PrivateLink) for rejected connections, pending approvals, and consumer health.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sagemaker-endpoint-health-investigation",
+    "privatelink-connectivity-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 * * ? *)",
+    "description": "Runs daily at 06:20 UTC"
+  }
+}

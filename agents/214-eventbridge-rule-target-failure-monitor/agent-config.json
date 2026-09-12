@@ -1,0 +1,17 @@
+{
+  "name": "eventbridge-rule-target-failure-monitor",
+  "description": "Monitors EventBridge rule target delivery failures, throttled rules, and rules missing a dead-letter queue.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "eventbridge-dlq-and-retry-design",
+    "eventbridge-event-flow-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

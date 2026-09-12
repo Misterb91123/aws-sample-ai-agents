@@ -1,0 +1,17 @@
+{
+  "name": "sqs-encryption-and-policy-auditor",
+  "description": "Audits SQS queues for missing encryption, wildcard access policies, unconditioned cross-account access, and missing dead-letter redrive.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "sqs-access-and-encryption-hardening",
+    "sqs-queue-processing-investigation",
+    "encryption-compliance-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:30 UTC"
+  }
+}

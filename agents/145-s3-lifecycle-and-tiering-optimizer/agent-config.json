@@ -1,0 +1,17 @@
+{
+  "name": "s3-lifecycle-and-tiering-optimizer",
+  "description": "Optimizes S3 storage cost through lifecycle policies, Intelligent-Tiering, and incomplete multipart upload cleanup.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "s3-storage-tiering-optimization",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:10 UTC"
+  }
+}

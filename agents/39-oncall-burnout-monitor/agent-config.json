@@ -1,0 +1,20 @@
+{
+  "name": "oncall-burnout-monitor",
+  "description": "Monitors on-call burden distribution, alert fatigue indicators, and off-hours page volume to identify burnout risk and operational health issues.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "list_cloudwatch_alarms",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "blast-radius-assessment",
+    "escalation-path-navigator",
+    "incident-communication-drafter"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:30 UTC"
+  }
+}

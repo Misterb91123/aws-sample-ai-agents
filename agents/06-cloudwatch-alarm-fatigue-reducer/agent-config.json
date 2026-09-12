@@ -1,0 +1,19 @@
+{
+  "name": "alarm-fatigue-reducer",
+  "description": "Analyzes CloudWatch alarm configurations and history to identify noisy, redundant, and misconfigured alarms with tuning recommendations.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "alarm-noise-reduction-strategy",
+    "cloudwatch-cost-reduction",
+    "config-conformance-drift-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:00 UTC"
+  }
+}

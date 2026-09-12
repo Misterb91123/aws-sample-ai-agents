@@ -1,0 +1,20 @@
+{
+  "name": "weekly-reliability-scorecard",
+  "description": "Generates a comprehensive weekly reliability scorecard covering SLO compliance, incident metrics, change success rate, and error budget status across all services.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "reliability-reviewer",
+    "az-failure-readiness-assessment",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:40 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "tag-coverage-and-cost-attribution-auditor",
+  "description": "Audits resource tag coverage for cost attribution, flagging missing required tags, untagged spend, and inconsistent tag values.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "tag-governance-and-cost-attribution",
+    "tag-policy-enforcement-strategy"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:30 UTC"
+  }
+}

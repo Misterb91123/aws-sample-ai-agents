@@ -1,0 +1,18 @@
+{
+  "name": "cross-region-data-transfer-auditor",
+  "description": "Identifies and quantifies unexpected cross-region data transfer costs to surface services that should be co-located.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-region-replication-lag-monitor",
+    "data-transfer-cost-analyzer",
+    "cross-account-connectivity-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:30 UTC"
+  }
+}

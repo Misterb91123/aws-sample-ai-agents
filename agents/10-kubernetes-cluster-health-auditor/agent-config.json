@@ -1,0 +1,19 @@
+{
+  "name": "eks-cluster-health-auditor",
+  "description": "Performs comprehensive health audits of EKS clusters covering version status, node health, workload issues, security, and operational readiness.",
+  "tools": [
+    "use_aws",
+    "use_kubectl",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "eks-rbac-least-privilege-review",
+    "emr-cluster-cost-performance-optimizer",
+    "eks-version-upgrade-planning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 5 * * ? *)",
+    "description": "Runs daily at 05:20 UTC"
+  }
+}

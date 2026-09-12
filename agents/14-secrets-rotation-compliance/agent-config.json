@@ -1,0 +1,16 @@
+{
+  "name": "secrets-rotation-compliance",
+  "description": "Audits secrets, access keys, and credentials for rotation compliance, flagging overdue and approaching-deadline credentials.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "encryption-compliance-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 * * ? *)",
+    "description": "Runs daily at 09:20 UTC"
+  }
+}

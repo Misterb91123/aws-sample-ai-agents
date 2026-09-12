@@ -1,0 +1,19 @@
+{
+  "name": "dynamodb-backup-and-pitr-auditor",
+  "description": "Audits DynamoDB tables for point-in-time recovery, backup coverage, and deletion protection.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "dynamodb-pitr-and-backup-audit",
+    "backup-coverage-auditor",
+    "backup-restore-test-planning",
+    "dynamodb-hot-partition-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 ? * TUE *)",
+    "description": "Runs weekly on TUE at 09:20 UTC"
+  }
+}

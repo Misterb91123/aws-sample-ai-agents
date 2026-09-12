@@ -1,0 +1,18 @@
+{
+  "name": "network-acl-and-sg-conflict-detector",
+  "description": "Detects conflicts between Network ACLs and security groups that cause silent packet drops, ephemeral port gaps, and overly broad or unused rules.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "nacl-and-sg-conflict-resolution",
+    "network-firewall-false-positive-tuning",
+    "vpc-network-topology-auditor",
+    "network-anomaly-investigation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:40 UTC"
+  }
+}

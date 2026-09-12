@@ -1,0 +1,17 @@
+{
+  "name": "msk-connect-connector-health-monitor",
+  "description": "Monitors MSK Connect connector state, task failures, and worker capacity saturation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "direct-connect-failover-troubleshooting",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours to check MSK Connect connector state, tasks, and worker capacity"
+  }
+}

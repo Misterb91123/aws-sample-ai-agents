@@ -1,0 +1,17 @@
+{
+  "name": "ecr-repository-governance",
+  "description": "Enforces ECR lifecycle policies, checks image scanning configuration, validates tag immutability settings, and identifies repositories without governance controls.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "tag-governance-and-cost-attribution",
+    "ecr-image-scan-remediation",
+    "artifact-repository-hygiene-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:20 UTC"
+  }
+}

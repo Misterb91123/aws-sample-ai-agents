@@ -1,0 +1,19 @@
+{
+  "name": "dr-replication-readiness-monitor",
+  "description": "Monitors cross-region replication lag across S3, DynamoDB global tables, and Aurora global databases, computes effective RPO, detects replication failures, and issues a failover readiness verdict per workload.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-region-replication-lag-monitor",
+    "containerization-readiness",
+    "pre-deployment-readiness-check",
+    "az-failure-readiness-assessment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 9 * * ? *)",
+    "description": "Runs daily at 09:50 UTC"
+  }
+}

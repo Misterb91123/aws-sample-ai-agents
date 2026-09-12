@@ -1,0 +1,18 @@
+{
+  "name": "stepfunctions-execution-failure-analyzer",
+  "description": "Analyzes Step Functions execution failures and state-level errors to surface recurring failing states and missing retry or catch handling.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "lambda-execution-role-hardening",
+    "api-gateway-integration-latency-analyzer",
+    "cross-region-replication-lag-monitor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

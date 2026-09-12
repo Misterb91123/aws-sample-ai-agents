@@ -1,0 +1,17 @@
+{
+  "name": "nacl-rule-auditor",
+  "description": "Audits Network ACL rules for overly permissive configurations, rule conflicts, and missing deny rules for known bad patterns.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "nacl-and-sg-conflict-resolution",
+    "cross-account-connectivity-debugger",
+    "direct-connect-failover-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:00 UTC"
+  }
+}

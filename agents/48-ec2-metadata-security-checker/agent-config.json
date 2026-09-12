@@ -1,0 +1,18 @@
+{
+  "name": "ec2-metadata-security-checker",
+  "description": "Checks EC2 instances for IMDSv1 exposure, missing hop limits, and instance metadata security best practices.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "security-incident-containment",
+    "security-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

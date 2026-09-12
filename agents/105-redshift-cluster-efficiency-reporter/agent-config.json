@@ -1,0 +1,18 @@
+{
+  "name": "redshift-cluster-efficiency-reporter",
+  "description": "Reports on Redshift cluster efficiency including disk-based queries, WLM queue waits, table skew, and vacuum staleness.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "emr-cluster-cost-performance-optimizer",
+    "redshift-query-tuning-advisor",
+    "redshift-wlm-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * MON *)",
+    "description": "Runs weekly on MON at 06:30 UTC"
+  }
+}

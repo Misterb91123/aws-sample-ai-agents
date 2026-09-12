@@ -1,0 +1,17 @@
+{
+  "name": "efs-throughput-utilization-auditor",
+  "description": "Monitors EFS file systems for throughput mode optimization, identifies over-provisioned throughput, and tracks storage growth patterns.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:50 UTC"
+  }
+}

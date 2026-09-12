@@ -1,0 +1,17 @@
+{
+  "name": "cloudwatch-alarm-configuration-auditor",
+  "description": "Audits CloudWatch alarm configurations for best practices including correct thresholds, proper actions, evaluation periods, and metric math correctness.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "alarm-noise-reduction-strategy",
+    "cloudwatch-cost-reduction"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:50 UTC"
+  }
+}

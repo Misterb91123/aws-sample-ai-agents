@@ -1,0 +1,19 @@
+{
+  "name": "container-runtime-security-monitor",
+  "description": "Monitors ECS and EKS container runtime for security anomalies like privilege escalation, exec into pods, and unexpected processes.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "container-image-security-scanning",
+    "rds-snapshot-security-review",
+    "container-image-lifecycle-manager",
+    "security-incident-containment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

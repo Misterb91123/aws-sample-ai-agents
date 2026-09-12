@@ -1,0 +1,16 @@
+{
+  "name": "config-conformance-pack-reporter",
+  "description": "Reports AWS Config conformance pack compliance across accounts and tracks remediation of non-compliant resources.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "config-conformance-drift-remediation",
+    "aws-config-compliance-assessor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:20 UTC"
+  }
+}

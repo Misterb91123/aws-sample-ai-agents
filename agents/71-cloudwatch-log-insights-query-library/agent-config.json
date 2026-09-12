@@ -1,0 +1,19 @@
+{
+  "name": "cloudwatch-log-insights-query-library",
+  "description": "Executes a curated set of diagnostic CloudWatch Logs Insights queries across critical log groups to proactively surface errors, latency spikes, and operational anomalies.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "athena-query-performance-optimizer",
+    "redshift-query-tuning-advisor",
+    "cloudwatch-cost-reduction",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 * * ? *)",
+    "description": "Runs daily at 06:20 UTC"
+  }
+}

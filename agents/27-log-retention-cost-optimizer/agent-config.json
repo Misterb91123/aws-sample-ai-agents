@@ -1,0 +1,16 @@
+{
+  "name": "log-retention-cost-optimizer",
+  "description": "Analyzes CloudWatch Logs costs and retention settings to identify savings from log optimization, compression, and tiering.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "retention-policy-optimizer",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * WED *)",
+    "description": "Runs weekly on WED at 05:30 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "iam-access-key-age-and-usage-auditor",
+  "description": "Audits IAM access keys for excessive age, unused keys, and users holding multiple active keys.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "access-review-auditor",
+    "sqs-access-and-encryption-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:20 UTC"
+  }
+}

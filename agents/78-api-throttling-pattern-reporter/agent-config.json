@@ -1,0 +1,19 @@
+{
+  "name": "api-throttling-pattern-reporter",
+  "description": "Tracks AWS API throttling across all service calls to identify automation or applications causing rate limit issues.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "self-healing-pattern-designer",
+    "api-gateway-troubleshooting",
+    "api-gateway-integration-latency-analyzer",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 * * ? *)",
+    "description": "Runs daily at 08:30 UTC"
+  }
+}

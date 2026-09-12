@@ -1,0 +1,16 @@
+{
+  "name": "xray-trace-sampling-optimizer",
+  "description": "Optimizes AWS X-Ray trace sampling rules and analyzes trace cost and coverage across services.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "xray-sampling-strategy-design",
+    "trace-analysis-investigator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * WED *)",
+    "description": "Runs weekly on WED at 08:40 UTC"
+  }
+}

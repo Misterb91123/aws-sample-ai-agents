@@ -1,0 +1,17 @@
+{
+  "name": "quota-utilization-forecaster",
+  "description": "Forecasts AWS service quota exhaustion across all services and recommends proactive limit increase requests.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "service-quota-forecasting",
+    "capacity-planning-forecaster"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 9 * * ? *)",
+    "description": "Runs daily at 09:30 UTC"
+  }
+}

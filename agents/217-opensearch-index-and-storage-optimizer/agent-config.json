@@ -1,0 +1,17 @@
+{
+  "name": "opensearch-index-and-storage-optimizer",
+  "description": "Optimizes OpenSearch index lifecycle and storage by flagging low free storage, high JVM memory pressure, missing ISM policies, and oversized replicas.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "opensearch-index-lifecycle-optimization",
+    "s3-storage-tiering-optimization"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

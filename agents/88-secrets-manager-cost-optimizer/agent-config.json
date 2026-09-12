@@ -1,0 +1,16 @@
+{
+  "name": "secrets-manager-cost-optimizer",
+  "description": "Identifies unused secrets, secrets that could use Parameter Store instead, and secrets with excessive retrieval patterns increasing costs.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:40 UTC"
+  }
+}

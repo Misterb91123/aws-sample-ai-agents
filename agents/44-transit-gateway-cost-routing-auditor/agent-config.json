@@ -1,0 +1,19 @@
+{
+  "name": "transit-gateway-cost-routing-auditor",
+  "description": "Audits Transit Gateway routing for blackholes, inefficiencies, and cost optimization opportunities across multi-account networks.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "transit-gateway-routing-debugging",
+    "api-gateway-troubleshooting",
+    "api-gateway-integration-latency-analyzer",
+    "dns-failover-and-latency-routing-design"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 ? * FRI *)",
+    "description": "Runs weekly on FRI at 08:20 UTC"
+  }
+}

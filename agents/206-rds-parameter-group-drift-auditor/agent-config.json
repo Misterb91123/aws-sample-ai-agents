@@ -1,0 +1,16 @@
+{
+  "name": "rds-parameter-group-drift-auditor",
+  "description": "Detects RDS and Aurora parameter group drift from an approved baseline and flags risky parameter values.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rds-parameter-baseline-management",
+    "rds-snapshot-security-review"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:20 UTC"
+  }
+}

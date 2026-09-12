@@ -1,0 +1,17 @@
+{
+  "name": "mq-broker-health-monitor",
+  "description": "Monitors Amazon MQ ActiveMQ and RabbitMQ broker state, memory, storage, and queue depth.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours to check Amazon MQ broker state, heap, storage, and queue depth"
+  }
+}

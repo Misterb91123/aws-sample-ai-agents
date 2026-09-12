@@ -1,0 +1,17 @@
+{
+  "name": "opensearch-cluster-health-monitor",
+  "description": "Monitors Amazon OpenSearch Service domains for cluster status, JVM memory pressure, shard imbalance, storage capacity, thread pool rejections, and snapshot health, then recommends scaling and configuration fixes.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "emr-cluster-cost-performance-optimizer",
+    "opensearch-index-lifecycle-optimization"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 * * ? *)",
+    "description": "Runs daily at 05:00 UTC"
+  }
+}

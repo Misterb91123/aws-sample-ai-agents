@@ -1,0 +1,18 @@
+{
+  "name": "quicksight-spice-capacity-monitor",
+  "description": "Monitors QuickSight SPICE capacity utilization and dataset refresh ingestion health.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "capacity-planning-forecaster",
+    "athena-query-performance-optimizer",
+    "emr-cluster-cost-performance-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to check QuickSight SPICE capacity and dataset refresh health"
+  }
+}

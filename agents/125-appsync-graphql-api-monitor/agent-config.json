@@ -1,0 +1,17 @@
+{
+  "name": "appsync-graphql-api-monitor",
+  "description": "Monitors AWS AppSync GraphQL APIs for resolver errors, latency, and throttling.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "api-gateway-troubleshooting",
+    "api-gateway-integration-latency-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 5 * * ? *)",
+    "description": "Runs daily at 05:10 UTC"
+  }
+}

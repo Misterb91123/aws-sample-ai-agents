@@ -1,0 +1,19 @@
+{
+  "name": "deployment-velocity-reporter",
+  "description": "Tracks DORA metrics and deployment velocity across all services to measure engineering delivery performance.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "canary-deployment-analysis",
+    "deployment-freeze-enforcer",
+    "pre-deployment-readiness-check"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:40 UTC"
+  }
+}

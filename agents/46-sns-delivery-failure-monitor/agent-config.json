@@ -1,0 +1,17 @@
+{
+  "name": "sns-delivery-failure-monitor",
+  "description": "Monitors SNS topic delivery failures, identifies unhealthy subscribers, and tracks notification reliability across all topics.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

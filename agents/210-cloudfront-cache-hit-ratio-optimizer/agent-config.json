@@ -1,0 +1,18 @@
+{
+  "name": "cloudfront-cache-hit-ratio-optimizer",
+  "description": "Optimizes CloudFront cache hit ratio to cut origin load and cost by finding low hit rates, missing cache policies, and cache-defeating forwarding.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cloudfront-cache-optimization",
+    "apigateway-throttling-tuning",
+    "caching-strategy-advisor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

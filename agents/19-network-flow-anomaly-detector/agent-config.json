@@ -1,0 +1,19 @@
+{
+  "name": "network-flow-anomaly-detector",
+  "description": "Analyzes VPC Flow Logs to detect unusual traffic patterns, potential data exfiltration, and unauthorized network communications.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "network-anomaly-investigation",
+    "cost-anomaly-root-cause-analysis",
+    "eventbridge-event-flow-debugger",
+    "network-firewall-false-positive-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "service-quota-watchdog",
+  "description": "Monitors AWS service quotas approaching limits and proactively flags quotas that need increase requests before they cause failures.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "service-quota-forecasting",
+    "service-onboarding-checklist"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 * * ? *)",
+    "description": "Runs daily at 07:30 UTC"
+  }
+}

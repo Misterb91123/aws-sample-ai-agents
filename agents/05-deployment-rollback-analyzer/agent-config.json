@@ -1,0 +1,21 @@
+{
+  "name": "deployment-rollback-analyzer",
+  "description": "Analyzes recent deployments, detects failures by correlating deployment events with health metrics, and provides rollback recommendations.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs",
+    "list_investigations"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "canary-deployment-analysis",
+    "deployment-freeze-enforcer",
+    "pre-deployment-readiness-check"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "waf-blocked-traffic-trend-reporter",
+  "description": "Reports AWS WAF blocked and allowed traffic trends, top blocked sources, rate-based rule effectiveness, and rules approaching WCU capacity per WebACL.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "waf-blocked-traffic-analysis",
+    "waf-rate-based-rule-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 7 * * ? *)",
+    "description": "Runs daily at 07:50 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "eks-node-group-scaling-efficiency-monitor",
+  "description": "Monitors EKS managed node group scaling efficiency and bin-packing to flag underutilized nodes and scheduling pressure.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "eks-rbac-least-privilege-review",
+    "eks-version-upgrade-planning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to evaluate EKS node group utilization, bin-packing, and pod scheduling pressure"
+  }
+}

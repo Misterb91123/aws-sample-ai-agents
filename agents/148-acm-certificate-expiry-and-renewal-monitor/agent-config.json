@@ -1,0 +1,17 @@
+{
+  "name": "acm-certificate-expiry-and-renewal-monitor",
+  "description": "Monitors ACM certificates for upcoming expiry, failed managed renewals, blocked validation, and unused certificates across regions.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis",
+    "exposed-credentials-response"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 8 * * ? *)",
+    "description": "Runs daily at 08:50 UTC"
+  }
+}

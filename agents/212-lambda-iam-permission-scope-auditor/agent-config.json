@@ -1,0 +1,17 @@
+{
+  "name": "lambda-iam-permission-scope-auditor",
+  "description": "Audits Lambda execution role permission scope for wildcard actions, AdministratorAccess, unused permissions, and missing least-privilege boundaries.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "lambda-concurrency-cost-tuning",
+    "lambda-cold-start-investigator",
+    "lambda-execution-role-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 7 ? * WED *)",
+    "description": "Runs weekly on WED at 07:20 UTC"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "route53-health-check-validator",
+  "description": "Audits Route53 health checks for misconfiguration, failing checks, dangling endpoints, and DNS failover readiness gaps.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-account-connectivity-debugger",
+    "direct-connect-failover-troubleshooting",
+    "dns-failover-and-latency-routing-design"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sandbox-cost-cleanup-reporter",
+  "description": "Identifies stale and idle resources in sandbox and development accounts for cleanup to reduce cost.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sandbox-account-cleanup-advisor",
+    "ebs-snapshot-cleanup-strategy"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:00 UTC"
+  }
+}

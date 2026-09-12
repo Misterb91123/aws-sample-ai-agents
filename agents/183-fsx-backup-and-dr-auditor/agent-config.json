@@ -1,0 +1,17 @@
+{
+  "name": "fsx-backup-and-dr-auditor",
+  "description": "Audits FSx file systems for backup coverage, retention, and multi-AZ/DR posture including single-AZ production systems and stale backups.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "backup-coverage-auditor",
+    "backup-restore-test-planning",
+    "dynamodb-pitr-and-backup-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:30 UTC"
+  }
+}

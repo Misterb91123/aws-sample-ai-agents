@@ -1,0 +1,19 @@
+{
+  "name": "cross-service-dependency-mapper",
+  "description": "Discovers and documents service dependencies using resource tags, network flows, and API call patterns to maintain an accurate service map.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "legacy-dependency-mapper",
+    "service-quota-forecasting",
+    "cross-region-replication-lag-monitor",
+    "cross-account-connectivity-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:30 UTC"
+  }
+}

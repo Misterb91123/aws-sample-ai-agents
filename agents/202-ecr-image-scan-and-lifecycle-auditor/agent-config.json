@@ -1,0 +1,17 @@
+{
+  "name": "ecr-image-scan-and-lifecycle-auditor",
+  "description": "Audits ECR repositories for unremediated image scan findings and lifecycle policy coverage.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ecr-image-scan-remediation",
+    "container-image-security-scanning",
+    "container-image-lifecycle-manager"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 ? * WED *)",
+    "description": "Runs weekly on WED at 05:40 UTC"
+  }
+}

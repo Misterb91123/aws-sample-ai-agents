@@ -1,0 +1,17 @@
+{
+  "name": "cost-anomaly-root-cause-investigator",
+  "description": "Investigates AWS Cost Anomaly Detection findings to attribute spikes to specific services, resources, and changes.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cost-anomaly-root-cause-analysis",
+    "log-pattern-anomaly-detector",
+    "network-anomaly-investigation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 * * ? *)",
+    "description": "Runs daily at 07:30 UTC"
+  }
+}

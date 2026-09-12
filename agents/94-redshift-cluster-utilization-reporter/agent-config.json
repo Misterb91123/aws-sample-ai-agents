@@ -1,0 +1,18 @@
+{
+  "name": "redshift-cluster-utilization-reporter",
+  "description": "Monitors Redshift cluster performance, identifies underutilized clusters, tracks query queue depth, and recommends pause/resume schedules.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "emr-cluster-cost-performance-optimizer",
+    "redshift-query-tuning-advisor",
+    "redshift-wlm-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * FRI *)",
+    "description": "Runs weekly on FRI at 08:40 UTC"
+  }
+}

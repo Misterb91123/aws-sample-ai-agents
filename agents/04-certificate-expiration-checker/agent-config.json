@@ -1,0 +1,16 @@
+{
+  "name": "certificate-expiration-checker",
+  "description": "Tracks all TLS/SSL certificates across AWS accounts, identifies certificates approaching expiration, and flags renewal issues.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 * * ? *)",
+    "description": "Runs daily at 9:00 AM UTC"
+  }
+}

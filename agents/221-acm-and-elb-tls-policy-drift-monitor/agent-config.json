@@ -1,0 +1,16 @@
+{
+  "name": "acm-and-elb-tls-policy-drift-monitor",
+  "description": "Monitors TLS policy drift on ELB and CloudFront endpoints for outdated protocols, weak ciphers, fleet drift, and expiring listener certificates.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "tls-handshake-failure-debugger",
+    "tls-policy-modernization"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

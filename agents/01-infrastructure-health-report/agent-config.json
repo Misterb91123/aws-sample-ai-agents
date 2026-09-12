@@ -1,0 +1,19 @@
+{
+  "name": "daily-infra-health-report",
+  "description": "Generates a comprehensive daily infrastructure health report summarizing AWS resource state, active alarms, incidents, and service availability.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_cloudwatch_alarms",
+    "list_investigations"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 * * ? *)",
+    "description": "Runs daily at 06:00 UTC"
+  }
+}

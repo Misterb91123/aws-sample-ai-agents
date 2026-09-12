@@ -1,0 +1,16 @@
+{
+  "name": "glue-data-catalog-hygiene-auditor",
+  "description": "Audits Glue Data Catalog hygiene including failing crawlers, stale partitions, deprecated tables, and empty databases.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "glue-job-failure-diagnosis",
+    "artifact-repository-hygiene-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:30 UTC"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "s3-bucket-security-scanner",
+  "description": "Scans all S3 buckets for public access, missing encryption, overly permissive policies, and data protection gaps.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "security-incident-containment",
+    "security-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:30 UTC"
+  }
+}

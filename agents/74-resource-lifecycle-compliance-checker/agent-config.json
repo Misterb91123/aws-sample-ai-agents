@@ -1,0 +1,17 @@
+{
+  "name": "resource-lifecycle-compliance-checker",
+  "description": "Verifies resources follow lifecycle stages from dev to staging to prod, preventing shadow production deployments.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "encryption-compliance-validator",
+    "idle-resource-hunter"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 ? * FRI *)",
+    "description": "Runs weekly on FRI at 09:20 UTC"
+  }
+}

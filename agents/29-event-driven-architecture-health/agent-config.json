@@ -1,0 +1,17 @@
+{
+  "name": "event-driven-architecture-health",
+  "description": "Monitors health of event-driven systems including SQS queues, SNS topics, EventBridge rules, and Kinesis streams for backlogs and failures.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "event-driven-troubleshooting",
+    "eventbridge-event-flow-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

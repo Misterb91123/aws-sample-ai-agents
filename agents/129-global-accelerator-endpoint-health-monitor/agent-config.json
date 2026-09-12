@@ -1,0 +1,17 @@
+{
+  "name": "global-accelerator-endpoint-health-monitor",
+  "description": "Monitors AWS Global Accelerator accelerators and endpoint groups for unhealthy endpoints and traffic distribution issues.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sagemaker-endpoint-health-investigation",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 9 * * ? *)",
+    "description": "Runs daily at 09:10 UTC"
+  }
+}

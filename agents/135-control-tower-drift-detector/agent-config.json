@@ -1,0 +1,16 @@
+{
+  "name": "control-tower-drift-detector",
+  "description": "Detects drift from AWS Control Tower governance including non-compliant accounts, disabled guardrails, and landing zone drift.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "control-tower-remediation",
+    "cloudtrail-lake-cost-control"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:30 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "reserved-instance-coverage-optimizer",
+  "description": "Tracks RI utilization, identifies expiring RIs, finds uncovered steady-state usage, and compares RI vs Savings Plan effectiveness.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:50 UTC"
+  }
+}

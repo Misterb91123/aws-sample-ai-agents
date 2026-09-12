@@ -1,0 +1,17 @@
+{
+  "name": "codepipeline-stage-failure-analyzer",
+  "description": "Analyzes AWS CodePipeline stage failures, recurring failure hotspots, and mean time to recovery across pipelines.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "canary-deployment-analysis",
+    "deployment-freeze-enforcer",
+    "pre-deployment-readiness-check"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:20 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "orphaned-resource-cleaner",
+  "description": "Discovers orphaned AWS resources left behind by deleted services, failed deployments, or incomplete cleanup, and recommends safe removal.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "idle-resource-hunter",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:20 UTC"
+  }
+}

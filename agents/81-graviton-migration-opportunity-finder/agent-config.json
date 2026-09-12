@@ -1,0 +1,18 @@
+{
+  "name": "graviton-migration-opportunity-finder",
+  "description": "Identifies EC2, RDS, ElastiCache, and Lambda workloads on x86 that could migrate to Graviton/ARM for 20-40% cost savings.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "automation-opportunity-scorer",
+    "cost-allocation-gap-finder",
+    "database-migration-planner",
+    "serverless-migration-evaluator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:30 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "cloudformation-stack-health-checker",
+  "description": "Finds CloudFormation stacks in failed or rollback states, detects drift, identifies stuck updates, stale stacks, and production stacks missing protections.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 * * ? *)",
+    "description": "Runs daily at 08:40 UTC"
+  }
+}

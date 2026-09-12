@@ -1,0 +1,17 @@
+{
+  "name": "athena-cost-governance-monitor",
+  "description": "Monitors Amazon Athena query cost by scanning volume, flags expensive queries, and enforces workgroup data scan limits.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "tag-governance-and-cost-attribution",
+    "athena-query-performance-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 * * ? *)",
+    "description": "Runs daily at 09:20 UTC"
+  }
+}

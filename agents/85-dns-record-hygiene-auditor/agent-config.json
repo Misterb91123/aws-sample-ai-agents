@@ -1,0 +1,17 @@
+{
+  "name": "dns-record-hygiene-auditor",
+  "description": "Audits Route53 records for dangling DNS pointing to deleted resources, stale records, and subdomain takeover vulnerabilities.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "artifact-repository-hygiene-auditor",
+    "dns-failover-and-latency-routing-design",
+    "dns-resolution-troubleshooter"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:10 UTC"
+  }
+}

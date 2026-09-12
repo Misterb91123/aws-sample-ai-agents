@@ -1,0 +1,21 @@
+{
+  "name": "incident-postmortem-generator",
+  "description": "Auto-generates blameless post-mortem documents from resolved investigations with timeline, root cause analysis, and action items.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "incident-communication-drafter",
+    "incident-triage-classifier",
+    "release-changelog-generator",
+    "security-incident-containment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:30 UTC"
+  }
+}

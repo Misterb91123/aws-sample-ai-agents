@@ -1,0 +1,17 @@
+{
+  "name": "step-functions-cost-efficiency-reporter",
+  "description": "Reports Step Functions cost and execution efficiency, recommending Standard versus Express workflow types, flagging excessive state transitions, limit risk, pass-through Lambda, and failures.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "step-functions-error-handling-design",
+    "step-functions-workflow-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * THU *)",
+    "description": "Runs weekly on THU at 08:40 UTC"
+  }
+}

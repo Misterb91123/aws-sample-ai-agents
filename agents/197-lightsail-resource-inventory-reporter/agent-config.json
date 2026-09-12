@@ -1,0 +1,16 @@
+{
+  "name": "lightsail-resource-inventory-reporter",
+  "description": "Reports Amazon Lightsail resource inventory and cost visibility gaps including unattached static IPs and disks, instances without snapshots, and resources outside central governance.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "idle-resource-hunter",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 9 ? * WED *)",
+    "description": "Runs weekly on WED at 09:50 UTC"
+  }
+}

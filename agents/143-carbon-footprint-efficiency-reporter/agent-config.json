@@ -1,0 +1,17 @@
+{
+  "name": "carbon-footprint-efficiency-reporter",
+  "description": "Reports infrastructure efficiency as a proxy for carbon footprint and identifies waste that increases both cost and emissions.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 4 4 * ? *)",
+    "description": "Runs monthly on day 4 at 04:50 UTC"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "ecs-fargate-rightsizing-advisor",
+  "description": "Recommends ECS Fargate task CPU and memory rightsizing from sustained utilization to cut waste and relieve undersized tasks.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "ecs-task-failure-diagnosis",
+    "rightsizing-recommendation-engine"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 * * ? *)",
+    "description": "Runs daily at 08:20 UTC"
+  }
+}

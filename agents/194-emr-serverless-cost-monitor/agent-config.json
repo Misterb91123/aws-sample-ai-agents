@@ -1,0 +1,17 @@
+{
+  "name": "emr-serverless-cost-monitor",
+  "description": "Monitors EMR Serverless application usage and job run resource utilization to flag low-utilization jobs, idle pre-initialized capacity, and week-over-week cost growth.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "emr-cluster-cost-performance-optimizer",
+    "serverless-migration-evaluator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 * * ? *)",
+    "description": "Runs daily at 09:20 UTC"
+  }
+}

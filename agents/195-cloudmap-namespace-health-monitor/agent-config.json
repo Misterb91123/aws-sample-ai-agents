@@ -1,0 +1,16 @@
+{
+  "name": "cloudmap-namespace-health-monitor",
+  "description": "Monitors AWS Cloud Map service discovery health to flag unhealthy instances, services with no healthy instances, and stale registrations.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to monitor Cloud Map namespace and service discovery health"
+  }
+}

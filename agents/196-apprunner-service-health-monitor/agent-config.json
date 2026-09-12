@@ -1,0 +1,17 @@
+{
+  "name": "apprunner-service-health-monitor",
+  "description": "Monitors AWS App Runner service health and scaling to flag non-running services, elevated 5xx error rates, high resource utilization, and services pinned at maximum instances.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "service-quota-forecasting",
+    "service-onboarding-checklist"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours to monitor App Runner service health and scaling"
+  }
+}

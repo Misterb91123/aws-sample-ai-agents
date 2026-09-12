@@ -1,0 +1,17 @@
+{
+  "name": "macie-sensitive-data-exposure-monitor",
+  "description": "Monitors Amazon Macie findings for sensitive data exposed in S3 and flags buckets that are both highly sensitive and publicly accessible.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis",
+    "exposed-credentials-response"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

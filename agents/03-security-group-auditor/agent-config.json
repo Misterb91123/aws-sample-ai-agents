@@ -1,0 +1,18 @@
+{
+  "name": "security-group-auditor",
+  "description": "Audits all VPC security groups to identify overly permissive rules, unused groups, and configurations violating security best practices.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "security-incident-containment",
+    "security-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * THU *)",
+    "description": "Runs weekly on THU at 05:30 UTC"
+  }
+}

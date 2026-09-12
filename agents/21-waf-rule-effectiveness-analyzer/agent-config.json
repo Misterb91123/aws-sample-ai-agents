@@ -1,0 +1,18 @@
+{
+  "name": "waf-rule-effectiveness-analyzer",
+  "description": "Evaluates WAF rule effectiveness by analyzing blocked traffic patterns, identifying dormant rules, and detecting protection gaps.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "waf-blocked-traffic-analysis",
+    "waf-rate-based-rule-tuning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 9 ? * TUE *)",
+    "description": "Runs weekly on TUE at 09:30 UTC"
+  }
+}

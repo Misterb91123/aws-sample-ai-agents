@@ -1,0 +1,17 @@
+{
+  "name": "s3-replication-lag-and-failure-monitor",
+  "description": "Monitors S3 Cross-Region and Same-Region Replication for lag and failures against the 15 minute RTC SLA.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-region-replication-lag-monitor",
+    "kinesis-data-pipeline-lag-investigation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

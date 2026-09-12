@@ -1,0 +1,18 @@
+{
+  "name": "cloudfront-security-header-auditor",
+  "description": "Audits CloudFront distributions for missing security response headers, weak TLS configuration, and absent WAF association.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "cloudfront-cache-optimization",
+    "security-incident-containment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:00 UTC"
+  }
+}

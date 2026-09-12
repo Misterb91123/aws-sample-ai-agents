@@ -1,0 +1,17 @@
+{
+  "name": "batch-job-queue-efficiency-monitor",
+  "description": "Monitors AWS Batch job queues and compute environments for stuck jobs, failures, and vCPU saturation.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "glue-job-failure-diagnosis",
+    "sqs-queue-processing-investigation",
+    "sagemaker-training-job-cost-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours to check AWS Batch job queue and compute environment efficiency"
+  }
+}

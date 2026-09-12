@@ -1,0 +1,18 @@
+{
+  "name": "lambda-provisioned-concurrency-cost-optimizer",
+  "description": "Optimizes Lambda provisioned concurrency by analyzing utilization versus cost and identifying over-provisioned, under-provisioned, and missing-PC functions.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "lambda-concurrency-cost-tuning",
+    "lambda-cold-start-investigator",
+    "lambda-execution-role-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:00 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "vpn-tunnel-stability-monitor",
+  "description": "Monitors Site-to-Site VPN tunnels for flapping, down state, and asymmetric redundancy.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to detect VPN tunnel flapping, down tunnels, and redundancy loss"
+  }
+}

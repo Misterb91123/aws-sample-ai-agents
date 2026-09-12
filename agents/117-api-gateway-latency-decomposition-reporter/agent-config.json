@@ -1,0 +1,19 @@
+{
+  "name": "api-gateway-latency-decomposition-reporter",
+  "description": "Reports API Gateway latency decomposed into gateway overhead versus backend integration latency at p50, p90, and p99 to isolate slow endpoints and flag SLA breaches, cold starts, cache issues, and timeout risk.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "api-gateway-integration-latency-analyzer",
+    "api-gateway-troubleshooting",
+    "dns-failover-and-latency-routing-design",
+    "latency-path-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 7 * * ? *)",
+    "description": "Runs daily at 07:50 UTC"
+  }
+}

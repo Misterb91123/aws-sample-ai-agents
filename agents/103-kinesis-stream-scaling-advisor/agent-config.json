@@ -1,0 +1,18 @@
+{
+  "name": "kinesis-stream-scaling-advisor",
+  "description": "Analyzes Kinesis Data Streams shard utilization to recommend resharding and detect throttling or consumer lag.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "kinesis-data-pipeline-lag-investigation",
+    "athena-query-performance-optimizer",
+    "emr-cluster-cost-performance-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to evaluate Kinesis shard utilization, throttling, and consumer lag"
+  }
+}

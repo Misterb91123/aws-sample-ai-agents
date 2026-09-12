@@ -1,0 +1,216 @@
+{
+  "schemaId": "recommendation.schema.json",
+  "schemaDraft": "draft-07 compatible",
+  "title": "Agent Recommendation Record",
+  "description": "A machine-readable recommendation emitted by a read-only monitoring or audit agent. It is safe to display to a human, to store, or to hand to a separate remediation-orchestrator agent for an approval-gated change plan. Producing a recommendation record never executes anything.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "producedBy",
+    "producedAt",
+    "title",
+    "finding",
+    "evidence",
+    "target",
+    "proposedAction",
+    "safetyRating",
+    "reversible",
+    "requiresApproval",
+    "escalationRequired",
+    "prohibitedActionCheck",
+    "confidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version of this recommendation schema."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,80}$",
+      "description": "Stable identifier for this recommendation, unique within the producing agent run (for example, alarm-fatigue-2026-08-14-cpu-prod-api)."
+    },
+    "producedBy": {
+      "type": "string",
+      "description": "The agent name that produced this recommendation, matching agent-config.json name."
+    },
+    "producedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the recommendation was produced."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 160,
+      "description": "One-line human-readable title naming the resource and the fix."
+    },
+    "finding": {
+      "type": "string",
+      "description": "What was observed and why it is a problem. Grounded in data, not speculation."
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The specific observed data points that justify the finding. Every recommendation must cite at least one.",
+      "items": {
+        "type": "object",
+        "required": ["source", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Where the value came from, for example a CloudWatch metric name or an AWS API operation (cloudwatch GetMetricStatistics CPUUtilization, ec2 DescribeSnapshots)."
+          },
+          "value": {
+            "type": "string",
+            "description": "The observed value or summary, for example p95 CPUUtilization 12 percent over 14 days, or snapshot has no source volume."
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the value was observed, used to judge freshness."
+          }
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["service", "resourceId"],
+      "additionalProperties": false,
+      "description": "The specific resource the recommendation applies to.",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "AWS service, for example ec2, rds, s3, cloudwatch."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource identifier or ARN. Reference by identifier; do not embed secrets."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account identifier. Treated as HIGH sensitivity; may be masked in stored output."
+        },
+        "region": {
+          "type": "string",
+          "description": "AWS region of the resource."
+        }
+      }
+    },
+    "proposedAction": {
+      "type": "object",
+      "required": ["summary", "changeType"],
+      "additionalProperties": false,
+      "description": "The change being proposed. This is a proposal only; the producing agent cannot execute it.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Plain-language description of the specific change, naming the resource and the exact setting or value."
+        },
+        "changeType": {
+          "type": "string",
+          "enum": [
+            "no-op",
+            "configuration-change",
+            "scaling-change",
+            "policy-change",
+            "tagging-change",
+            "lifecycle-change",
+            "resource-cleanup",
+            "investigation-only"
+          ],
+          "description": "Category of change."
+        },
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional concrete implementation the executor could use after approval. Never auto-run by the producing agent.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["aws-cli", "ssm-automation", "cloudformation", "terraform", "manual"],
+              "description": "How the change would be applied."
+            },
+            "content": {
+              "type": "string",
+              "description": "The command, document name, or template snippet. Must not contain a prohibited action (see prohibitedActionCheck)."
+            }
+          }
+        },
+        "rollback": {
+          "type": "string",
+          "description": "Explicit steps to revert the change if it makes things worse. Required for any change that is not read-only."
+        }
+      }
+    },
+    "safetyRating": {
+      "type": "string",
+      "enum": ["GREEN", "YELLOW", "RED"],
+      "description": "GREEN read-only or no state change; YELLOW state-changing but recoverable; RED destructive or hard to reverse."
+    },
+    "reversible": {
+      "type": "boolean",
+      "description": "Whether the proposed change can be reverted."
+    },
+    "requiresApproval": {
+      "type": "boolean",
+      "description": "Whether a human must approve before the change is applied. Must be true for YELLOW and RED."
+    },
+    "escalationRequired": {
+      "type": "boolean",
+      "description": "Whether the change meets an escalation condition in SECURITY.md (IAM in production, security controls, KMS key policy, aws-auth, SCP, CloudTrail, encryption, cross-account or cross-region blast radius, data loss or exposure)."
+    },
+    "prohibitedActionCheck": {
+      "type": "string",
+      "enum": ["passed", "failed"],
+      "description": "Result of checking the proposed action against the SECURITY.md prohibited actions list. A downstream executor must refuse any record where this is failed."
+    },
+    "blastRadius": {
+      "type": "string",
+      "enum": ["single-resource", "single-account", "multi-account", "multi-region", "organization"],
+      "description": "Scope of impact if the change is applied."
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"],
+      "description": "Severity of the finding."
+    },
+    "effort": {
+      "type": "string",
+      "enum": ["quick-win", "small", "medium", "project"],
+      "description": "Estimated effort to remediate."
+    },
+    "estimatedMonthlySavingsUsd": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Optional estimated monthly cost saving if the change is a cost optimization."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Confidence in the finding given data completeness. Low confidence should lower severity, not inflate it."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Suggested owning team, derived from resource tags where available."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional caveats, assumptions, or data gaps affecting this recommendation."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "safetyRating": { "enum": ["YELLOW", "RED"] } }
+      },
+      "then": {
+        "properties": { "requiresApproval": { "const": true } }
+      }
+    }
+  ]
+}

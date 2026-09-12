@@ -1,0 +1,16 @@
+{
+  "name": "elastic-ip-waste-detector",
+  "description": "Identifies unassociated and unnecessary Elastic IPs across accounts, calculating total waste and recommending cleanup.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:30 UTC"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "database-performance-weekly-report",
+  "description": "Produces a weekly RDS/Aurora performance digest covering slow queries, capacity trends, and proactive optimization recommendations.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "athena-query-performance-optimizer",
+    "emr-cluster-cost-performance-optimizer",
+    "database-migration-planner",
+    "database-query-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:40 UTC"
+  }
+}

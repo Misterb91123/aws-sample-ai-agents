@@ -1,0 +1,19 @@
+{
+  "name": "multi-region-latency-comparator",
+  "description": "Compares application and infrastructure latency across AWS regions to detect regional degradation and validate multi-region performance.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "multi-account-baseline-hardening",
+    "api-gateway-integration-latency-analyzer",
+    "cross-region-replication-lag-monitor",
+    "dns-failover-and-latency-routing-design"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 * * ? *)",
+    "description": "Runs daily at 7:00 AM UTC"
+  }
+}

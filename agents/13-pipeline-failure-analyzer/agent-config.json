@@ -1,0 +1,17 @@
+{
+  "name": "pipeline-failure-analyzer",
+  "description": "Analyzes CI/CD pipeline failures to identify flaky tests, recurring errors, and deployment bottlenecks with DORA metrics.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "kinesis-data-pipeline-lag-investigation",
+    "build-pipeline-bottleneck-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:10 UTC"
+  }
+}

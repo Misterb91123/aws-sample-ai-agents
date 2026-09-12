@@ -1,0 +1,17 @@
+{
+  "name": "workspaces-utilization-and-cost-monitor",
+  "description": "Monitors Amazon WorkSpaces utilization and running-mode cost fit to flag ALWAYS_ON WorkSpaces with low usage and unused WorkSpaces not connected in 30 days.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

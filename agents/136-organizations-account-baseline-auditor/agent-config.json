@@ -1,0 +1,18 @@
+{
+  "name": "organizations-account-baseline-auditor",
+  "description": "Audits every account in the organization for baseline security and operational controls consistency.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "multi-account-baseline-hardening",
+    "sandbox-account-cleanup-advisor",
+    "cross-account-connectivity-debugger",
+    "rds-parameter-baseline-management"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:40 UTC"
+  }
+}

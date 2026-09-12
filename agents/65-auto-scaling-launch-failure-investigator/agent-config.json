@@ -1,0 +1,18 @@
+{
+  "name": "auto-scaling-launch-failure-investigator",
+  "description": "Investigates Auto Scaling Group launch failures to identify capacity issues, AMI problems, subnet exhaustion, and security group misconfigurations preventing scaling.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ami-and-os-lifecycle-management",
+    "capacity-planning-forecaster",
+    "container-image-lifecycle-manager"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

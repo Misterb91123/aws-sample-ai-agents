@@ -1,0 +1,18 @@
+{
+  "name": "cloudwan-core-network-monitor",
+  "description": "Monitors AWS Cloud WAN core network for segment routing health, attachment state, and cross-region traffic.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "network-firewall-false-positive-tuning",
+    "vpc-network-topology-auditor",
+    "network-anomaly-investigation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:00 UTC"
+  }
+}

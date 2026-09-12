@@ -1,0 +1,18 @@
+{
+  "name": "bedrock-token-spend-tracker",
+  "description": "Tracks Amazon Bedrock token consumption and cost by model, detects throttling, and flags prompt inefficiency.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "bedrock-usage-cost-monitor",
+    "feature-store-freshness-auditor",
+    "ml-model-drift-monitor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 * * ? *)",
+    "description": "Runs daily at 08:30 UTC"
+  }
+}

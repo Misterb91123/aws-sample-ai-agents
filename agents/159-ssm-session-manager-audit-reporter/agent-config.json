@@ -1,0 +1,16 @@
+{
+  "name": "ssm-session-manager-audit-reporter",
+  "description": "Audits SSM Session Manager usage for logging gaps, long-running sessions, production access, and privileged usage.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "dynamodb-pitr-and-backup-audit",
+    "change-management-audit-trail"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:30 UTC"
+  }
+}

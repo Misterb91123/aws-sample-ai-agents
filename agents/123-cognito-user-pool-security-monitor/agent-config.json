@@ -1,0 +1,19 @@
+{
+  "name": "cognito-user-pool-security-monitor",
+  "description": "Monitors Amazon Cognito user pools for authentication anomalies, MFA coverage, and risky configuration.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "security-incident-containment",
+    "security-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 * * ? *)",
+    "description": "Runs daily at 8:00 AM UTC to assess Cognito user pool security posture"
+  }
+}

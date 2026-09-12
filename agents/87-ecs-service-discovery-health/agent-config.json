@@ -1,0 +1,19 @@
+{
+  "name": "ecs-service-discovery-health",
+  "description": "Monitors ECS Cloud Map service discovery registrations, identifies stale registrations, missing services, and DNS resolution failures.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "ecs-task-failure-diagnosis",
+    "service-quota-forecasting",
+    "service-onboarding-checklist"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

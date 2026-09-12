@@ -1,0 +1,17 @@
+{
+  "name": "cloudwatch-synthetics-canary-health-monitor",
+  "description": "Monitors CloudWatch Synthetics canaries for low success rate, run duration regression, and canaries that are stopped or not running.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cloudwatch-cost-reduction",
+    "canary-deployment-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

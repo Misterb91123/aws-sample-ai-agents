@@ -1,0 +1,16 @@
+{
+  "name": "datasync-task-health-monitor",
+  "description": "Monitors AWS DataSync task execution health to catch errored executions, transfer failures, and tasks with no successful run in 24 hours.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ecs-task-failure-diagnosis",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

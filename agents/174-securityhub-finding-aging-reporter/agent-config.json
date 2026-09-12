@@ -1,0 +1,17 @@
+{
+  "name": "securityhub-finding-aging-reporter",
+  "description": "Reports AWS Security Hub finding aging and remediation SLA breaches by severity, grouped by security standard and account.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "guardduty-finding-investigation",
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * FRI *)",
+    "description": "Runs weekly on FRI at 09:00 UTC"
+  }
+}

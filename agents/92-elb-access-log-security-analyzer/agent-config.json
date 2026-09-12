@@ -1,0 +1,19 @@
+{
+  "name": "elb-access-log-security-analyzer",
+  "description": "Analyzes ALB access logs for security-relevant patterns including scanning activity, credential stuffing indicators, and suspicious request patterns.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "access-review-auditor",
+    "container-image-security-scanning",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "scp-effectiveness-auditor",
+  "description": "Audits AWS Organizations Service Control Policies for coverage gaps, overly broad or ineffective policies, and accounts missing baseline guardrails.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "scp-guardrail-design",
+    "access-review-auditor",
+    "aws-config-compliance-assessor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:20 UTC"
+  }
+}

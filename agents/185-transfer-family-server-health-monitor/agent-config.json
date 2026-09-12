@@ -1,0 +1,17 @@
+{
+  "name": "transfer-family-server-health-monitor",
+  "description": "Monitors AWS Transfer Family SFTP, FTPS, and FTP server state, authentication failures, and idle capacity.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "data-transfer-cost-analyzer",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to check Transfer Family server state, auth failures, and idle servers"
+  }
+}

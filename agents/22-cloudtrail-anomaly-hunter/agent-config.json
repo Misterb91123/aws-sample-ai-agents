@@ -1,0 +1,19 @@
+{
+  "name": "cloudtrail-anomaly-hunter",
+  "description": "Analyzes CloudTrail events to detect suspicious API activity, unauthorized access patterns, and privilege escalation indicators.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "cloudtrail-lake-cost-control",
+    "cost-anomaly-root-cause-analysis",
+    "idle-resource-hunter",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

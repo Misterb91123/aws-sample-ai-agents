@@ -1,0 +1,16 @@
+{
+  "name": "infrastructure-age-eol-tracker",
+  "description": "Tracks infrastructure components approaching end-of-life including runtimes, AMIs, DB engines, instance types, and OS versions.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "infrastructure-drift-detector",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 5 ? * FRI *)",
+    "description": "Runs weekly on FRI at 05:10 UTC"
+  }
+}

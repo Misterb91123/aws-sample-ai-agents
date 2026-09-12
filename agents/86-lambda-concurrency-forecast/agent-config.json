@@ -1,0 +1,18 @@
+{
+  "name": "lambda-concurrency-forecast",
+  "description": "Forecasts Lambda concurrency needs based on invocation trends and identifies functions approaching account or reserved limits.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "lambda-concurrency-cost-tuning",
+    "lambda-cold-start-investigator",
+    "lambda-execution-role-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 6 * * ? *)",
+    "description": "Runs daily at 06:50 UTC"
+  }
+}

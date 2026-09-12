@@ -1,0 +1,17 @@
+{
+  "name": "kms-grant-and-policy-drift-auditor",
+  "description": "Audits KMS key grants and key policies for drift and over-permissive access including unknown principals and wildcard policy statements.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis",
+    "exposed-credentials-response"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 ? * THU *)",
+    "description": "Runs weekly on THU at 05:40 UTC"
+  }
+}

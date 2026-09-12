@@ -1,0 +1,17 @@
+{
+  "name": "storage-cost-optimizer",
+  "description": "Identifies storage cost savings across EBS, S3, snapshots, and EFS by analyzing usage patterns and recommending optimizations.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "s3-storage-tiering-optimization",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * FRI *)",
+    "description": "Runs weekly on FRI at 09:00 UTC"
+  }
+}

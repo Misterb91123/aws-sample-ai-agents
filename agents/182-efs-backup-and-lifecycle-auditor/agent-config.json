@@ -1,0 +1,17 @@
+{
+  "name": "efs-backup-and-lifecycle-auditor",
+  "description": "Audits EFS file systems for backup coverage and lifecycle policies including disabled backups and missing IA transitions.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "backup-coverage-auditor",
+    "backup-restore-test-planning",
+    "dynamodb-pitr-and-backup-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:20 UTC"
+  }
+}

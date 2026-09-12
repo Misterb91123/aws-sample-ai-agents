@@ -1,0 +1,17 @@
+{
+  "name": "rds-proxy-connection-health-monitor",
+  "description": "Monitors RDS Proxy connection pooling health for high borrow latency, pool saturation, and excessive connection pinning.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "rds-parameter-baseline-management"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

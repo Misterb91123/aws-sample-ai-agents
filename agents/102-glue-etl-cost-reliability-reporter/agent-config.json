@@ -1,0 +1,17 @@
+{
+  "name": "glue-etl-cost-reliability-reporter",
+  "description": "Generates a weekly report on AWS Glue ETL job cost and reliability, flagging failing jobs, oversized DPU allocation, and jobs without bookmarks or retries.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "glue-job-failure-diagnosis",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * WED *)",
+    "description": "Runs weekly on WED at 05:00 UTC"
+  }
+}

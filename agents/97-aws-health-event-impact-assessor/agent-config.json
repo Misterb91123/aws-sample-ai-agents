@@ -1,0 +1,17 @@
+{
+  "name": "aws-health-event-impact-assessor",
+  "description": "Monitors AWS Health events and assesses their impact on your specific infrastructure including service disruptions, maintenance, and advisories.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "event-driven-troubleshooting",
+    "eventbridge-event-flow-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

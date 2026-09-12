@@ -1,0 +1,17 @@
+{
+  "name": "resource-tagging-compliance",
+  "description": "Audits AWS resources to enforce tagging standards, identify untagged resources, and quantify cost attribution gaps.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "encryption-compliance-validator",
+    "idle-resource-hunter"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:20 UTC"
+  }
+}

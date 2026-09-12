@@ -1,0 +1,17 @@
+{
+  "name": "well-architected-review-automator",
+  "description": "Performs automated checks against AWS Well-Architected Framework pillars and produces findings with improvement recommendations.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 4 2 * ? *)",
+    "description": "Runs monthly on day 2 at 04:00 UTC"
+  }
+}

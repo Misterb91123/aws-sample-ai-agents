@@ -1,0 +1,16 @@
+{
+  "name": "monthly-cost-allocation-report",
+  "description": "Generates monthly cost breakdown by team, service, and environment with trend analysis and budget comparison.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cost-allocation-gap-finder",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 4 1 * ? *)",
+    "description": "Runs monthly on day 1 at 04:20 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "vpc-peering-and-tgw-route-auditor",
+  "description": "Audits VPC peering connections and Transit Gateway route tables for blackholes, missing return routes, overlapping CIDRs, and stale connections.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "vpc-route-and-peering-troubleshooting",
+    "vpc-network-topology-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * FRI *)",
+    "description": "Runs weekly on FRI at 08:30 UTC"
+  }
+}

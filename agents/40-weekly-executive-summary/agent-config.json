@@ -1,0 +1,19 @@
+{
+  "name": "weekly-executive-summary",
+  "description": "Generates a weekly executive summary covering platform health, incidents, deployments, costs, security, and reliability trends for leadership review.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:40 UTC"
+  }
+}

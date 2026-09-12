@@ -1,0 +1,16 @@
+{
+  "name": "ebs-snapshot-cost-and-orphan-auditor",
+  "description": "Finds orphaned and costly EBS snapshots whose source volumes are gone or that are unused and aged, with monthly cost estimates.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ebs-snapshot-cleanup-strategy",
+    "rds-snapshot-security-review"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:40 UTC"
+  }
+}

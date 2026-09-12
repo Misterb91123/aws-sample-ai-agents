@@ -1,0 +1,17 @@
+{
+  "name": "ml-model-drift-scheduled-reporter",
+  "description": "Reports SageMaker Model Monitor drift findings across all monitored endpoints and flags unaddressed constraint violations open across consecutive runs.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ml-model-drift-monitor",
+    "bedrock-usage-cost-monitor",
+    "feature-store-freshness-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:10 UTC"
+  }
+}

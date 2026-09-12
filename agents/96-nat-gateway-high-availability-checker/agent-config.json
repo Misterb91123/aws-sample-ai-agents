@@ -1,0 +1,18 @@
+{
+  "name": "nat-gateway-high-availability-checker",
+  "description": "Verifies NAT Gateway high availability by checking for single-AZ NAT configurations, cross-AZ traffic patterns, and failover readiness.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "api-gateway-troubleshooting",
+    "api-gateway-integration-latency-analyzer",
+    "transit-gateway-routing-debugging"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * TUE *)",
+    "description": "Runs weekly on TUE at 09:00 UTC"
+  }
+}

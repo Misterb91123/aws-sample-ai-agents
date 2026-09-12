@@ -1,0 +1,17 @@
+{
+  "name": "iam-policy-simulator-validator",
+  "description": "Validates critical IAM policies produce expected allow/deny results, detecting permission drift that could compromise security or break operations.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis",
+    "exposed-credentials-response"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:40 UTC"
+  }
+}

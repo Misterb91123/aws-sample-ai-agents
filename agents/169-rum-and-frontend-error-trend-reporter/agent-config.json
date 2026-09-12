@@ -1,0 +1,17 @@
+{
+  "name": "rum-and-frontend-error-trend-reporter",
+  "description": "Reports CloudWatch RUM frontend error and performance trends including JavaScript and HTTP errors and core web vitals against baseline and target thresholds.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "step-functions-error-handling-design",
+    "error-budget-tracker"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

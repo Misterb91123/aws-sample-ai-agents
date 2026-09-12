@@ -1,0 +1,18 @@
+{
+  "name": "incident-frequency-trend-analyzer",
+  "description": "Analyzes incident patterns over 30, 60, and 90 days to identify systemic reliability improvements or regressions.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "incident-communication-drafter",
+    "incident-triage-classifier",
+    "security-incident-containment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 5 ? * WED *)",
+    "description": "Runs weekly on WED at 05:50 UTC"
+  }
+}

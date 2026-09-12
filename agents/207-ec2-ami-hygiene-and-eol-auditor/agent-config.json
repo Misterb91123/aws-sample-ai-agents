@@ -1,0 +1,16 @@
+{
+  "name": "ec2-ami-hygiene-and-eol-auditor",
+  "description": "Audits EC2 AMI hygiene and OS end-of-life including deprecated AMIs, aged AMIs in use, and public or unencrypted AMIs.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "artifact-repository-hygiene-auditor",
+    "ami-and-os-lifecycle-management"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:30 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "secrets-manager-rotation-drift-monitor",
+  "description": "Monitors Secrets Manager secrets for rotation failures, disabled rotation, and secrets past their configured rotation interval.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 * * ? *)",
+    "description": "Runs daily at 07:00 UTC"
+  }
+}

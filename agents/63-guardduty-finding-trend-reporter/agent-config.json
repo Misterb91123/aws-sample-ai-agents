@@ -1,0 +1,16 @@
+{
+  "name": "guardduty-finding-trend-reporter",
+  "description": "Tracks GuardDuty finding trends over 30 days, identifies spikes in findings, recurring patterns, and areas where findings are not being addressed.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "guardduty-finding-investigation",
+    "guardduty-trend-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:30 UTC"
+  }
+}

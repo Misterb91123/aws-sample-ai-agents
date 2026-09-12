@@ -1,0 +1,19 @@
+{
+  "name": "sla-breach-predictor",
+  "description": "Predicts potential SLA/SLO breaches by analyzing error budget burn rates and metric trends before breaches occur.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations"
+  ],
+  "skills": [
+    "az-failure-readiness-assessment",
+    "chaos-experiment-planner",
+    "dependency-health-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

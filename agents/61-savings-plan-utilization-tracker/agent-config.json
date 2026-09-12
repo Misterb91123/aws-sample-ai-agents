@@ -1,0 +1,17 @@
+{
+  "name": "savings-plan-utilization-tracker",
+  "description": "Tracks Savings Plan utilization rates, identifies under-utilized commitments, flags expiring plans, and finds uncovered steady-state usage that should have a commitment.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "savings-plan-advisor",
+    "cloudtrail-lake-cost-control",
+    "cost-allocation-gap-finder"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:10 UTC"
+  }
+}

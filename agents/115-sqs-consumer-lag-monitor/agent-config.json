@@ -1,0 +1,19 @@
+{
+  "name": "sqs-consumer-lag-monitor",
+  "description": "Monitors Amazon SQS queues for consumer lag, rising message age, poison messages in dead-letter queues, and visibility timeout misconfiguration, then recommends scaling and configuration fixes.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "kinesis-data-pipeline-lag-investigation",
+    "cross-region-replication-lag-monitor",
+    "sqs-queue-processing-investigation",
+    "sqs-access-and-encryption-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours to track queue depth, message age, and consumer lag"
+  }
+}

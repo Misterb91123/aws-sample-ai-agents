@@ -1,0 +1,18 @@
+{
+  "name": "cloudtrail-lake-query-cost-monitor",
+  "description": "Monitors CloudTrail Lake event data store storage and query cost, flagging expensive scans, long-retention high-ingestion stores, and unused data stores.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cloudtrail-lake-cost-control",
+    "athena-query-performance-optimizer",
+    "redshift-query-tuning-advisor",
+    "database-query-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

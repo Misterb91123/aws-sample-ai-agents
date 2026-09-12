@@ -1,0 +1,17 @@
+{
+  "name": "direct-connect-link-health-monitor",
+  "description": "Monitors AWS Direct Connect connections and virtual interfaces for link state, BGP session health, and throughput saturation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "direct-connect-failover-troubleshooting",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 7 * * ? *)",
+    "description": "Runs daily at 07:10 UTC"
+  }
+}

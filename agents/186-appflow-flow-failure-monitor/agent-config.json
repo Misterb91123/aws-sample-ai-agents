@@ -1,0 +1,16 @@
+{
+  "name": "appflow-flow-failure-monitor",
+  "description": "Monitors Amazon AppFlow flow run failures, missed scheduled runs, and record-level errors.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "eventbridge-event-flow-debugger",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to check AppFlow flow execution status and record errors"
+  }
+}

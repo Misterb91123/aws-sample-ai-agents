@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb-autoscaling-effectiveness-monitor",
+  "description": "Monitors DynamoDB auto scaling effectiveness by comparing consumed versus provisioned capacity, throttling, and scaling lag to surface tables where autoscaling is misconfigured or ineffective.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "dynamodb-pitr-and-backup-audit",
+    "dynamodb-hot-partition-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

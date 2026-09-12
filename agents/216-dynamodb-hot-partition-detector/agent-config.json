@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb-hot-partition-detector",
+  "description": "Detects DynamoDB hot partitions and throttling from key skew using capacity metrics and Contributor Insights.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "dynamodb-hot-partition-remediation",
+    "dynamodb-pitr-and-backup-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

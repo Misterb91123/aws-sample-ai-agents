@@ -1,0 +1,17 @@
+{
+  "name": "cloudwatch-metrics-cost-optimizer",
+  "description": "Identifies CloudWatch cost drivers from custom metrics, high-cardinality dimensions, and excessive metric API calls, and recommends reductions.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "operational-metrics-dashboard-builder",
+    "cloudwatch-cost-reduction"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:30 UTC"
+  }
+}

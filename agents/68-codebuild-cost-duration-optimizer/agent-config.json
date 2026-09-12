@@ -1,0 +1,18 @@
+{
+  "name": "codebuild-cost-duration-optimizer",
+  "description": "Identifies slow and expensive CodeBuild projects, recommends compute type optimizations, detects cache inefficiencies, and tracks build duration trends.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "artifact-repository-hygiene-auditor",
+    "build-pipeline-bottleneck-analyzer",
+    "developer-environment-drift-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 ? * THU *)",
+    "description": "Runs weekly on THU at 08:20 UTC"
+  }
+}

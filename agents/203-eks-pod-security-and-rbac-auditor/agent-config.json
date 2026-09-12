@@ -1,0 +1,19 @@
+{
+  "name": "eks-pod-security-and-rbac-auditor",
+  "description": "Audits EKS pod security standards and RBAC for overly broad bindings, privileged pods, and wildcard verbs.",
+  "tools": [
+    "use_aws",
+    "use_kubectl"
+  ],
+  "skills": [
+    "eks-rbac-least-privilege-review",
+    "rds-snapshot-security-review",
+    "container-image-security-scanning",
+    "eks-version-upgrade-planning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 5 ? * THU *)",
+    "description": "Runs weekly on THU at 05:50 UTC"
+  }
+}

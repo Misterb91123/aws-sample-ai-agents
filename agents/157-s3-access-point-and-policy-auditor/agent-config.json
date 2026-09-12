@@ -1,0 +1,16 @@
+{
+  "name": "s3-access-point-and-policy-auditor",
+  "description": "Audits S3 access points and bucket policies for overly permissive or public access, including missing Block Public Access and wildcard principals.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "access-review-auditor",
+    "sqs-access-and-encryption-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:10 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "compliance-evidence-collector",
+  "description": "Collects and packages compliance evidence from AWS configurations for audit preparation (SOC2, PCI, HIPAA, ISO 27001).",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "encryption-compliance-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 4 1 * ? *)",
+    "description": "Runs monthly on day 1 at 04:50 UTC"
+  }
+}

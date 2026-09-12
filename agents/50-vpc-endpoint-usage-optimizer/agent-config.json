@@ -1,0 +1,18 @@
+{
+  "name": "vpc-endpoint-usage-optimizer",
+  "description": "Identifies VPCs missing cost-saving VPC endpoints and audits existing endpoints for utilization and misconfiguration.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sagemaker-endpoint-health-investigation",
+    "vpc-route-and-peering-troubleshooting",
+    "vpc-network-topology-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:20 UTC"
+  }
+}

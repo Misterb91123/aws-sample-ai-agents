@@ -1,0 +1,17 @@
+{
+  "name": "elastic-beanstalk-environment-health-monitor",
+  "description": "Monitors AWS Elastic Beanstalk environments for health status, deployment failures, and outdated platform versions.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "developer-environment-drift-detector",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 * * ? *)",
+    "description": "Runs daily at 09:00 UTC"
+  }
+}

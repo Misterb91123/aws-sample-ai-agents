@@ -1,0 +1,16 @@
+{
+  "name": "trusted-advisor-check-aggregator",
+  "description": "Aggregates AWS Trusted Advisor checks into a prioritized action list across cost, security, fault tolerance, performance, and service limits.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "trusted-advisor-remediation-prioritization",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 ? * TUE *)",
+    "description": "Runs weekly on TUE at 05:40 UTC"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "feature-store-freshness-monitor",
+  "description": "Monitors SageMaker Feature Store feature groups for stale features, ingestion failures, and online versus offline store divergence.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "feature-store-freshness-auditor",
+    "bedrock-usage-cost-monitor",
+    "ml-model-drift-monitor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 5 * * ? *)",
+    "description": "Runs daily at 05:40 UTC"
+  }
+}

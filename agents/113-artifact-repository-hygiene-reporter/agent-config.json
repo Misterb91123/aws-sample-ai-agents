@@ -1,0 +1,16 @@
+{
+  "name": "artifact-repository-hygiene-reporter",
+  "description": "Audits CodeArtifact and ECR repositories for stale artifacts, missing lifecycle policies, and scanning gaps.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "artifact-repository-hygiene-auditor",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:50 UTC"
+  }
+}

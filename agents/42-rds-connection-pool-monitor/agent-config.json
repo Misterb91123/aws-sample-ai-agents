@@ -1,0 +1,17 @@
+{
+  "name": "rds-connection-pool-monitor",
+  "description": "Monitors RDS/Aurora connection utilization, detects connection leaks, and identifies exhaustion risks before application failures.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "rds-snapshot-security-review",
+    "rds-parameter-baseline-management"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 7 * * ? *)",
+    "description": "Runs daily at 07:20 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sagemaker-endpoint-cost-rightsizer",
+  "description": "Rightsizes SageMaker real-time endpoints by analyzing invocation volume, instance utilization, and idle endpoints.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sagemaker-endpoint-health-investigation",
+    "sagemaker-training-job-cost-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:50 UTC"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "aurora-cluster-optimization-advisor",
+  "description": "Analyzes Aurora cluster configurations for cost and performance optimization including reader utilization, instance sizing, and serverless v2 migration candidates.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "observability-cost-optimization",
+    "s3-storage-tiering-optimization",
+    "emr-cluster-cost-performance-optimizer",
+    "opensearch-index-lifecycle-optimization"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:10 UTC"
+  }
+}

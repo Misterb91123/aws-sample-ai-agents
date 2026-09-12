@@ -1,0 +1,18 @@
+{
+  "name": "vpc-cidr-capacity-planner",
+  "description": "Tracks IP address consumption per subnet, forecasts CIDR exhaustion, and identifies subnets needing expansion.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "database-migration-planner",
+    "vpc-route-and-peering-troubleshooting",
+    "capacity-planning-forecaster",
+    "vpc-network-topology-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * FRI *)",
+    "description": "Runs weekly on FRI at 08:30 UTC"
+  }
+}

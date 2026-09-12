@@ -1,0 +1,16 @@
+{
+  "name": "config-rule-drift-remediator",
+  "description": "Monitors AWS Config rule evaluations for non-compliant resources and recommends or tracks remediation actions.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "config-conformance-drift-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 * * ? *)",
+    "description": "Runs daily at 06:00 UTC"
+  }
+}

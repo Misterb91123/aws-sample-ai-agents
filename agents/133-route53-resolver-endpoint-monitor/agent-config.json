@@ -1,0 +1,18 @@
+{
+  "name": "route53-resolver-endpoint-monitor",
+  "description": "Monitors Route53 Resolver inbound and outbound endpoints and resolver rules for query failures and capacity.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sagemaker-endpoint-health-investigation",
+    "cross-account-connectivity-debugger",
+    "direct-connect-failover-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 * * ? *)",
+    "description": "Runs daily at 08:20 UTC"
+  }
+}

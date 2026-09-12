@@ -1,0 +1,16 @@
+{
+  "name": "organizations-scp-change-monitor",
+  "description": "Monitors AWS Organizations service control policy changes for unauthorized or risky edits, unexpected FullAWSAccess attachment, and policies detached from OUs.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "change-management-audit-trail",
+    "scp-guardrail-design"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 9 * * ? *)",
+    "description": "Runs daily at 09:30 UTC"
+  }
+}

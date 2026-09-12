@@ -1,0 +1,17 @@
+{
+  "name": "build-pipeline-lead-time-reporter",
+  "description": "Reports CI/CD lead time and stage bottlenecks across CodePipeline and CodeBuild to improve developer feedback loops.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "build-pipeline-bottleneck-analyzer",
+    "kinesis-data-pipeline-lag-investigation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:30 UTC"
+  }
+}

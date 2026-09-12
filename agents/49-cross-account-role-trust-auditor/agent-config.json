@@ -1,0 +1,18 @@
+{
+  "name": "cross-account-role-trust-auditor",
+  "description": "Audits IAM role trust policies for overly broad cross-account access, missing external IDs, and unauthorized trust relationships.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cross-account-connectivity-debugger",
+    "multi-account-baseline-hardening",
+    "sandbox-account-cleanup-advisor",
+    "cross-region-replication-lag-monitor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 9 ? * FRI *)",
+    "description": "Runs weekly on FRI at 09:10 UTC"
+  }
+}

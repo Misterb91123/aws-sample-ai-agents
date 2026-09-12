@@ -1,0 +1,17 @@
+{
+  "name": "ec2-spot-savings-opportunity-reporter",
+  "description": "Identifies on-demand EC2 workloads suitable for Spot Instances and quantifies the potential cost savings.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "automation-opportunity-scorer",
+    "spot-interruption-handling",
+    "savings-plan-advisor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 6 ? * MON *)",
+    "description": "Runs weekly on MON at 06:50 UTC"
+  }
+}

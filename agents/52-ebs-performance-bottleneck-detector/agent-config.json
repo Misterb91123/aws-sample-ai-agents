@@ -1,0 +1,19 @@
+{
+  "name": "ebs-performance-bottleneck-detector",
+  "description": "Detects EBS volumes hitting IOPS or throughput limits, identifies high queue lengths causing application latency, and recommends volume type upgrades.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ebs-snapshot-cleanup-strategy",
+    "athena-query-performance-optimizer",
+    "emr-cluster-cost-performance-optimizer",
+    "build-pipeline-bottleneck-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 * * ? *)",
+    "description": "Runs daily at 07:40 UTC"
+  }
+}

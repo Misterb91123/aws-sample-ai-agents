@@ -1,0 +1,17 @@
+{
+  "name": "kms-key-usage-rotation-auditor",
+  "description": "Audits KMS keys for rotation compliance, unused keys, overly broad policies, pending deletions, and cross-account grants.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis",
+    "exposed-credentials-response"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 6 ? * MON *)",
+    "description": "Runs weekly on MON at 06:10 UTC"
+  }
+}

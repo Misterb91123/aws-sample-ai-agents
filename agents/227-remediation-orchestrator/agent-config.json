@@ -1,0 +1,17 @@
+{
+  "name": "remediation-orchestrator",
+  "description": "Consumes recommendation records from the read-only monitoring and audit agents, validates and safety-gates them, and produces a human-approval-ready change plan without executing any change.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "rollback-decision-framework",
+    "change-management-audit-trail",
+    "runbook-executor-guide"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 13 * * ? *)",
+    "description": "Runs daily at 13:00 UTC to assemble a change plan from the latest recommendations; can also be run on demand"
+  }
+}

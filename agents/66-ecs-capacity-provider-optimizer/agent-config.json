@@ -1,0 +1,18 @@
+{
+  "name": "ecs-capacity-provider-optimizer",
+  "description": "Optimizes ECS capacity provider strategies by analyzing Spot versus On-Demand mix, capacity reservation efficiency, and task placement patterns.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "ecs-task-failure-diagnosis",
+    "capacity-planning-forecaster"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:00 UTC"
+  }
+}

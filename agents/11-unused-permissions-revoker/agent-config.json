@@ -1,0 +1,16 @@
+{
+  "name": "unused-permissions-revoker",
+  "description": "Scans IAM Access Advisor data to identify unused service permissions and recommend least-privilege policy scoping.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:50 UTC"
+  }
+}

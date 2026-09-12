@@ -1,0 +1,17 @@
+{
+  "name": "lakeformation-permission-auditor",
+  "description": "Audits Lake Formation data permissions for legacy IAMAllowedPrincipals grants, overly broad access, and ungoverned tables.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "athena-query-performance-optimizer",
+    "emr-cluster-cost-performance-optimizer",
+    "glue-job-failure-diagnosis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:40 UTC"
+  }
+}

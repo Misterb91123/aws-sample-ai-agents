@@ -1,0 +1,17 @@
+{
+  "name": "ecs-task-failure-investigator",
+  "description": "Investigates ECS task failures, crash loops, and deployment issues to identify root causes and recommend fixes.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "ecs-task-failure-diagnosis",
+    "ecs-deployment-stability-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

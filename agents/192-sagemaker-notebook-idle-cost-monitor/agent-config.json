@@ -1,0 +1,18 @@
+{
+  "name": "sagemaker-notebook-idle-cost-monitor",
+  "description": "Identifies idle SageMaker notebook instances and Studio apps that waste cost while running.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "idle-resource-hunter",
+    "sagemaker-endpoint-health-investigation",
+    "sagemaker-training-job-cost-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to detect idle SageMaker notebook instances and Studio apps"
+  }
+}

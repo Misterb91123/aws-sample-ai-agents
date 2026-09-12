@@ -1,0 +1,18 @@
+{
+  "name": "elb-idle-and-cost-optimizer",
+  "description": "Identifies idle and low-traffic load balancers and those with no healthy targets to reduce wasted cost.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "idle-resource-hunter",
+    "cross-account-connectivity-debugger",
+    "direct-connect-failover-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ssm-patch-baseline-drift-detector",
+  "description": "Detects instances that have drifted from their approved patch baselines after manual changes or missed maintenance windows.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "multi-account-baseline-hardening",
+    "rds-parameter-baseline-management"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:30 UTC"
+  }
+}

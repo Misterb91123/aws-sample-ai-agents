@@ -1,0 +1,20 @@
+{
+  "name": "toil-automation-progress-tracker",
+  "description": "Tracks operational toil metrics, automation adoption, and efficiency trends over time to measure SRE team improvement.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "list_cloudwatch_alarms",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "automation-opportunity-scorer",
+    "runbook-to-automation-converter",
+    "toil-identification-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 9 ? * MON *)",
+    "description": "Runs weekly on MON at 09:20 UTC"
+  }
+}

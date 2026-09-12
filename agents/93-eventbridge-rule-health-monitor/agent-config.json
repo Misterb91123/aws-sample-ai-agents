@@ -1,0 +1,17 @@
+{
+  "name": "eventbridge-rule-health-monitor",
+  "description": "Monitors EventBridge rules for delivery failures, identifies rules that never match, and detects dead-letter accumulation from failed invocations.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "eventbridge-dlq-and-retry-design",
+    "eventbridge-event-flow-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "lambda-runtime-deprecation-tracker",
+  "description": "Tracks Lambda functions on deprecated or soon-to-be-deprecated runtimes and recommends target runtime upgrades.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "lambda-concurrency-cost-tuning",
+    "lambda-cold-start-investigator",
+    "lambda-execution-role-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:30 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "eventbridge-delivery-failure-monitor",
+  "description": "Monitors EventBridge rules for delivery failures, dormant rules that never match, dead-letter accumulation, and targets pointing at deleted resources, then recommends routing and permission fixes.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "eventbridge-dlq-and-retry-design",
+    "eventbridge-event-flow-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours to track rule delivery failures, dormant rules, and dead-letter accumulation"
+  }
+}

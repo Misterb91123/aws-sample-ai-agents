@@ -1,0 +1,16 @@
+{
+  "name": "config-recorder-coverage-auditor",
+  "description": "Audits AWS Config recorder coverage across accounts and regions to flag regions without a recorder, incomplete resource-type coverage, stopped recording, and delivery failures.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "aws-config-compliance-assessor",
+    "config-conformance-drift-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * TUE *)",
+    "description": "Runs weekly on TUE at 05:30 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "iam-least-privilege-auditor",
+  "description": "Audits IAM policies, roles, and users to identify overly permissive access, unused permissions, and least-privilege violations.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "eks-rbac-least-privilege-review",
+    "certificate-expiry-remediation",
+    "cloudtrail-coverage-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:10 UTC"
+  }
+}

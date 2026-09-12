@@ -1,0 +1,18 @@
+{
+  "name": "codedeploy-deployment-health-monitor",
+  "description": "Monitors AWS CodeDeploy deployment health by tracking failure rates, automatic rollbacks, and stuck deployments across applications and deployment groups.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ecs-deployment-stability-troubleshooting",
+    "canary-deployment-analysis",
+    "deployment-freeze-enforcer",
+    "pre-deployment-readiness-check"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

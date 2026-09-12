@@ -1,0 +1,17 @@
+{
+  "name": "cross-region-dr-sync-validator",
+  "description": "Validates cross-region DR replication health, backup freshness, and failover readiness across all critical infrastructure.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-region-replication-lag-monitor",
+    "cross-account-connectivity-debugger"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 7 * * ? *)",
+    "description": "Runs daily at 07:20 UTC"
+  }
+}

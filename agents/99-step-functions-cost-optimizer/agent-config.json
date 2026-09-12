@@ -1,0 +1,17 @@
+{
+  "name": "step-functions-cost-optimizer",
+  "description": "Identifies Step Functions workflows that could save costs by switching between Standard and Express types, or by reducing state transitions.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "step-functions-error-handling-design",
+    "step-functions-workflow-optimizer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 9 ? * FRI *)",
+    "description": "Runs weekly on FRI at 09:30 UTC"
+  }
+}

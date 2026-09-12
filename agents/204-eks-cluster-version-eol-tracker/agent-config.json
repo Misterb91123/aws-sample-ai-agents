@@ -1,0 +1,17 @@
+{
+  "name": "eks-cluster-version-eol-tracker",
+  "description": "Tracks EKS cluster and node group Kubernetes versions against AWS standard support end-of-life dates.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "eks-version-upgrade-planning",
+    "emr-cluster-cost-performance-optimizer",
+    "eks-rbac-least-privilege-review"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * FRI *)",
+    "description": "Runs weekly on FRI at 05:00 UTC"
+  }
+}

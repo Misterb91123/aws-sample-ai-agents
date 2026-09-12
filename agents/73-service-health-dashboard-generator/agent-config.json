@@ -1,0 +1,21 @@
+{
+  "name": "service-health-dashboard-generator",
+  "description": "Generates a consolidated service health artifact showing availability, errors, latency, alarms, and incidents for all services.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "operational-metrics-dashboard-builder",
+    "service-quota-forecasting",
+    "dashboard-gap-analyzer",
+    "service-onboarding-checklist"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 * * ? *)",
+    "description": "Runs daily at 08:20 UTC"
+  }
+}

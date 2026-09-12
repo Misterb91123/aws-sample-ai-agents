@@ -1,0 +1,20 @@
+{
+  "name": "lambda-error-pattern-analyzer",
+  "description": "Analyzes Lambda error patterns, timeout trends, and throttling across all functions to surface systemic reliability issues.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "self-healing-pattern-designer",
+    "lambda-concurrency-cost-tuning",
+    "step-functions-error-handling-design",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 6 * * ? *)",
+    "description": "Runs daily at 06:20 UTC"
+  }
+}
