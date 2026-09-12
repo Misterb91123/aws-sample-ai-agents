@@ -1,93 +1,217 @@
-# aws-sample-ai-agents
+# AWS DevOps Agent - Sample Custom Agents and Skills
 
+A curated, ready-to-deploy collection of **227 custom agents** and **145 skills** for
+[AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-custom-agents-index.html).
 
+Every agent is read-only and produces an operational report or recommendation:
+health summaries, cost and compliance audits, trend analyses, and multi-step
+operational workflows across AWS, CloudWatch, and CI/CD data. Every skill packages
+an investigation procedure or decision framework the agent loads automatically
+when a task matches.
 
-## Getting started
+- **Agents** live under [`agents/`](agents/), one directory per agent, each with a
+  `system-prompt.md` (the agent's instructions) and an `agent-config.json`
+  (its recommended tools, skills, and schedule trigger).
+- **Skills** live under [`skills/`](skills/), grouped into 19 operational domains,
+  each with a `SKILL.md` containing `name`, `description`, and `agent_type`
+  frontmatter plus the procedure itself.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## How this maps to AWS DevOps Agent
 
-## Add your files
+A custom agent in AWS DevOps Agent is a **system prompt** plus a selected set of
+**MCP tools**, optional **skills**, optional **memory stores**, and an optional
+**schedule trigger**. Understanding how the service consumes these files avoids
+the most common deployment surprise:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- **Agent import reads only the system prompt.** When you import an agent from
+  GitHub, the service ingests a single `.md` file as the system prompt. It does
+  **not** read `agent-config.json`. The tools, skills, and trigger in that file
+  are recommendations you apply separately through Chat or the Asset API.
+- **Skill import reads the whole skill directory.** The service reads the
+  `SKILL.md` frontmatter (`name`, `description`) to decide when to activate the
+  skill and imports the directory contents. The `agent_type` frontmatter in each
+  skill records which agent type it targets (Generic, Incident RCA, Evaluation,
+  and so on).
+- **Tools are assigned only through Chat or the Asset API**, never from a file.
+
+To bridge the gap between `agent-config.json` and the import flow, this repo
+ships a generator that turns each config into a copy-paste Chat command
+(see [Deploying](#deploying)).
+
+---
+
+## Repository layout
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.aws.dev/solair/aws-sample-ai-agents.git
-git branch -M main
-git push -uf origin main
+agents/                 227 custom agents (system-prompt.md + agent-config.json)
+skills/                 145 skills across 19 domains (SKILL.md per skill)
+policies/               Least-privilege read-only IAM starting policy
+schemas/                JSON schema for optional machine-readable recommendations
+scripts/                validate.py and generate_deploy_commands.py
+AGENT_TEMPLATE.md       Authoring template and best-practices checklist
+CATALOG.md              Browse agents and skills by operational domain and by AWS service
+DEPLOYMENT.md           Step-by-step deployment guide
+SECURITY.md             Security and guardrails framework
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://gitlab.aws.dev/solair/aws-sample-ai-agents/-/settings/integrations)
+## Quick start
 
-## Collaborate with your team
+1. **Validate the collection** (run this before deploying or after any edit):
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+   ```bash
+   python scripts/validate.py
+   ```
 
-## Test and Deploy
+   It checks that every file is pure ASCII, every `agent-config.json` is valid
+   and uses only known DevOps Agent tools, every system prompt has the required
+   sections in order, and every `SKILL.md` has valid `name`, `description`, and
+   `agent_type` frontmatter.
 
-Use the built-in continuous integration in GitLab.
+2. **Generate Chat deploy commands** for the agents you want:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+   ```bash
+   python scripts/generate_deploy_commands.py            # all agents
+   python scripts/generate_deploy_commands.py 01 02      # by agent number
+   python scripts/generate_deploy_commands.py cost       # by name fragment
+   python scripts/generate_deploy_commands.py --out deploy.txt
+   ```
 
-***
+   Each block is ready to paste into DevOps Agent Chat to create the agent,
+   assign its tools and skills, and set its trigger.
 
-# Editing this README
+3. **Deploy.** Import skills from this repository, then create agents and assign
+   their tools. See [DEPLOYMENT.md](DEPLOYMENT.md) for the full walkthrough.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
 
-## Suggestions for a good README
+## Deploying
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Full instructions, including bulk deployment and a suggested rollout order, are
+in [DEPLOYMENT.md](DEPLOYMENT.md). In short:
 
-## Name
-Choose a self-explaining name for your project.
+**Skills** - import from GitHub (recommended, enables sync), upload as ZIP, or
+create in the UI. For GitHub import, paste the skill directory URL into
+**Knowledge > Skills > Add skill > Import from repository**, for example:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+```
+https://github.com/YOUR-ORG/YOUR-REPO/tree/main/skills/incident-management/blast-radius-assessment
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**Agents** - create through Chat (recommended, because tools are only assignable
+in Chat) using the blocks from `generate_deploy_commands.py`, or import the
+`system-prompt.md` from GitHub and then assign tools in Chat afterwards.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Because agent import reads only the system prompt, the tools and trigger from
+`agent-config.json` must be applied separately. The generator script produces
+exactly the Chat instructions to do that.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+---
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## How an agent uses the right skill
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+An agent does not follow a fixed agent-to-skill mapping. Whether a skill is used
+depends on two independent gates, and both must pass:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. **The skill must be reachable by the agent.** A custom agent loads only the
+   skills you assign to it, plus any skill whose `agent_type` is `Generic`
+   (available to all agent types). If a skill is neither assigned nor `Generic`,
+   the agent can never load it. This is why each generated deploy block includes
+   an "Assign these skills" line and why every `SKILL.md` records its
+   `agent_type`.
+
+2. **The agent must judge the skill relevant at runtime.** During an invocation
+   the agent reads the `description` frontmatter of each reachable skill and
+   decides, per task, whether that skill applies. There is no keyword table - the
+   description is the trigger. Per AWS guidance, a vague or missing description
+   causes the agent to skip the skill even when its instructions are good.
+
+To make activation reliable:
+
+- **Assign the intended skills.** Use the "Assign these skills" line from
+  `generate_deploy_commands.py`, or assign them in Chat, for example:
+
+  ```
+  Assign the blast-radius-assessment and metric-correlation-investigator skills
+  to my incident-postmortem-generator agent.
+  ```
+
+- **Keep descriptions specific and trigger-oriented.** Write them from the
+  agent's perspective, naming the services, symptoms, and scenarios that should
+  activate the skill (the skills in this repo already follow this style). If you
+  edit a skill's `description`, re-import or sync it so the service picks up the
+  change.
+
+- **Assign only relevant skills.** You can attach up to 200 skills per agent, but
+  a focused set reduces context consumption and improves activation accuracy.
+
+### Confirm a skill actually fired
+
+After deploying, run the agent on demand and open its **invocation trajectory**.
+The trajectory shows which skills the agent loaded and when. If an expected skill
+did not activate, it is almost always one of the two gates above: the skill was
+not assigned (or not `Generic`), or its `description` did not clearly match the
+task. See [DEPLOYMENT.md](DEPLOYMENT.md#verifying-deployment) for the full
+verification steps and the recommended agent-to-skill pairings.
+
+---
+
+## Prerequisites
+
+- An AWS DevOps Agent **Agent Space** with at least one connected integration and
+  the AWS accounts you want to analyze connected to it.
+- The MCP tools the agents use available in your Agent Space: `use_aws`,
+  `query_cloudwatch_metrics`, `query_cloudwatch_logs`, `list_cloudwatch_alarms`,
+  `list_investigations`, and `use_kubectl` (EKS agents only).
+- Read-only IAM permissions on the analyzed services. A scoped starting policy is
+  provided at [policies/agent-readonly-policy.json](policies/agent-readonly-policy.json).
+- A connected **GitHub account** to import agents and skills directly from a
+  repository.
+
+See [DEPLOYMENT.md](DEPLOYMENT.md#prerequisites) for details.
+
+---
+
+## Safety model
+
+Every agent in this repository is **read-only**: it never creates, modifies, or
+deletes resources, and it never recommends a prohibited action. Findings are
+grounded in observed values, interpretations are labeled as hypotheses, and
+sensitive data is referenced by identifier rather than reproduced. Agents may
+optionally emit machine-readable recommendation records conforming to
+[schemas/recommendation.schema.json](schemas/recommendation.schema.json) for a
+human-approval workflow; emitting a record never executes anything. See
+[SECURITY.md](SECURITY.md) and [AGENT_TEMPLATE.md](AGENT_TEMPLATE.md).
+
+---
+
+## Browsing and authoring
+
+- To find an agent or skill by operational domain or by AWS service, see
+  [CATALOG.md](CATALOG.md).
+- To author a new agent or skill that matches the repository conventions, follow
+  [AGENT_TEMPLATE.md](AGENT_TEMPLATE.md) and the skills library overview in
+  [skills/README.md](skills/README.md), then run `python scripts/validate.py`.
+
+---
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Contributions are welcome. Before opening a merge request, run
+`python scripts/validate.py` and confirm it passes. See
+[CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+See [LICENSE](LICENSE).
+
+## References
+
+- [AWS DevOps Agent User Guide](https://docs.aws.amazon.com/devopsagent/latest/userguide/)
+- [Custom Agents](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-custom-agents-index.html)
+- [Creating a custom agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/custom-agents-creating-a-custom-agent.html)
+- [DevOps Agent Skills](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html)
+- [Managing assets (API)](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-managing-assets.html)
