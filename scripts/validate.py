@@ -2,7 +2,8 @@
 """Validate the AWS DevOps Agent custom agents and skills collection.
 
 Checks enforced:
-- Pure ASCII across all .md and .json files (no em dashes, curly quotes, emojis, etc.).
+- Pure ASCII across all .md, .json, .py, .ps1, .yml, .yaml, and .txt files
+  (no em dashes, en dashes, curly quotes, ellipses, emojis, etc.).
 - Every agent-config.json is valid JSON with the required fields.
 - Every agent-config.json only references tools from the known DevOps Agent tool set.
 - Every agent system-prompt.md contains the six required sections in order:
@@ -85,19 +86,40 @@ def rel(path):
     return os.path.relpath(path, REPO_ROOT)
 
 
+ASCII_SUFFIXES = (".md", ".json", ".py", ".ps1", ".yml", ".yaml", ".txt")
+
+
+def first_non_ascii(line):
+    for col, ch in enumerate(line, start=1):
+        if ord(ch) > 127:
+            return col, ch
+    return None
+
+
 def check_ascii(errors):
-    for root in (AGENTS_DIR, SKILLS_DIR, REPO_ROOT):
-        for path in iter_files(root, (".md", ".json")):
-            try:
-                content = read(path)
-            except (OSError, UnicodeDecodeError) as exc:
-                errors.append("cannot read %s: %s" % (rel(path), exc))
-                continue
-            if not is_ascii(content):
-                for i, line in enumerate(content.splitlines(), start=1):
-                    if not is_ascii(line):
-                        errors.append("non-ASCII in %s line %d" % (rel(path), i))
-                        break
+    seen = set()
+    for path in iter_files(REPO_ROOT, ASCII_SUFFIXES):
+        if os.sep + ".git" + os.sep in path:
+            continue
+        real = os.path.realpath(path)
+        if real in seen:
+            continue
+        seen.add(real)
+        try:
+            content = read(path)
+        except (OSError, UnicodeDecodeError) as exc:
+            errors.append("cannot read %s: %s" % (rel(path), exc))
+            continue
+        if not is_ascii(content):
+            for i, line in enumerate(content.splitlines(), start=1):
+                found = first_non_ascii(line)
+                if found:
+                    col, ch = found
+                    errors.append(
+                        "non-ASCII in %s line %d col %d: U+%04X"
+                        % (rel(path), i, col, ord(ch))
+                    )
+                    break
 
 
 def collect_skill_names():
