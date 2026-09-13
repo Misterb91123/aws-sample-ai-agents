@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **145 skills** organized across **19 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **151 skills** organized across **20 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -331,6 +331,21 @@ Skills for diagnosing messaging, event routing, and cross-region integration.
 | [cross-region-replication-lag-monitor](messaging-integration/cross-region-replication-lag-monitor/) | Monitors S3, DynamoDB, and Aurora replication lag for DR | Generic |
 | [eventbridge-dlq-and-retry-design](messaging-integration/eventbridge-dlq-and-retry-design/) | Designs EventBridge DLQ and retry for reliable delivery | Generic |
 | [step-functions-error-handling-design](messaging-integration/step-functions-error-handling-design/) | Designs Step Functions retry, catch, and error handling | Generic |
+
+---
+
+### 20. Contact Center (Amazon Connect)
+
+Skills for operating and troubleshooting Amazon Connect contact centers.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [connect-contact-flow-troubleshooting](contact-center/connect-contact-flow-troubleshooting/) | Diagnoses contact flows that fail, loop, drop callers, or misroute, including flow-invoked Lambda and Lex failures | Incident RCA |
+| [connect-queue-and-routing-health](contact-center/connect-queue-and-routing-health/) | Diagnoses queue backlogs, service-level breaches, abandonment, and routing-profile misconfiguration | Incident RCA |
+| [connect-telephony-and-voice-quality-investigation](contact-center/connect-telephony-and-voice-quality-investigation/) | Diagnoses call setup failures, concurrency-quota throttling, packet loss, and phone number problems | Incident RCA |
+| [connect-capacity-and-concurrency-planning](contact-center/connect-capacity-and-concurrency-planning/) | Forecasts and right-sizes Connect capacity against Service Quotas with targeted increase recommendations | Generic |
+| [connect-security-and-compliance-audit](contact-center/connect-security-and-compliance-audit/) | Audits instance access, recording and CTR encryption, storage configs, and security-profile least privilege | Evaluation |
+| [connect-integration-and-lambda-reliability](contact-center/connect-integration-and-lambda-reliability/) | Diagnoses reliability of Lambda data dips, Lex, Customer Profiles, Contact Lens, and Kinesis CTR streaming | Incident RCA |
 
 ---
 
