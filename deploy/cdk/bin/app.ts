@@ -25,9 +25,20 @@ const agentDirs = agentDirsCtx
   ? agentDirsCtx.split(",").map((s) => s.trim()).filter(Boolean)
   : undefined;
 
+// Optional: control which skills the stack creates. A single CloudFormation
+// template is capped at 1 MB and the full skill set alone is ~0.8 MB, so use
+// "referenced" (with agentDirs) or "none" for batched or agents-only stacks:
+//   cdk deploy -c agentDirs=01-... -c skillsMode=referenced
+const skillsMode = app.node.tryGetContext("skillsMode") as
+  | "all"
+  | "referenced"
+  | "none"
+  | undefined;
+
 new DevOpsAgentStack(app, "DevOpsAgentStack", {
   agentSpaceId,
   agentDirs,
+  skillsMode,
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,

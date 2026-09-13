@@ -11,6 +11,10 @@ Checks enforced:
 - Every skill SKILL.md has YAML frontmatter with name, description, and a valid agent_type.
 - Every skill referenced by an agent config actually exists on disk.
 
+Version control and generated or third-party build output (.git, node_modules,
+cdk.out, .terraform) are skipped so the checks only cover the repository's own
+source.
+
 Exit code 0 on success, 1 on any failure. Safe to run in CI.
 """
 
@@ -75,8 +79,18 @@ def read(path):
         return handle.read()
 
 
+# Directories that are not part of the repository's own source and must not be
+# validated: version control, and third-party or generated build output from the
+# deploy/ tooling (for example a contributor running `npm install` under
+# deploy/cdk creates node_modules with non-ASCII third-party docs).
+EXCLUDED_DIRS = {".git", "node_modules", "cdk.out", ".terraform"}
+
+
 def iter_files(root, suffixes):
-    for base, _dirs, files in os.walk(root):
+    for base, dirs, files in os.walk(root):
+        # Prune excluded directories in place so os.walk does not descend into
+        # them (this also speeds up the walk considerably).
+        dirs[:] = [d for d in dirs if d not in EXCLUDED_DIRS]
         for name in files:
             if name.endswith(suffixes):
                 yield os.path.join(base, name)

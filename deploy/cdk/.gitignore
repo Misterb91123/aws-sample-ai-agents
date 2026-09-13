@@ -1,0 +1,7 @@
+# CDK build and dependency artifacts
+node_modules/
+cdk.out/
+*.d.ts
+*.js
+!jest.config.js
+*.tsbuildinfo

@@ -68,6 +68,16 @@ export interface DevOpsAgentStackProps extends StackProps {
    * "01-infrastructure-health-report") to deploy. Defaults to all agents.
    */
   readonly agentDirs?: string[];
+  /**
+   * Which skills to create in this stack. Because a single CloudFormation
+   * template is capped at 1 MB and the full skill set alone is ~0.8 MB, deploy
+   * skills in batches or scope them to the agents in this stack.
+   *  - "all" (default): every skill under skills/.
+   *  - "referenced": only the skills referenced by the agents in this stack.
+   *    Use this with agentDirs to keep a batched stack under the size limit.
+   *  - "none": create no skills (they already exist in the Agent Space).
+   */
+  readonly skillsMode?: "all" | "referenced" | "none";
 }
 
 /**
@@ -80,31 +90,9 @@ export class DevOpsAgentStack extends Stack {
     super(scope, id, props);
 
     const { agentSpaceId } = props;
+    const skillsMode = props.skillsMode ?? "all";
 
-    // --- skills -----------------------------------------------------------
-    const skillResourceByName = new Map<string, CfnResource>();
-    const skillsRoot = path.join(REPO_ROOT, "skills");
-    for (const skillDir of findSkillDirs(skillsRoot)) {
-      const skillMd = path.join(skillDir, "SKILL.md");
-      const name = path.basename(skillDir);
-      const agentType = readSkillAgentType(skillMd);
-      const content = fs.readFileSync(skillMd, "utf8");
-
-      // The service reads name and description from the SKILL.md frontmatter,
-      // so metadata only needs agent_types.
-      const skill = new CfnResource(this, logicalId("Skill", name), {
-        type: "AWS::DevOpsAgent::Asset",
-        properties: {
-          AgentSpaceId: agentSpaceId,
-          AssetType: "skill",
-          Metadata: { agent_types: [agentType] },
-          Files: [{ Path: "SKILL.md", ContentText: content }],
-        },
-      });
-      skillResourceByName.set(name, skill);
-    }
-
-    // --- agents (and triggers) -------------------------------------------
+    // --- resolve which agents this stack deploys --------------------------
     const agentsRoot = path.join(REPO_ROOT, "agents");
     const agentDirs =
       props.agentDirs ??
@@ -112,17 +100,57 @@ export class DevOpsAgentStack extends Stack {
         .readdirSync(agentsRoot)
         .filter((d) => fs.statSync(path.join(agentsRoot, d)).isDirectory());
 
+    // Load the selected agents' configs up front so we know which skills they
+    // reference (needed for skillsMode "referenced").
+    const selectedAgents: { dir: string; config: AgentConfig; prompt: string }[] =
+      [];
     for (const dir of agentDirs) {
       const agentDir = path.join(agentsRoot, dir);
       const configPath = path.join(agentDir, "agent-config.json");
       const promptPath = path.join(agentDir, "system-prompt.md");
       if (!fs.existsSync(configPath) || !fs.existsSync(promptPath)) continue;
-
       const config: AgentConfig = JSON.parse(
         fs.readFileSync(configPath, "utf8")
       );
       const prompt = fs.readFileSync(promptPath, "utf8");
+      selectedAgents.push({ dir, config, prompt });
+    }
 
+    const referencedSkillNames = new Set<string>();
+    for (const a of selectedAgents) {
+      for (const s of a.config.skills ?? []) referencedSkillNames.add(s);
+    }
+
+    // --- skills -----------------------------------------------------------
+    const skillResourceByName = new Map<string, CfnResource>();
+    const skillsRoot = path.join(REPO_ROOT, "skills");
+    if (skillsMode !== "none") {
+      for (const skillDir of findSkillDirs(skillsRoot)) {
+        const name = path.basename(skillDir);
+        if (skillsMode === "referenced" && !referencedSkillNames.has(name)) {
+          continue;
+        }
+        const skillMd = path.join(skillDir, "SKILL.md");
+        const agentType = readSkillAgentType(skillMd);
+        const content = fs.readFileSync(skillMd, "utf8");
+
+        // The service reads name and description from the SKILL.md frontmatter,
+        // so metadata only needs agent_types.
+        const skill = new CfnResource(this, logicalId("Skill", name), {
+          type: "AWS::DevOpsAgent::Asset",
+          properties: {
+            AgentSpaceId: agentSpaceId,
+            AssetType: "skill",
+            Metadata: { agent_types: [agentType] },
+            Files: [{ Path: "SKILL.md", ContentText: content }],
+          },
+        });
+        skillResourceByName.set(name, skill);
+      }
+    }
+
+    // --- agents (and triggers) -------------------------------------------
+    for (const { config, prompt } of selectedAgents) {
       const agent = new CfnResource(this, logicalId("Agent", config.name), {
         type: "AWS::DevOpsAgent::Asset",
         properties: {
