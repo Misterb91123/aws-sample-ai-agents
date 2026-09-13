@@ -479,6 +479,117 @@ To browse agents by the AWS service they cover instead of by operational domain,
 
 ---
 
+## Application performance monitoring
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [service-golden-signals-monitor](agents/228-service-golden-signals-monitor/) | Reports the four golden signals per application service against baseline and target |
+| Agent | [end-to-end-transaction-latency-tracer](agents/229-end-to-end-transaction-latency-tracer/) | Decomposes a user transaction across every hop to pinpoint which call owns the latency |
+| Agent | [apdex-and-user-satisfaction-reporter](agents/230-apdex-and-user-satisfaction-reporter/) | Computes an Apdex-style satisfaction score per endpoint from latency distributions |
+| Agent | [p99-latency-regression-detector](agents/231-p99-latency-regression-detector/) | Flags week-over-week tail-latency regressions before they breach the SLO |
+| Agent | [application-error-signal-correlator](agents/232-application-error-signal-correlator/) | Correlates error-rate spikes with deploys, config changes, and dependency health |
+| Agent | [memory-leak-and-gc-pressure-detector](agents/233-memory-leak-and-gc-pressure-detector/) | Tracks per-service memory growth and GC/OOM patterns to spot leaks before crashes |
+| Agent | [dependency-slo-impact-analyzer](agents/234-dependency-slo-impact-analyzer/) | Quantifies how much each dependency's degradation eats into an app's availability SLO |
+
+---
+
+## Release management
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [dora-four-keys-scorecard](agents/235-dora-four-keys-scorecard/) | Consolidates the four DORA keys into one scorecard with elite/high/medium/low banding |
+| Agent | [canary-and-blue-green-analysis-reporter](agents/236-canary-and-blue-green-analysis-reporter/) | Compares old vs new fleet metrics and reports promote, hold, or rollback signals |
+| Agent | [change-failure-rate-attribution](agents/237-change-failure-rate-attribution/) | Attributes incidents to the change that caused them; computes change failure rate per team |
+| Agent | [feature-flag-and-config-drift-reporter](agents/238-feature-flag-and-config-drift-reporter/) | Flags stale flags, risky always-on flags, and prod vs non-prod config divergence |
+| Agent | [release-readiness-gate-reporter](agents/239-release-readiness-gate-reporter/) | Aggregates pre-release signals into a go or no-go readiness summary per service |
+| Agent | [post-deployment-health-verification](agents/240-post-deployment-health-verification/) | Compares app KPIs before and after each deploy; flags silent degradations |
+| Agent | [rollback-frequency-and-mttr-reporter](agents/241-rollback-frequency-and-mttr-reporter/) | Reports rollback frequency and recovery time to surface fragile pipelines |
+
+---
+
+## Disaster recovery
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [rto-rpo-attainment-reporter](agents/242-rto-rpo-attainment-reporter/) | Measures achievable RTO/RPO per tier and flags gaps against declared targets |
+| Agent | [dr-gameday-drill-readiness-reporter](agents/243-dr-gameday-drill-readiness-reporter/) | Per-application pre-game-day readiness checklist for a DR drill |
+| Agent | [application-failover-dependency-validator](agents/244-application-failover-dependency-validator/) | Verifies every dependency is present and usable in the DR region before failover |
+| Agent | [backup-recoverability-for-critical-apps](agents/245-backup-recoverability-for-critical-apps/) | Reports the freshest recoverable point and proven restorability per application |
+| Agent | [multi-region-active-active-drift-detector](agents/246-multi-region-active-active-drift-detector/) | Detects config and data-consistency drift between active-active regions |
+
+---
+
+## Site reliability and SLO
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [slo-error-budget-burn-rate-monitor](agents/247-slo-error-budget-burn-rate-monitor/) | Computes multi-window error-budget burn rate and forecasts budget exhaustion |
+| Agent | [sli-definition-coverage-auditor](agents/248-sli-definition-coverage-auditor/) | Audits SLI/SLO coverage and flags user-facing services with no reliability targets |
+| Agent | [toil-and-alert-actionability-reporter](agents/249-toil-and-alert-actionability-reporter/) | Measures per-service actionable-vs-noise alerts and on-call time consumed |
+| Agent | [availability-scorecard-by-user-journey](agents/250-availability-scorecard-by-user-journey/) | Rolls resource health up into end-user journey availability (login, checkout) |
+
+---
+
+## Application troubleshooting
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [log-error-signature-clusterer](agents/251-log-error-signature-clusterer/) | Clusters log errors into recurring signatures and surfaces new error types |
+| Agent | [cascading-failure-and-retry-storm-detector](agents/252-cascading-failure-and-retry-storm-detector/) | Detects retry storms and timeout cascades and identifies the originating service |
+| Agent | [slow-query-and-n-plus-one-detector](agents/253-slow-query-and-n-plus-one-detector/) | Correlates latency with query patterns to find slow queries and N+1 access |
+| Agent | [thundering-herd-and-cold-start-analyzer](agents/254-thundering-herd-and-cold-start-analyzer/) | Identifies cold-start and cache-stampede patterns that degrade user experience |
+| Agent | [user-facing-incident-timeline-reconstructor](agents/255-user-facing-incident-timeline-reconstructor/) | Reconstructs a unified incident timeline of deploys, alarms, and dependency events |
+
+---
+
+## CloudWatch observability coverage
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [application-signals-slo-and-service-map-monitor](agents/256-application-signals-slo-and-service-map-monitor/) | Monitors Application Signals services, SLOs, golden signals, and service-map health |
+| Agent | [lambda-insights-performance-monitor](agents/257-lambda-insights-performance-monitor/) | Uses Lambda Insights to monitor memory/CPU, cold starts, and mis-provisioning |
+| Agent | [cross-account-observability-oam-auditor](agents/258-cross-account-observability-oam-auditor/) | Audits Observability Access Manager sinks/links and cross-account coverage gaps |
+| Agent | [cloudwatch-anomaly-detector-coverage-monitor](agents/259-cloudwatch-anomaly-detector-coverage-monitor/) | Audits native metric anomaly-detector coverage and configuration |
+| Agent | [metric-streams-and-emf-ingestion-health-monitor](agents/260-metric-streams-and-emf-ingestion-health-monitor/) | Monitors metric streams, Firehose delivery, and EMF ingestion health |
+| Agent | [cloudwatch-dashboard-coverage-auditor](agents/261-cloudwatch-dashboard-coverage-auditor/) | Audits dashboard coverage, broken widgets, and stale dashboards |
+
+---
+
+## End-of-life and extended-support cost
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [extended-support-cost-exposure-reporter](agents/262-extended-support-cost-exposure-reporter/) | Cross-service dollar exposure of extended-support charges with a migration roadmap |
+| Agent | [rds-aurora-extended-support-charge-detector](agents/263-rds-aurora-extended-support-charge-detector/) | RDS/Aurora versions in or entering Extended Support with per-vCPU-hour estimates |
+| Agent | [eks-extended-support-charge-detector](agents/264-eks-extended-support-charge-detector/) | EKS versions in or entering Extended Support with the per-cluster-hour delta |
+| Agent | [lambda-deprecated-runtime-migration-planner](agents/265-lambda-deprecated-runtime-migration-planner/) | Deprecated Lambda runtimes, block-deploy deadlines, and a migration roadmap |
+| Agent | [ec2-legacy-platform-eos-cost-detector](agents/266-ec2-legacy-platform-eos-cost-detector/) | EC2 on end-of-support OS/instance families with AWS vs third-party cost exposure |
+
+---
+
+## Cost governance and account contacts
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [cost-protection-controls-enablement-auditor](agents/267-cost-protection-controls-enablement-auditor/) | Detects and drives enablement of low-cost cost safety nets (anomaly detection, budgets) |
+| Agent | [account-alternate-contacts-and-notification-consolidation-auditor](agents/268-account-alternate-contacts-and-notification-consolidation-auditor/) | Flags stale/missing account contacts and consolidates notifications to monitored destinations |
+
+---
+
+## Contact center, IoT, media, messaging, and purpose-built databases (skills)
+
+Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.
+
+| Domain | Skills |
+|--------|--------|
+| Contact center (Amazon Connect) | contact-flow troubleshooting, queue and routing health, telephony and voice quality, capacity and concurrency planning, security and compliance audit, integration and Lambda reliability |
+| IoT | IoT Core connectivity and throttling, rules-engine action failures, device certificate expiry (fleet), Greengrass deployment and core health, FleetWise ingestion health |
+| Messaging deliverability | SES deliverability and reputation, SES sending quota and throttle, Pinpoint campaign delivery, Chime SDK media session quality |
+| Media | MediaLive channel and input health, MediaConvert job failure and backlog, MediaPackage origin and packaging, MediaTailor ad insertion |
+| Purpose-built databases | DocumentDB, Neptune, Timestream, MemoryDB, Keyspaces health and capacity |
+
+---
+
 ## Index by AWS service
 
 Find agents by the primary AWS service they cover. An agent appears under one primary service; many agents also read adjacent services.
