@@ -22,6 +22,8 @@ is one approvable operation on one resource, described by
 
 ## Files
 
+Core AWS domains:
+
 - [security.md](security.md) - security group scoping, IMDSv2, S3 protection,
   flow logs, GuardDuty, KMS rotation, TLS policy.
 - [cost.md](cost.md) - idle resource tagging, lifecycle tiering, log retention,
@@ -30,6 +32,21 @@ is one approvable operation on one resource, described by
   capacity and PITR, backup settings.
 - [observability.md](observability.md) - alarm configuration, anomaly detectors,
   log retention, metric hygiene.
+
+Service-category domains:
+
+- [contact-center.md](contact-center.md) - Amazon Connect flows, routing
+  profiles, phone number association, Lambda association, recording encryption.
+- [iot.md](iot.md) - IoT Core policy scoping and quotas, certificate lifecycle,
+  Greengrass deployments, FleetWise campaigns (with the rules-engine PassRole
+  refusal).
+- [media.md](media.md) - Elemental MediaLive channel restart, MediaConvert queue,
+  MediaPackage and MediaTailor config (with live-broadcast blast radius).
+- [messaging-deliverability.md](messaging-deliverability.md) - SES suppression,
+  DKIM, sending options and quota, Pinpoint channels and campaigns, Chime SDK
+  quota (with the reputation-is-a-process caveat).
+- [purpose-built-databases.md](purpose-built-databases.md) - DocumentDB, Neptune,
+  Timestream, MemoryDB, Keyspaces sizing, capacity, and failover.
 
 ## Reading the guardrail column
 
