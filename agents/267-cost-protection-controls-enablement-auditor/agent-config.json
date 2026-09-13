@@ -1,0 +1,17 @@
+{
+  "name": "cost-protection-controls-enablement-auditor",
+  "description": "Audits whether low-cost AWS cost-governance protection controls (Cost Anomaly Detection, AWS Budgets, Cost Explorer, RI/SP utilization alerts) are enabled per account and drives their enablement to prevent large surprise bills.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cost-optimization-reviewer",
+    "operational-excellence-reviewer",
+    "multi-account-baseline-hardening"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * TUE *)",
+    "description": "Runs weekly on Tuesday at 06:00 UTC"
+  }
+}

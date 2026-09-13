@@ -1,0 +1,17 @@
+{
+  "name": "account-alternate-contacts-and-notification-consolidation-auditor",
+  "description": "Audits AWS account primary and alternate contacts (BILLING, OPERATIONS, SECURITY) across accounts, flags stale/missing/personal-individual contacts, and recommends consolidating notifications to monitored role-based destinations.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "multi-account-baseline-hardening",
+    "access-review-auditor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:00 UTC"
+  }
+}

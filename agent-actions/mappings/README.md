@@ -47,6 +47,9 @@ Service-category domains:
   quota (with the reputation-is-a-process caveat).
 - [purpose-built-databases.md](purpose-built-databases.md) - DocumentDB, Neptune,
   Timestream, MemoryDB, Keyspaces sizing, capacity, and failover.
+- [cost-governance.md](cost-governance.md) - enabling cost-protection controls
+  (Cost Anomaly Detection, Budgets and their notifications) and updating stale
+  account alternate contacts (with the account-API ceiling caveat).
 
 ## Reading the guardrail column
 
