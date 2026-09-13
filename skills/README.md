@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **177 skills** organized across **25 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **190 skills** organized across **26 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -420,6 +420,28 @@ Skills for leveraging AWS DevOps Agent memory - the managed stores (topology, de
 
 ---
 
+### 26. Integrations Ecosystem
+
+Skills for getting more from AWS DevOps Agent integrations - multi-tool telemetry (Datadog, Dynatrace, Splunk, Grafana, New Relic, CloudWatch), code and pipeline connectors (GitHub, GitLab, Azure DevOps), comms and ticketing (PagerDuty, Slack, ServiceNow), hybrid AWS + Azure estates, and extension points (webhooks, custom MCP servers, remote A2A agents). Read-only, reasoning over data the platform surfaces from connected sources.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [cross-telemetry-signal-reconciliation](integrations-ecosystem/cross-telemetry-signal-reconciliation/) | Reconciles a service's signals across CloudWatch and connected third-party telemetry; classifies disagreements and gaps | Generic |
+| [observability-tool-overlap-and-cost](integrations-ecosystem/observability-tool-overlap-and-cost/) | Finds services double-instrumented across paid telemetry tools and licence/ingest waste | Generic |
+| [telemetry-coverage-and-webhook-health](integrations-ecosystem/telemetry-coverage-and-webhook-health/) | Audits telemetry coverage of critical paths and the health of investigation-trigger webhooks | Generic |
+| [deployment-to-incident-correlation](integrations-ecosystem/deployment-to-incident-correlation/) | Correlates GitHub/GitLab/Azure DevOps deploys with health and incident timelines | Generic |
+| [multi-pipeline-dora-consolidation](integrations-ecosystem/multi-pipeline-dora-consolidation/) | Computes DORA four keys unified across GitHub + GitLab + Azure DevOps | Generic |
+| [release-freeze-and-change-collision-detection](integrations-ecosystem/release-freeze-and-change-collision-detection/) | Flags deploys against freeze windows and ServiceNow change tickets | Generic |
+| [incident-notification-routing-audit](integrations-ecosystem/incident-notification-routing-audit/) | Audits severity-to-PagerDuty/Slack/ServiceNow routing and severities that route nowhere | Generic |
+| [ticket-hygiene-and-mttr-reconciliation](integrations-ecosystem/ticket-hygiene-and-mttr-reconciliation/) | Reconciles ServiceNow records against the resource timeline for missing/stale tickets and MTTR gaps | Generic |
+| [alert-to-page-noise-analysis](integrations-ecosystem/alert-to-page-noise-analysis/) | Measures alert-to-page conversion per routing target | Generic |
+| [hybrid-estate-inventory-and-drift](integrations-ecosystem/hybrid-estate-inventory-and-drift/) | Unified AWS + Azure inventory and tag/ownership drift | Generic |
+| [cross-cloud-dependency-and-egress-cost](integrations-ecosystem/cross-cloud-dependency-and-egress-cost/) | Maps AWS<->Azure dependencies and cross-cloud egress cost/latency | Generic |
+| [a2a-and-mcp-integration-health](integrations-ecosystem/a2a-and-mcp-integration-health/) | Audits remote A2A agents, custom MCP servers, and webhooks for health, staleness, scope, and security | Generic |
+| [webhook-trigger-coverage](integrations-ecosystem/webhook-trigger-coverage/) | Ensures incident-triggering webhooks are present, authenticated, and invoking investigations | Generic |
+
+---
+
 ## How to Use
 
 ### Option 1: Create in the UI
@@ -672,6 +694,20 @@ skills/
     +-- known-noise-and-quirks-curation/SKILL.md
     +-- directives-store-hygiene/SKILL.md
     +-- memory-store-hygiene-and-limits/SKILL.md
++-- integrations-ecosystem/
+    +-- cross-telemetry-signal-reconciliation/SKILL.md
+    +-- observability-tool-overlap-and-cost/SKILL.md
+    +-- telemetry-coverage-and-webhook-health/SKILL.md
+    +-- deployment-to-incident-correlation/SKILL.md
+    +-- multi-pipeline-dora-consolidation/SKILL.md
+    +-- release-freeze-and-change-collision-detection/SKILL.md
+    +-- incident-notification-routing-audit/SKILL.md
+    +-- ticket-hygiene-and-mttr-reconciliation/SKILL.md
+    +-- alert-to-page-noise-analysis/SKILL.md
+    +-- hybrid-estate-inventory-and-drift/SKILL.md
+    +-- cross-cloud-dependency-and-egress-cost/SKILL.md
+    +-- a2a-and-mcp-integration-health/SKILL.md
+    +-- webhook-trigger-coverage/SKILL.md
 ```
 
 ---

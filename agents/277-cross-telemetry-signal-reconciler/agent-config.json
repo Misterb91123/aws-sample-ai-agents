@@ -1,0 +1,19 @@
+{
+  "name": "cross-telemetry-signal-reconciler",
+  "description": "Reconciles health signals for the same service across CloudWatch and connected third-party telemetry (Datadog, Dynatrace, Splunk, Grafana, New Relic), classifies disagreements, finds coverage gaps and duplicate alerting, and recommends a single source of truth per signal. Read-only.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs",
+    "list_cloudwatch_alarms",
+    "list_investigations"
+  ],
+  "skills": [
+    "cross-telemetry-signal-reconciliation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 11 ? * WED *)",
+    "description": "Runs weekly on WED at 11:00 UTC"
+  }
+}

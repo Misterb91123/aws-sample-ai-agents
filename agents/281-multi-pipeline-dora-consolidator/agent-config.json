@@ -1,0 +1,16 @@
+{
+  "name": "multi-pipeline-dora-consolidator",
+  "description": "Computes the DORA four keys as one unified org-level and per-team view across teams shipping through GitHub Actions, GitLab CI/CD, and Azure DevOps, normalizing event definitions across providers so a mixed-CI organization sees comparable numbers. Differs from single-tool DORA agents by consolidating across VCS and CI providers. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "multi-pipeline-dora-consolidation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:00 UTC"
+  }
+}

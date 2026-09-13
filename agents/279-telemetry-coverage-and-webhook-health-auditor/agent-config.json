@@ -1,0 +1,17 @@
+{
+  "name": "telemetry-coverage-and-webhook-health-auditor",
+  "description": "Audits whether connected telemetry sources cover the critical request paths and whether investigation-trigger webhooks are present, authenticated, and firing, so silent broken webhooks and uninstrumented paths are caught before an incident goes uninvestigated. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "telemetry-coverage-and-webhook-health"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:30 UTC"
+  }
+}

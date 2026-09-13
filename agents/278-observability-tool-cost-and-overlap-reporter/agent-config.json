@@ -1,0 +1,16 @@
+{
+  "name": "observability-tool-cost-and-overlap-reporter",
+  "description": "Finds services instrumented in more than one paid telemetry or APM tool (CloudWatch, Datadog, Dynatrace, Splunk, Grafana, New Relic), estimates the licence and ingest waste that overlap represents, and recommends a consolidation target per service. Dollar figures are estimates; Cost Explorer and vendor billing are authoritative. Read-only.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "observability-tool-overlap-and-cost"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(15 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:15 UTC"
+  }
+}

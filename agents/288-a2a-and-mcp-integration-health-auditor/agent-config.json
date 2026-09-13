@@ -1,0 +1,16 @@
+{
+  "name": "a2a-and-mcp-integration-health-auditor",
+  "description": "Audits registered remote A2A agents, custom MCP servers, and generic webhooks for health, staleness, over-broad scope, and security posture (authenticated, least-privilege, still used), ranking the risky and unused extension points so the platform team can retire or tighten them. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "a2a-and-mcp-integration-health"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(35 17 ? * FRI *)",
+    "description": "Runs weekly on FRI at 17:35 UTC"
+  }
+}

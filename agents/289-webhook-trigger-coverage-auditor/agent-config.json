@@ -1,0 +1,16 @@
+{
+  "name": "webhook-trigger-coverage-auditor",
+  "description": "Ensures incident-triggering webhooks from the connected telemetry and ticketing tools are present, authenticated, and actually invoking investigations, so an incident from any expected source reliably becomes an investigation. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "webhook-trigger-coverage"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(55 18 ? * SAT *)",
+    "description": "Runs weekly on SAT at 18:55 UTC"
+  }
+}

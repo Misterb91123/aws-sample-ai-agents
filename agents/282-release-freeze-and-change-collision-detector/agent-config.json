@@ -1,0 +1,16 @@
+{
+  "name": "release-freeze-and-change-collision-detector",
+  "description": "Cross-references pipeline deploy events from GitHub Actions, GitLab CI/CD, and Azure DevOps against declared change-freeze windows and ServiceNow change tickets to flag freeze violations, deploys with no approved ticket, and change collisions on shared resources, ranked by risk. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "release-freeze-and-change-collision-detection"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 10 ? * SAT *)",
+    "description": "Runs weekly on SAT at 10:20 UTC"
+  }
+}

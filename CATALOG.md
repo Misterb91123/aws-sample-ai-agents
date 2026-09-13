@@ -601,6 +601,41 @@ Agents that leverage AWS DevOps Agent memory - the managed stores (topology, dep
 
 ---
 
+## Integrations ecosystem
+
+Agents that get more from AWS DevOps Agent integrations - multi-tool telemetry (Datadog, Dynatrace, Splunk, Grafana, New Relic, CloudWatch), code and pipeline connectors (GitHub, GitLab, Azure DevOps), comms and ticketing (PagerDuty, Slack, ServiceNow), hybrid AWS + Azure estates, and extension points (webhooks, custom MCP servers, remote A2A agents). All read-only; they reason over data the platform surfaces from connected sources plus AWS-native reads. Several extend an existing AWS-only agent across providers or clouds (noted below).
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [cross-telemetry-signal-reconciler](agents/277-cross-telemetry-signal-reconciler/) | Reconciles a service's signals across CloudWatch and connected third-party telemetry; classifies disagreements, coverage gaps, and duplicate alerts |
+| Agent | [observability-tool-cost-and-overlap-reporter](agents/278-observability-tool-cost-and-overlap-reporter/) | Finds services double-instrumented across paid telemetry tools and licence/ingest waste; recommends consolidation |
+| Agent | [telemetry-coverage-and-webhook-health-auditor](agents/279-telemetry-coverage-and-webhook-health-auditor/) | Audits telemetry coverage of critical paths and the health of investigation-trigger webhooks |
+| Agent | [deployment-to-incident-correlation-reporter](agents/280-deployment-to-incident-correlation-reporter/) | Correlates GitHub/GitLab/Azure DevOps deploys with health and incidents to attribute regressions (extends 237 across providers) |
+| Agent | [multi-pipeline-dora-consolidator](agents/281-multi-pipeline-dora-consolidator/) | Unifies the DORA four keys across GitHub + GitLab + Azure DevOps for mixed-CI orgs (extends 235 across providers) |
+| Agent | [release-freeze-and-change-collision-detector](agents/282-release-freeze-and-change-collision-detector/) | Flags deploys against change-freeze windows and ServiceNow change tickets |
+| Agent | [incident-notification-routing-auditor](agents/283-incident-notification-routing-auditor/) | Audits severity-to-PagerDuty/Slack/ServiceNow routing and severities that route nowhere |
+| Agent | [ticket-hygiene-and-mttr-reconciler](agents/284-ticket-hygiene-and-mttr-reconciler/) | Reconciles ServiceNow records against the resource timeline for missing/stale tickets and MTTR discrepancies |
+| Agent | [alert-to-page-noise-reporter](agents/285-alert-to-page-noise-reporter/) | Measures alert-to-page conversion per routing target, feeding alarm-fatigue work (extends 06/39 with the paging half) |
+| Agent | [hybrid-estate-inventory-and-drift-reporter](agents/286-hybrid-estate-inventory-and-drift-reporter/) | Unified AWS + Azure inventory and cross-cloud tag/ownership drift (extends 225 across clouds) |
+| Agent | [cross-cloud-dependency-and-egress-cost-reporter](agents/287-cross-cloud-dependency-and-egress-cost-reporter/) | Maps AWS<->Azure dependencies and cross-cloud egress cost/latency (extends 33 across clouds) |
+| Agent | [a2a-and-mcp-integration-health-auditor](agents/288-a2a-and-mcp-integration-health-auditor/) | Audits remote A2A agents, custom MCP servers, and webhooks for health, staleness, scope, and security |
+| Agent | [webhook-trigger-coverage-auditor](agents/289-webhook-trigger-coverage-auditor/) | Ensures incident-triggering webhooks are present, authenticated, and invoking investigations |
+| Skill | [cross-telemetry-signal-reconciliation](skills/integrations-ecosystem/cross-telemetry-signal-reconciliation/) | Reconciles service signals across CloudWatch and third-party telemetry |
+| Skill | [observability-tool-overlap-and-cost](skills/integrations-ecosystem/observability-tool-overlap-and-cost/) | Finds paid-telemetry overlap and ingest waste |
+| Skill | [telemetry-coverage-and-webhook-health](skills/integrations-ecosystem/telemetry-coverage-and-webhook-health/) | Audits telemetry path coverage and webhook firing health |
+| Skill | [deployment-to-incident-correlation](skills/integrations-ecosystem/deployment-to-incident-correlation/) | Correlates cross-provider deploys with health and incidents |
+| Skill | [multi-pipeline-dora-consolidation](skills/integrations-ecosystem/multi-pipeline-dora-consolidation/) | DORA four keys unified across GitHub + GitLab + Azure DevOps |
+| Skill | [release-freeze-and-change-collision-detection](skills/integrations-ecosystem/release-freeze-and-change-collision-detection/) | Deploys vs freeze windows and ServiceNow change tickets |
+| Skill | [incident-notification-routing-audit](skills/integrations-ecosystem/incident-notification-routing-audit/) | Severity-to-routing coverage across PagerDuty/Slack/ServiceNow |
+| Skill | [ticket-hygiene-and-mttr-reconciliation](skills/integrations-ecosystem/ticket-hygiene-and-mttr-reconciliation/) | ServiceNow records vs resource timeline; MTTR reconciliation |
+| Skill | [alert-to-page-noise-analysis](skills/integrations-ecosystem/alert-to-page-noise-analysis/) | Alert-to-page conversion per routing target |
+| Skill | [hybrid-estate-inventory-and-drift](skills/integrations-ecosystem/hybrid-estate-inventory-and-drift/) | Unified AWS + Azure inventory and tag/ownership drift |
+| Skill | [cross-cloud-dependency-and-egress-cost](skills/integrations-ecosystem/cross-cloud-dependency-and-egress-cost/) | AWS<->Azure dependencies and egress cost/latency |
+| Skill | [a2a-and-mcp-integration-health](skills/integrations-ecosystem/a2a-and-mcp-integration-health/) | Health, staleness, scope, and security of A2A/MCP/webhook integrations |
+| Skill | [webhook-trigger-coverage](skills/integrations-ecosystem/webhook-trigger-coverage/) | Presence, auth, and firing of incident-trigger webhooks |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

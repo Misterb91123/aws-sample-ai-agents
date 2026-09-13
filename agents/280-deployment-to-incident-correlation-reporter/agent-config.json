@@ -1,0 +1,17 @@
+{
+  "name": "deployment-to-incident-correlation-reporter",
+  "description": "Correlates pipeline deploy events tracked from GitHub Actions, GitLab CI/CD, and Azure DevOps with resource health metrics and incident timelines to attribute regressions to the specific release most likely responsible, ranked by evidence strength. Read-only.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations"
+  ],
+  "skills": [
+    "deployment-to-incident-correlation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(45 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:45 UTC"
+  }
+}

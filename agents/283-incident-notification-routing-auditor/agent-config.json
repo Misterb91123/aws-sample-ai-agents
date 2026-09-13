@@ -1,0 +1,17 @@
+{
+  "name": "incident-notification-routing-auditor",
+  "description": "Audits that alarm and finding severities map to the correct PagerDuty escalation policy, Slack channel, or ServiceNow assignment group, and finds severities that route nowhere so a critical alert cannot fall into silence. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms",
+    "list_investigations"
+  ],
+  "skills": [
+    "incident-notification-routing-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 13 ? * SUN *)",
+    "description": "Runs weekly on SUN at 13:10 UTC"
+  }
+}

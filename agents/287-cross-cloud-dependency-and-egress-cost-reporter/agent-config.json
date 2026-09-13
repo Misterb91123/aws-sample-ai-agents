@@ -1,0 +1,16 @@
+{
+  "name": "cross-cloud-dependency-and-egress-cost-reporter",
+  "description": "Maps AWS-to-Azure and Azure-to-AWS dependencies and estimates the data-egress cost and latency of each cross-cloud call, ranking the paths where colocation or caching would save the most. Dollar figures are estimates; Cost Explorer and the Azure billing console are authoritative. Read-only.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-cloud-dependency-and-egress-cost"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(50 16 ? * THU *)",
+    "description": "Runs weekly on THU at 16:50 UTC"
+  }
+}

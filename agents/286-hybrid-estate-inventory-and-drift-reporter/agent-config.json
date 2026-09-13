@@ -1,0 +1,15 @@
+{
+  "name": "hybrid-estate-inventory-and-drift-reporter",
+  "description": "Builds a unified resource inventory across the connected AWS and Azure accounts and finds tag and ownership drift, including the same logical service tagged differently on each cloud, so hybrid governance keeps cost allocation, ownership, and audit intact. Read-only.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "hybrid-estate-inventory-and-drift"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(5 15 ? * WED *)",
+    "description": "Runs weekly on WED at 15:05 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "alert-to-page-noise-reporter",
+  "description": "Measures how many alerts became a page a human had to act on versus how many auto-resolved per routing target (PagerDuty, Slack, ServiceNow), ranking the noisiest targets to feed alarm-fatigue work with the paging half it does not cover. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms",
+    "list_investigations"
+  ],
+  "skills": [
+    "alert-to-page-noise-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(25 12 ? * TUE *)",
+    "description": "Runs weekly on TUE at 12:25 UTC"
+  }
+}

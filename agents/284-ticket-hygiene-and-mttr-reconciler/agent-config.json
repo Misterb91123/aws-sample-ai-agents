@@ -1,0 +1,16 @@
+{
+  "name": "ticket-hygiene-and-mttr-reconciler",
+  "description": "Reconciles ServiceNow incident and change records against the actual resource timeline to find incidents with no ticket, tickets left open after recovery, and MTTR figures that disagree with when the resource truly broke and healed, so reporting and audits can be trusted. Read-only.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "ticket-hygiene-and-mttr-reconciliation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 14 ? * MON *)",
+    "description": "Runs weekly on MON at 14:40 UTC"
+  }
+}
