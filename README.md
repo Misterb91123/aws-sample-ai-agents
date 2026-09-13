@@ -12,9 +12,86 @@ when a task matches.
 - **Agents** live under [`agents/`](agents/), one directory per agent, each with a
   `system-prompt.md` (the agent's instructions) and an `agent-config.json`
   (its recommended tools, skills, and schedule trigger).
-- **Skills** live under [`skills/`](skills/), grouped into 19 operational domains,
+- **Skills** live under [`skills/`](skills/), grouped into 24 operational domains,
   each with a `SKILL.md` containing `name`, `description`, and `agent_type`
   frontmatter plus the procedure itself.
+
+---
+
+## Architecture at a glance
+
+A deployed custom agent is a system prompt plus a curated set of MCP tools,
+optional skills, optional memory stores, and a schedule trigger, all living in
+your Agent Space. It reads from your connected AWS accounts and observability
+data with read-only tools and produces reports and recommendations.
+
+```mermaid
+flowchart LR
+    subgraph Repo["This repository"]
+        SP[system-prompt.md]
+        CFG[agent-config.json<br/>tools, skills, trigger]
+        SK[SKILL.md files<br/>24 domains]
+    end
+
+    subgraph Space["AWS DevOps Agent - Agent Space"]
+        AG[Custom agent<br/>268 available]
+        SKA[Skills<br/>169 available]
+        MEM[Memory stores<br/>optional]
+        TRG[Schedule trigger]
+    end
+
+    subgraph Tools["MCP tools - read-only"]
+        T1[use_aws]
+        T2[query_cloudwatch_metrics]
+        T3[query_cloudwatch_logs]
+        T4[list_cloudwatch_alarms]
+        T5[list_investigations]
+        T6[use_kubectl]
+    end
+
+    subgraph Sources["Connected data"]
+        AWS[AWS accounts]
+        CW[CloudWatch metrics/logs/alarms]
+        INV[Investigations]
+    end
+
+    OUT[Report artifact +<br/>optional recommendations]
+
+    SP --> AG
+    CFG --> AG
+    SK --> SKA
+    SKA -.loaded when relevant.-> AG
+    MEM -.context.-> AG
+    TRG --> AG
+    AG --> Tools
+    Tools --> Sources
+    AG --> OUT
+```
+
+## How an agent runs (functionality flow)
+
+On each scheduled or on-demand run, an agent gathers data, loads any relevant
+skills, analyzes against thresholds, and emits a report - degrading gracefully
+and never exceeding its read-only scope.
+
+```mermaid
+flowchart TD
+    A[Trigger fires<br/>schedule or on demand] --> B[Load system prompt<br/>+ assigned skills]
+    B --> C[Gather data via read-only tools]
+    C --> D{Tool call OK?}
+    D -->|throttled| E[Retry once, then<br/>continue with partial data]
+    D -->|access denied / empty| F[Note the gap,<br/>continue]
+    D -->|ok| G[Analyze vs thresholds]
+    E --> G
+    F --> G
+    G --> H[Validate: no div-by-zero,<br/>freshness, impossible values]
+    H --> I[Produce report artifact<br/>+ Issues Encountered]
+    I --> J{Actionable finding?}
+    J -->|yes| K[Emit recommendation<br/>GREEN/YELLOW/RED, evidence, rollback]
+    J -->|no| L[Report only]
+    K --> M[Human reviews]
+    L --> M
+```
 
 ---
 
@@ -247,6 +324,24 @@ mutating operation that remediates it, and marks which fixes the agent refuses
 outright (delete-class operations, anything needing `iam:PassRole`, and the
 repository's prohibited actions), so those stay manual. Enabling directed actions
 is a deliberate change to your operating posture; the default remains read-only.
+
+The lifecycle from a read-only finding to an applied fix is human-gated at every
+step:
+
+```mermaid
+flowchart TD
+    A[Read-only agent<br/>produces a finding] --> B[Recommendation record<br/>evidence, safety rating, rollback]
+    B --> C{Directed actions<br/>enabled on the Agent Space?}
+    C -->|no| D[Manual remediation<br/>human applies the fix]
+    C -->|yes| E[Operator asks agent in chat<br/>to apply the step]
+    E --> F[Agent proposes the exact<br/>mutating operation]
+    F --> G{Passes guardrails?}
+    G -->|delete-class / iam:PassRole /<br/>prohibited action| H[Refused - stays manual]
+    G -->|allowed| I[Operator approves in chat<br/>scoped, single-use]
+    I --> J[Agent executes under the<br/>scoped elevated role]
+    J --> K[CloudTrail records the change<br/>attributed to the approver]
+    K --> L[Agent verifies the result]
+```
 
 ---
 

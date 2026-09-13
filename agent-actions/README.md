@@ -95,16 +95,38 @@ Third-party and MCP tools use a classification model instead:
 
 ## How this repository fits together
 
+```mermaid
+flowchart LR
+    subgraph RO["Read-only agent - scheduled"]
+        F[finding] --> R[recommendation record<br/>recommendation.schema.json]
+    end
+    subgraph OP["Operator + DevOps Agent - chat"]
+        RV[reviews recommendation] --> AP[asks agent to apply it]
+        AP --> PR[agent proposes a directed action<br/>directed-action.schema.json]
+        PR --> AA[operator approves<br/>scoped, single-use]
+        AA --> EX[agent executes under<br/>the elevated role]
+        EX --> CT[CloudTrail attributes<br/>it to the operator]
+    end
+    R --> RV
 ```
-Read-only agent (scheduled)            Operator + DevOps Agent (chat)
---------------------------             ------------------------------
-finding                        -->     reviews recommendation
-recommendation record          -->     asks agent to apply it
-(recommendation.schema.json)           agent proposes a directed action
-                                       (directed-action.schema.json)
-                                       operator approves (scoped, single-use)
-                                       agent executes under elevated role
-                                       CloudTrail attributes it to the operator
+
+The safety model is defense in depth: every layer below must pass before a change
+is applied, and the agent refuses destructive operations even with approval.
+
+```mermaid
+flowchart TD
+    A[Directed action proposed] --> B{Agent Space toggle<br/>elevatedActionsEnabled?}
+    B -->|off| X[Stays a recommendation<br/>manual remediation]
+    B -->|on| C{Elevated role registered<br/>and valid?}
+    C -->|no| X
+    C -->|yes| D{Within the role's<br/>permission ceiling?}
+    D -->|no| X
+    D -->|yes| E{Guardrails: not delete-class,<br/>no iam:PassRole,<br/>not a prohibited action?}
+    E -->|refused| Y[Agent refuses<br/>even if approved]
+    E -->|allowed| F{Operator approves in chat?<br/>scoped, single-use}
+    F -->|reject| X
+    F -->|approve| G[Execute under scoped,<br/>time-bounded credentials]
+    G --> H[CloudTrail: attributed<br/>to the approving operator]
 ```
 
 - A read-only agent emits a **recommendation record**

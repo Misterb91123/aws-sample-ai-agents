@@ -21,6 +21,28 @@ There is no checksum verification, signing, or tamper detection on agent or skil
 
 ---
 
+## Defense in depth
+
+The controls layer so that no single failure lets the agent take an unsafe or
+unintended action. Read-only is the default posture; every write is opt-in and
+human-gated, and some operations are refused outright regardless of approval.
+
+```mermaid
+flowchart TD
+    A[Agent reasons over read data] --> ADV{Adversarial input?<br/>injected instruction in a log,<br/>tag, finding, or ticket}
+    ADV -->|yes| ADVX[Treat as untrusted data,<br/>report as possible injection,<br/>do not act on it]
+    ADV -->|no| B[Produce finding + recommendation]
+    B --> PROH{Would the fix be a<br/>prohibited action?<br/>wildcard IAM, disable a control,<br/>0.0.0.0/0, and so on}
+    PROH -->|yes| PROHX[Never recommended;<br/>propose the scoped alternative]
+    PROH -->|no| RATE[Rate GREEN / YELLOW / RED<br/>+ escalation flags]
+    RATE --> EXEC{Execute the change?}
+    EXEC -->|read-only default| REC[Recommendation only<br/>human acts]
+    EXEC -->|directed actions opt-in| GATE[Layered gates:<br/>space toggle, elevated role,<br/>permission ceiling, per-action approval]
+    GATE --> GUARD{Delete-class,<br/>iam:PassRole?}
+    GUARD -->|yes| REFUSE[Refused even if approved<br/>stays manual]
+    GUARD -->|no| RUN[Execute under scoped,<br/>time-bounded credentials<br/>CloudTrail attributed]
+```
+
 ## Threat model
 
 | Risk | Description | Mitigation in this repository |
