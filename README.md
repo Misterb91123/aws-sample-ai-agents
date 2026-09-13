@@ -34,8 +34,8 @@ flowchart LR
     end
 
     subgraph Space["AWS DevOps Agent - Agent Space"]
-        AG[Custom agent<br/>268 available]
-        SKA[Skills<br/>169 available]
+        AG[Custom agent<br/>269 available]
+        SKA[Skills<br/>170 available]
         MEM[Memory stores<br/>optional]
         TRG[Schedule trigger]
     end
