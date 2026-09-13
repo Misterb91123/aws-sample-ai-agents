@@ -51,6 +51,37 @@ Service-category domains:
   (Cost Anomaly Detection, Budgets and their notifications) and updating stale
   account alternate contacts (with the account-API ceiling caveat).
 
+Cross-cutting domains:
+
+- [config-compliance.md](config-compliance.md) - Config recorder coverage,
+  CloudTrail event coverage and validation, Route 53 DNSSEC, Network Firewall
+  logging, Lake Formation scope-down, ECR scan and lifecycle.
+- [data-protection-encryption.md](data-protection-encryption.md) - SQS/SNS
+  encryption and policy, Cognito hardening, RDS snapshot un-sharing and encrypted
+  copy, public AMI lockdown, RDS parameter groups, DynamoDB deletion protection
+  and TTL, EFS backup and lifecycle, Backup Vault Lock.
+- [capacity-and-quotas.md](capacity-and-quotas.md) - API Gateway throttling and
+  usage plans, WAF rule versions and rate rules, Kinesis scaling, Redshift WLM,
+  OpenSearch storage, service-quota increases, and the EOL in-place upgrades
+  (Lambda runtime, EKS version).
+- [governance-and-refused.md](governance-and-refused.md) - Organizations SCPs,
+  IAM Identity Center, Control Tower (all ceiling-gated), plus the refused-passrole
+  family (SNS feedback role, EventBridge target roles, Secrets rotation Lambda,
+  S3 replication role).
+
+## What the mappings cover, and what they intentionally do not
+
+These files map the agents that produce a **remediable** finding - one whose fix
+is a single mutating operation. Most agents in this repository are **reporters**:
+they analyze, forecast, correlate, or score (for example DORA scorecards, cost
+allocation reports, dependency maps, incident timelines, SLO burn-rate monitors,
+health and trend monitors). A reporter's output is insight, not a single API
+call, so it has no directed action by design - and padding one in would be
+misleading. Likewise, findings whose only fix is a delete, a role-passing
+operation, or a prohibited action are shown as refused and stay manual. The
+result is deliberately a subset of the 268 agents: the ones where a safe,
+approvable, single-operation remediation genuinely exists.
+
 ## Reading the guardrail column
 
 - **allowed** - passes the agent's service-side guardrails and this repository's

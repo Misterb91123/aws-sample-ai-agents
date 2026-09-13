@@ -7,7 +7,7 @@ This file maps the read-only SECURITY findings produced by the scheduled agents 
 | Field | Value |
 | --- | --- |
 | Read-only finding | An inbound security group rule allows 0.0.0.0/0 (or ::/0) to a sensitive port such as 22 (SSH), 3389 (RDP), 3306, 5432, or 6379. |
-| Source | 03-security-group-auditor, 82-public-exposure-surface-scanner, 84-nacl-rule-auditor, 98-vpc-security-group-rule-count-monitor, skill guardduty-finding-investigation |
+| Source | 03-security-group-auditor, 82-public-exposure-surface-scanner, 84-nacl-rule-auditor, 98-vpc-security-group-rule-count-monitor, 220-network-acl-and-sg-conflict-detector, 31-config-rule-drift-remediator (restricted-ssh rule), skill guardduty-finding-investigation |
 | Directed action | ec2:RevokeSecurityGroupIngress (remove the open rule) followed by ec2:AuthorizeSecurityGroupIngress (add the scoped rule) |
 | Parameters | Revoke the ingress rule for 0.0.0.0/0 on tcp/22 (and tcp/3389 if present); authorize tcp/22 from the corporate/VPN CIDR, for example 10.0.0.0/8, on the same security group. Adding a 0.0.0.0/0 rule as the "fix" is never proposed. |
 | Guardrail status | allowed |
@@ -113,6 +113,20 @@ This file maps the read-only SECURITY findings produced by the scheduled agents 
 | Approval scope | single-use |
 | Rollback | Re-run the same operation with the previous SslPolicy / MinimumProtocolVersion captured before the change. |
 | Notes | Raising the minimum TLS version can drop very old clients; confirm the client population supports TLS 1.2+ first. CloudFront changes take time to propagate to edge locations. Verify by reading the listener or distribution config. |
+
+## CloudFront distribution missing security headers or WAF association
+
+| Field | Value |
+| --- | --- |
+| Read-only finding | A CloudFront distribution serves responses without a security-headers policy (for example no HSTS, X-Content-Type-Options, or frame options), or is not associated with a WAF web ACL. |
+| Source | 156-cloudfront-security-header-auditor |
+| Directed action | cloudfront:UpdateDistribution (attach a response-headers policy that sets the security headers, and/or set WebACLId to associate a WAF web ACL) |
+| Parameters | Set ResponseHeadersPolicyId on the cache behavior to a policy that enables Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options, and Referrer-Policy; set WebACLId to an existing web ACL ARN. Removing headers or disassociating protection is never proposed. |
+| Guardrail status | allowed |
+| Safety | YELLOW |
+| Approval scope | single-use |
+| Rollback | Re-run cloudfront:UpdateDistribution with the prior ResponseHeadersPolicyId and WebACLId captured before the change. |
+| Notes | The response-headers policy and the WAF web ACL must already exist (this attaches them; it does not pass an IAM role). HSTS in particular changes browser behavior for the domain, so confirm the max-age and includeSubDomains scope before approving. CloudFront changes propagate to edge locations over several minutes. Verify by reading the distribution config. |
 
 ## IAM role with wildcard or over-broad policy
 

@@ -62,7 +62,7 @@ manual.
 | Safety | YELLOW - enabling PITR is recoverable and adds a small ongoing cost; it strengthens rather than weakens protection. |
 | Approval scope | One UpdateContinuousBackups call on the named table enabling PITR. |
 | Rollback | UpdateContinuousBackups with PointInTimeRecoveryEnabled=false, though disabling a backup control is generally discouraged. |
-| Notes | The repository prohibits disabling logging/encryption/backup controls; enabling PITR is the safe direction and is never the prohibited case. |
+| Notes | The repository prohibits disabling logging/encryption/backup controls; enabling PITR is the safe direction and is never the prohibited case. The related deletion-protection and TTL fixes from the same agent (146) are mapped in [data-protection-encryption.md](data-protection-encryption.md). |
 
 ## DynamoDB throttling from under-provisioned capacity
 
