@@ -573,6 +573,8 @@ To browse agents by the AWS service they cover instead of by operational domain,
 |------|------|-------------|
 | Agent | [cost-protection-controls-enablement-auditor](agents/267-cost-protection-controls-enablement-auditor/) | Detects and drives enablement of low-cost cost safety nets (anomaly detection, budgets) |
 | Agent | [account-alternate-contacts-and-notification-consolidation-auditor](agents/268-account-alternate-contacts-and-notification-consolidation-auditor/) | Flags stale/missing account contacts and consolidates notifications to monitored destinations |
+| Agent | [trusted-advisor-check-aggregator](agents/226-trusted-advisor-check-aggregator/) | Aggregates and prioritizes Trusted Advisor checks across all five categories |
+| Agent | [trusted-advisor-remediation-and-migration-planner](agents/269-trusted-advisor-remediation-and-migration-planner/) | Completes each Trusted Advisor recommendation with quantified impact, step-by-step remediation, and a migration path |
 
 ---
 

@@ -1,0 +1,18 @@
+{
+  "name": "trusted-advisor-remediation-and-migration-planner",
+  "description": "For every Trusted Advisor check in red or yellow status, produces a complete remediation-and-migration plan: validated quantified impact, concrete step-by-step next steps, a safety rating, approval need, and a migration path - the gap Trusted Advisor itself leaves.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "trusted-advisor-remediation-and-migration-playbook",
+    "trusted-advisor-remediation-prioritization",
+    "cost-optimization-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:00 UTC"
+  }
+}

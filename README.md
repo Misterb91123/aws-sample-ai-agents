@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Sample Custom Agents and Skills
 
-A curated, ready-to-deploy collection of **268 custom agents** and **169 skills** for
+A curated, ready-to-deploy collection of **269 custom agents** and **170 skills** for
 [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-custom-agents-index.html).
 
 Every agent is read-only and produces an operational report or recommendation:
@@ -122,8 +122,8 @@ ships a generator that turns each config into a copy-paste Chat command
 ## Repository layout
 
 ```
-agents/                 268 custom agents (system-prompt.md + agent-config.json)
-skills/                 169 skills across 24 domains (SKILL.md per skill)
+agents/                 269 custom agents (system-prompt.md + agent-config.json)
+skills/                 170 skills across 24 domains (SKILL.md per skill)
 deploy/                 Deployment options: Console, AWS CLI, Bash, CloudFormation, CDK, Terraform
 agent-actions/          Optional directed actions: turn recommendations into approved changes
 policies/               Least-privilege read-only IAM starting policy

@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **169 skills** organized across **24 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **170 skills** organized across **24 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -254,6 +254,7 @@ Skills for evaluating workloads against the AWS Well-Architected Framework pilla
 | [performance-efficiency-reviewer](well-architected/performance-efficiency-reviewer/) | Evaluates resource selection and performance optimization | Evaluation |
 | [cost-optimization-reviewer](well-architected/cost-optimization-reviewer/) | Evaluates cost efficiency and financial management practices | Evaluation |
 | [trusted-advisor-remediation-prioritization](well-architected/trusted-advisor-remediation-prioritization/) | Prioritizes Trusted Advisor findings into an action plan | Evaluation |
+| [trusted-advisor-remediation-and-migration-playbook](well-architected/trusted-advisor-remediation-and-migration-playbook/) | Adds the concrete remediation steps, quantified impact, and migration path per Trusted Advisor check | Evaluation |
 
 ---
 
