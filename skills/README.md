@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **151 skills** organized across **20 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **169 skills** organized across **24 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -346,6 +346,60 @@ Skills for operating and troubleshooting Amazon Connect contact centers.
 | [connect-capacity-and-concurrency-planning](contact-center/connect-capacity-and-concurrency-planning/) | Forecasts and right-sizes Connect capacity against Service Quotas with targeted increase recommendations | Generic |
 | [connect-security-and-compliance-audit](contact-center/connect-security-and-compliance-audit/) | Audits instance access, recording and CTR encryption, storage configs, and security-profile least privilege | Evaluation |
 | [connect-integration-and-lambda-reliability](contact-center/connect-integration-and-lambda-reliability/) | Diagnoses reliability of Lambda data dips, Lex, Customer Profiles, Contact Lens, and Kinesis CTR streaming | Incident RCA |
+
+---
+
+### 21. IoT
+
+Skills for operating AWS IoT Core, Greengrass, and FleetWise device fleets.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [iot-core-connectivity-and-throttling](iot/iot-core-connectivity-and-throttling/) | Diagnoses MQTT connect failures, auth rejections, broker throttling, and reconnect storms | Incident RCA |
+| [iot-rules-engine-action-failures](iot/iot-rules-engine-action-failures/) | Diagnoses Rules Engine action failures and throttling to Lambda, SQS, DynamoDB, Kinesis, and Republish | Incident RCA |
+| [iot-device-certificate-expiry-fleet](iot/iot-device-certificate-expiry-fleet/) | Grades fleet X.509 certificate lifecycle: expiry buckets, revoked/inactive certs still attached, CA expiry | Evaluation |
+| [greengrass-deployment-and-core-health](iot/greengrass-deployment-and-core-health/) | Diagnoses Greengrass v2 unhealthy cores, failed deployments, and broken components | Incident RCA |
+| [iot-fleetwise-ingestion-health](iot/iot-fleetwise-ingestion-health/) | Diagnoses FleetWise campaign, vehicle reporting, and decode/manifest ingestion issues | Generic |
+
+---
+
+### 22. Messaging Deliverability
+
+Skills for email, messaging, and real-time communications deliverability.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [ses-deliverability-and-reputation](messaging-deliverability/ses-deliverability-and-reputation/) | Diagnoses SES bounce/complaint spikes, reputation risk, and DKIM/SPF/DMARC alignment | Incident RCA |
+| [ses-sending-quota-and-throttle](messaging-deliverability/ses-sending-quota-and-throttle/) | Tracks SES sending quota utilization and throttling with targeted increase sizing | Generic |
+| [pinpoint-campaign-delivery-health](messaging-deliverability/pinpoint-campaign-delivery-health/) | Diagnoses Pinpoint per-channel delivery failures, opt-out surges, and throttling | Incident RCA |
+| [chime-sdk-media-session-quality](messaging-deliverability/chime-sdk-media-session-quality/) | Diagnoses Chime SDK join failures and in-call media quality (packet loss, jitter) | Incident RCA |
+
+---
+
+### 23. Media
+
+Skills for AWS Elemental live and file-based media pipelines.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [medialive-channel-and-input-health](media/medialive-channel-and-input-health/) | Diagnoses MediaLive input loss, channel alerts, and pipeline failover | Incident RCA |
+| [mediaconvert-job-failure-and-backlog](media/mediaconvert-job-failure-and-backlog/) | Diagnoses MediaConvert transcode job failures and queue backlog | Incident RCA |
+| [mediapackage-origin-and-packaging-health](media/mediapackage-origin-and-packaging-health/) | Diagnoses MediaPackage origin errors, egress latency, and ingest health | Incident RCA |
+| [mediatailor-ad-insertion-health](media/mediatailor-ad-insertion-health/) | Diagnoses MediaTailor ad decision server errors, timeouts, and ad fill rate | Generic |
+
+---
+
+### 24. Purpose-Built Databases
+
+Skills for AWS purpose-built database engines beyond RDS, Aurora, DynamoDB, and ElastiCache.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [documentdb-cluster-health](purpose-built-databases/documentdb-cluster-health/) | Diagnoses DocumentDB CPU, connections, replica lag, cache hit ratio, and storage | Incident RCA |
+| [neptune-graph-performance-and-failover](purpose-built-databases/neptune-graph-performance-and-failover/) | Diagnoses Neptune query latency, request queue backlog, errors, and failover | Incident RCA |
+| [timestream-ingestion-and-query-health](purpose-built-databases/timestream-ingestion-and-query-health/) | Diagnoses Timestream ingestion throttling, write errors, and query cost/latency | Incident RCA |
+| [memorydb-redis-cluster-health](purpose-built-databases/memorydb-redis-cluster-health/) | Diagnoses MemoryDB node/shard health, memory pressure, evictions, and failover | Incident RCA |
+| [keyspaces-capacity-and-throttling](purpose-built-databases/keyspaces-capacity-and-throttling/) | Diagnoses Keyspaces throttling, capacity mode fit, and hot partitions | Generic |
 
 ---
 
