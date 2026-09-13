@@ -91,6 +91,41 @@ SECURITY.md             Security and guardrails framework
 
 ## Deploying
 
+The workflow is the same regardless of which method you pick: get the repo onto
+GitHub and validate it, prepare the Agent Space, then create the two asset types
+(skills and custom agents), wire up triggers, and verify a run.
+
+```mermaid
+flowchart TD
+    A[Clone repo] --> B[Run scripts/validate.py]
+    B --> C[Push to GitHub]
+    C --> D[Prepare Agent Space:<br/>connect accounts, tools,<br/>read-only IAM, GitHub link]
+    D --> E{Choose a deployment path}
+
+    E -->|Console| F[AWS Console]
+    E -->|CLI / Bash| G[Asset API<br/>aws devops-agent]
+    E -->|IaC| H[CloudFormation / CDK / Terraform]
+    E -->|AI assistant| I[Kiro / Cursor / Amazon Q /<br/>Claude / Codex drives the steps]
+
+    F --> J
+    G --> J
+    H --> J
+    I --> J
+
+    J[Create skill assets] --> K[Create custom_agent assets:<br/>system prompt + tools + skills]
+    K --> L[Configure schedule triggers]
+    L --> M[Run on demand]
+    M --> N{Trajectory + report OK?}
+    N -->|Access denied / gaps| O[Grant read-only permission,<br/>fix tools/skills] --> M
+    N -->|Yes| P[Deployed - runs on schedule]
+```
+
+Notes reflected in the diagram: skills are created before agents (an agent
+references its skills by name); agent import reads only the system prompt, so
+tools and triggers are applied separately (the Asset API and IaC paths apply
+them together); and triggers are set in the Console or via the CloudFormation
+`AWS::DevOpsAgent::Trigger` resource, not through the Asset API.
+
 For a clean, ordered walkthrough from clone to a running agent, start with
 [deploy/QUICKSTART.md](deploy/QUICKSTART.md). Otherwise choose the option that
 matches how you work. Each has a guide under [deploy/](deploy/):
