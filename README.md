@@ -47,12 +47,13 @@ ships a generator that turns each config into a copy-paste Chat command
 ```
 agents/                 227 custom agents (system-prompt.md + agent-config.json)
 skills/                 145 skills across 19 domains (SKILL.md per skill)
+deploy/                 Deployment options: Console, AWS CLI, Bash, CloudFormation, CDK, Terraform
 policies/               Least-privilege read-only IAM starting policy
 schemas/                JSON schema for optional machine-readable recommendations
 scripts/                validate.py and generate_deploy_commands.py
 AGENT_TEMPLATE.md       Authoring template and best-practices checklist
 CATALOG.md              Browse agents and skills by operational domain and by AWS service
-DEPLOYMENT.md           Step-by-step deployment guide
+DEPLOYMENT.md           Step-by-step deployment guide (Console-focused)
 SECURITY.md             Security and guardrails framework
 ```
 
@@ -90,8 +91,21 @@ SECURITY.md             Security and guardrails framework
 
 ## Deploying
 
-Full instructions, including bulk deployment and a suggested rollout order, are
-in [DEPLOYMENT.md](DEPLOYMENT.md). In short:
+Choose the option that matches how you work. Each has a guide under
+[deploy/](deploy/):
+
+| Option | Guide | Best for |
+|--------|-------|----------|
+| AWS Console | [deploy/console/](deploy/console/) | First-time setup, guided tool assignment |
+| AWS CLI | [deploy/aws-cli/](deploy/aws-cli/) | Scripted one-off creates via the Asset API |
+| Bash | [deploy/bash/](deploy/bash/) | End-to-end bulk deploy from the terminal |
+| CloudFormation | [deploy/cloudformation/](deploy/cloudformation/) | Declarative IaC and pipelines (also creates triggers) |
+| CDK | [deploy/cdk/](deploy/cdk/) | IaC in TypeScript, generated from the repo files |
+| Terraform | [deploy/terraform/](deploy/terraform/) | IaC for Terraform-standardized teams |
+
+See [deploy/README.md](deploy/README.md) for how the options compare and the
+asset model they share. Full Console instructions, including bulk deployment and
+a suggested rollout order, are in [DEPLOYMENT.md](DEPLOYMENT.md). In short:
 
 **Skills** - import from GitHub (recommended, enables sync), upload as ZIP, or
 create in the UI. For GitHub import, paste the skill directory URL into

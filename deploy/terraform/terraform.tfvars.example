@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars and fill in your values.
+region         = "us-east-1"
+agent_space_id = "8f6187a7-0388-4926-8217-3a0fe32f757c"
+stack_name     = "devops-agent-sample"

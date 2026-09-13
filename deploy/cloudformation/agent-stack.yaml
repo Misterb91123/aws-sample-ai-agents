@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Sample AWS DevOps Agent deployment. Creates one skill, one custom agent that
+  uses it, and a daily schedule trigger for the agent, using the
+  AWS::DevOpsAgent::Asset and AWS::DevOpsAgent::Trigger resource types. This is
+  a self-contained example with inline content; extend it by adding more Asset
+  resources for the other skills and agents in this repository.
+
+Parameters:
+  AgentSpaceId:
+    Type: String
+    Description: The UUID of the Agent Space that owns these assets.
+
+Resources:
+
+  # --- A skill (inline SKILL.md content) -----------------------------------
+  # For a self-contained template the SKILL.md text is embedded. To manage the
+  # skill from the GitHub repo with a sync link instead, use the repository
+  # import (sourceUrl) via the CLI - that content type is API-only, not a
+  # CloudFormation property.
+  OperationalExcellenceReviewerSkill:
+    Type: AWS::DevOpsAgent::Asset
+    Properties:
+      AgentSpaceId: !Ref AgentSpaceId
+      AssetType: skill
+      Metadata:
+        name: operational-excellence-reviewer
+        description: >-
+          Evaluates operational excellence practices and processes against the
+          AWS Well-Architected Framework. Use when reviewing operations
+          readiness, runbooks, observability, and change management for a
+          workload.
+        # API enum (uppercase). SKILL.md agent_type "Evaluation" maps to PREVENTION.
+        agent_types:
+          - PREVENTION
+      Files:
+        - Path: SKILL.md
+          ContentText: |
+            # Operational Excellence Reviewer
+
+            Use this skill to evaluate a workload against the Operational
+            Excellence pillar of the AWS Well-Architected Framework. Assess
+            observability, runbooks, change management, and incident response,
+            then produce prioritized findings with severity and effort.
+
+  # --- A custom agent that uses the skill ----------------------------------
+  DailyInfraHealthReportAgent:
+    Type: AWS::DevOpsAgent::Asset
+    DependsOn: OperationalExcellenceReviewerSkill
+    Properties:
+      AgentSpaceId: !Ref AgentSpaceId
+      AssetType: custom_agent
+      Metadata:
+        name: daily-infra-health-report
+        tools:
+          - use_aws
+          - query_cloudwatch_metrics
+          - list_cloudwatch_alarms
+          - list_investigations
+        # Skills are referenced by their name metadata.
+        skills:
+          - operational-excellence-reviewer
+      Files:
+        - Path: AGENT.md
+          ContentText: |
+            You are a DevOps reporting agent that produces a daily
+            infrastructure health report.
+
+            ## Goal
+            Summarize AWS resource state, active alarms, open investigations,
+            and service availability for the last 24 hours.
+
+            ## Approach
+            1. Call use_aws to inventory key resources and their state.
+            2. Call query_cloudwatch_metrics for the past 24 hours.
+            3. Call list_cloudwatch_alarms for alarms in ALARM state.
+            4. Call list_investigations for open and recently resolved items.
+
+            ## Constraints
+            - Read-only. Do not modify, create, or delete any resource.
+
+            ## Output
+            Produce a single artifact titled "Daily Infrastructure Health
+            Report - {date}" with a summary, an alarms table, an investigations
+            table, and an Issues Encountered section.
+
+  # --- A schedule trigger for the agent ------------------------------------
+  # The trigger action references the custom agent by asset id as custom:<id>.
+  DailyInfraHealthTrigger:
+    Type: AWS::DevOpsAgent::Trigger
+    Properties:
+      AgentSpaceId: !Ref AgentSpaceId
+      Type: TIME_BASED
+      Condition:
+        Schedule:
+          Expression: cron(0 6 * * ? *)
+      Action:
+        actionType: create:task
+        task:
+          agent: !Sub
+            - custom:${AssetId}
+            - AssetId: !GetAtt DailyInfraHealthReportAgent.AssetId
+      Status: Active
+
+Outputs:
+  SkillAssetId:
+    Description: Asset ID of the operational-excellence-reviewer skill.
+    Value: !GetAtt OperationalExcellenceReviewerSkill.AssetId
+  AgentAssetId:
+    Description: Asset ID of the daily-infra-health-report custom agent.
+    Value: !GetAtt DailyInfraHealthReportAgent.AssetId
+  AgentArn:
+    Description: ARN of the custom agent.
+    Value: !GetAtt DailyInfraHealthReportAgent.Arn

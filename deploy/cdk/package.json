@@ -1,0 +1,24 @@
+{
+  "name": "devops-agent-cdk",
+  "version": "1.0.0",
+  "description": "AWS CDK app that deploys DevOps Agent skills, custom agents, and triggers from this repository.",
+  "bin": {
+    "devops-agent-cdk": "bin/app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.9",
+    "aws-cdk": "2.150.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.5.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.150.0",
+    "constructs": "10.3.0"
+  }
+}
