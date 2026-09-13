@@ -1,0 +1,17 @@
+{
+  "name": "ec2-legacy-platform-eos-cost-detector",
+  "description": "Detects EC2 instances running end-of-support operating systems or previous-generation instance families, quantifies AWS versus third-party extended-support and licensing exposure, and produces a modernization roadmap.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "ami-and-os-lifecycle-management",
+    "lift-and-shift-assessment",
+    "rightsizing-recommendation-engine"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:20 UTC"
+  }
+}

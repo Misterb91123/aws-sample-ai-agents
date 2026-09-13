@@ -1,0 +1,17 @@
+{
+  "name": "extended-support-cost-exposure-reporter",
+  "description": "Quantifies current and upcoming AWS extended-support charges across RDS/Aurora, EKS, Lambda, and EC2 legacy platforms and produces a prioritized migration roadmap to eliminate the cost.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "cost-optimization-reviewer",
+    "database-migration-planner",
+    "eks-version-upgrade-planning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:00 UTC"
+  }
+}

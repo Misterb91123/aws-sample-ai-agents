@@ -1,0 +1,18 @@
+{
+  "name": "eks-extended-support-charge-detector",
+  "description": "Detects EKS clusters on Kubernetes versions in or entering EKS Extended Support within 60/90/180 days, estimates the elevated per-cluster-hour control-plane charge delta, and gives an upgrade roadmap.",
+  "tools": [
+    "use_aws",
+    "use_kubectl"
+  ],
+  "skills": [
+    "eks-version-upgrade-planning",
+    "capacity-planning-forecaster",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(40 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:40 UTC"
+  }
+}

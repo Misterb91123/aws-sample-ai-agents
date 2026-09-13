@@ -1,0 +1,17 @@
+{
+  "name": "lambda-deprecated-runtime-migration-planner",
+  "description": "Identifies Lambda functions on deprecated or soon-to-be-deprecated runtimes, quantifies the block-deployment deadline and security risk, and produces a migration roadmap to a supported runtime before forced deprecation.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "serverless-migration-evaluator",
+    "cost-optimization-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:00 UTC"
+  }
+}

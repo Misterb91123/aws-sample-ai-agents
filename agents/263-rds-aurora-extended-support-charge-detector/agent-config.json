@@ -1,0 +1,17 @@
+{
+  "name": "rds-aurora-extended-support-charge-detector",
+  "description": "Detects RDS and Aurora engine versions in or entering AWS RDS Extended Support within 60/90/180 days, estimates the per-vCPU-hour charge, and gives an upgrade-target roadmap.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "database-migration-planner",
+    "rds-parameter-baseline-management",
+    "cost-optimization-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:20 UTC"
+  }
+}
