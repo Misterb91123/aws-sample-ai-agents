@@ -3,6 +3,9 @@
 This folder collects the ways to deploy the custom agents and skills in this
 repository to AWS DevOps Agent. Pick the option that matches how you work.
 
+**New here? Start with [QUICKSTART.md](QUICKSTART.md)** for a clean, ordered,
+step-by-step walkthrough from clone to a running agent.
+
 | Option | Folder | Best for | Automatable |
 |--------|--------|----------|-------------|
 | AWS Console (web app) | [console/](console/) | First-time setup, a few assets, guided tool assignment | No |
@@ -11,6 +14,7 @@ repository to AWS DevOps Agent. Pick the option that matches how you work.
 | AWS CloudFormation | [cloudformation/](cloudformation/) | Declarative IaC, pipelines, repeatable environments | Yes |
 | AWS CDK | [cdk/](cdk/) | IaC in TypeScript alongside application infrastructure | Yes |
 | Terraform | [terraform/](terraform/) | IaC for Terraform-standardized teams | Yes |
+| AI assistants | [ai-assistants/](ai-assistants/) | Having Kiro, Cursor, Amazon Q, Claude, or Codex drive the deploy, or reusing the skills inside those tools | Yes |
 
 Every option produces the same result: `skill` and `custom_agent` assets (and
 optionally `Trigger` resources) in your Agent Space. The main repository

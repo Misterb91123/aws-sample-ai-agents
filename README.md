@@ -91,8 +91,9 @@ SECURITY.md             Security and guardrails framework
 
 ## Deploying
 
-Choose the option that matches how you work. Each has a guide under
-[deploy/](deploy/):
+For a clean, ordered walkthrough from clone to a running agent, start with
+[deploy/QUICKSTART.md](deploy/QUICKSTART.md). Otherwise choose the option that
+matches how you work. Each has a guide under [deploy/](deploy/):
 
 | Option | Guide | Best for |
 |--------|-------|----------|
@@ -102,6 +103,7 @@ Choose the option that matches how you work. Each has a guide under
 | CloudFormation | [deploy/cloudformation/](deploy/cloudformation/) | Declarative IaC and pipelines (also creates triggers) |
 | CDK | [deploy/cdk/](deploy/cdk/) | IaC in TypeScript, generated from the repo files |
 | Terraform | [deploy/terraform/](deploy/terraform/) | IaC for Terraform-standardized teams |
+| AI assistants | [deploy/ai-assistants/](deploy/ai-assistants/) | Kiro, Cursor, Amazon Q, Claude, or Codex driving the deploy, or reusing the skills inside those tools |
 
 See [deploy/README.md](deploy/README.md) for how the options compare and the
 asset model they share. Full Console instructions, including bulk deployment and
