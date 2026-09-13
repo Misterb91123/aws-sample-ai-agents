@@ -1,0 +1,20 @@
+{
+  "name": "user-facing-incident-timeline-reconstructor",
+  "description": "For a given incident window, reconstructs a unified timeline of deploys, alarms, error spikes, and dependency events to accelerate root-cause analysis.",
+  "tools": [
+    "list_investigations",
+    "query_cloudwatch_logs",
+    "query_cloudwatch_metrics",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "trace-analysis-investigator",
+    "metric-correlation-investigator",
+    "incident-communication-drafter"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

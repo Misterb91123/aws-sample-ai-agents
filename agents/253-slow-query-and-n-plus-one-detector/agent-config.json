@@ -1,0 +1,18 @@
+{
+  "name": "slow-query-and-n-plus-one-detector",
+  "description": "Correlates application latency with database query patterns to find slow queries and N-plus-one access patterns hurting user-facing endpoints, ranked by user impact.",
+  "tools": [
+    "query_cloudwatch_metrics",
+    "use_aws"
+  ],
+  "skills": [
+    "database-query-optimizer",
+    "latency-path-analyzer",
+    "caching-strategy-advisor"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 * * ? *)",
+    "description": "Runs daily at 06:00 UTC"
+  }
+}

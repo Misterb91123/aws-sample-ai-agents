@@ -1,0 +1,18 @@
+{
+  "name": "end-to-end-transaction-latency-tracer",
+  "description": "Uses X-Ray and trace data to decompose a user transaction across every hop and pinpoint which downstream call owns the latency.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "trace-analysis-investigator",
+    "latency-path-analyzer",
+    "distributed-tracing-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

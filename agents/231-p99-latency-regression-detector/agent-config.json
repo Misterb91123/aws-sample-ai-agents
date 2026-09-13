@@ -1,0 +1,17 @@
+{
+  "name": "p99-latency-regression-detector",
+  "description": "Compares tail latency p95 and p99 week over week per service and flags regressions before they breach the SLO.",
+  "tools": [
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "latency-path-analyzer",
+    "metric-correlation-investigator",
+    "error-budget-tracker"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 7 * * ? *)",
+    "description": "Runs daily at 07:10 UTC"
+  }
+}

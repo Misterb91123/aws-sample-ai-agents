@@ -1,0 +1,18 @@
+{
+  "name": "rto-rpo-attainment-reporter",
+  "description": "Measures the RTO and RPO each application tier can actually achieve from replication lag, backup recency, and failover configuration, and flags gaps against declared targets.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "rpo-rto-gap-calculator",
+    "disaster-recovery-validation",
+    "dependency-health-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * TUE *)",
+    "description": "Runs weekly on Tuesday"
+  }
+}

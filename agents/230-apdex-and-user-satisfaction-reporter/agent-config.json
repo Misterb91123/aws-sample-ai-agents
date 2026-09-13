@@ -1,0 +1,17 @@
+{
+  "name": "apdex-and-user-satisfaction-reporter",
+  "description": "Computes an Apdex-style user satisfaction score per endpoint from latency distributions classifying requests as satisfied, tolerating, or frustrated.",
+  "tools": [
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sli-measurement-validator",
+    "latency-path-analyzer",
+    "error-budget-tracker"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 * * ? *)",
+    "description": "Runs daily at 07:00 UTC"
+  }
+}

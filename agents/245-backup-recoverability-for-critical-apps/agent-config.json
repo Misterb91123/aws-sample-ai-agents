@@ -1,0 +1,18 @@
+{
+  "name": "backup-recoverability-for-critical-apps",
+  "description": "Focuses backup and restore validation on application-critical data stores and reports the freshest recoverable point and proven restorability per application rather than per resource.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "backup-restore-test-planning",
+    "backup-coverage-auditor",
+    "disaster-recovery-validation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * TUE *)",
+    "description": "Runs weekly on Tuesday"
+  }
+}

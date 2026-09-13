@@ -1,0 +1,18 @@
+{
+  "name": "dependency-slo-impact-analyzer",
+  "description": "Maps each application's dependencies and quantifies how much each dependency's degradation eats into the app's availability SLO.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "dependency-health-analyzer",
+    "error-budget-tracker",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * MON *)",
+    "description": "Runs weekly on Monday at 07:30 UTC"
+  }
+}

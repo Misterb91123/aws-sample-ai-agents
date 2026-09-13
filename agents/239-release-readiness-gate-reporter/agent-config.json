@@ -1,0 +1,19 @@
+{
+  "name": "release-readiness-gate-reporter",
+  "description": "Aggregates pre-release signals (open severe incidents, error-budget status, test and scan gates, and freeze windows) into a go or no-go readiness summary per service.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "pre-deployment-readiness-check",
+    "deployment-freeze-enforcer",
+    "error-budget-tracker"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

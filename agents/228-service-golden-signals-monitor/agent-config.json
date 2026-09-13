@@ -1,0 +1,18 @@
+{
+  "name": "service-golden-signals-monitor",
+  "description": "Reports the four golden signals (latency, traffic, errors, saturation) per application service in one unified view against baseline and target thresholds.",
+  "tools": [
+    "query_cloudwatch_metrics",
+    "use_aws"
+  ],
+  "skills": [
+    "sli-measurement-validator",
+    "metric-correlation-investigator",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

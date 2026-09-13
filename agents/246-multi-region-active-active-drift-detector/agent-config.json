@@ -1,0 +1,18 @@
+{
+  "name": "multi-region-active-active-drift-detector",
+  "description": "For active-active applications, detects configuration and data-consistency drift between regions that would cause incorrect or stale behavior after a full regional shift.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "cross-region-replication-lag-monitor",
+    "metric-correlation-investigator",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * WED *)",
+    "description": "Runs weekly on Wednesday"
+  }
+}

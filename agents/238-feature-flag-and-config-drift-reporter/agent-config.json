@@ -1,0 +1,16 @@
+{
+  "name": "feature-flag-and-config-drift-reporter",
+  "description": "Tracks feature-flag and config state across environments and flags stale flags, risky always-on flags, and prod versus non-prod divergence.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "developer-environment-drift-detector",
+    "change-management-audit-trail"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 8 ? * WED *)",
+    "description": "Runs weekly on Wednesday at 08:20 UTC"
+  }
+}

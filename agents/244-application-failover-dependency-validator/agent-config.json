@@ -1,0 +1,17 @@
+{
+  "name": "application-failover-dependency-validator",
+  "description": "Verifies that on failover to the DR region every application dependency (DNS, secrets, data stores, downstream services) is also present and usable there, so failover does not stall on a missing dependency.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "dependency-health-analyzer",
+    "disaster-recovery-validation",
+    "dns-failover-and-latency-routing-design"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(20 5 ? * TUE *)",
+    "description": "Runs weekly on Tuesday"
+  }
+}

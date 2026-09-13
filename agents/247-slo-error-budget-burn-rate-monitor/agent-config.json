@@ -1,0 +1,17 @@
+{
+  "name": "slo-error-budget-burn-rate-monitor",
+  "description": "Computes multi-window fast and slow error-budget burn rate per SLO and reports which application services will exhaust their error budget before the SLO period ends.",
+  "tools": [
+    "query_cloudwatch_metrics",
+    "use_aws"
+  ],
+  "skills": [
+    "error-budget-tracker",
+    "sli-measurement-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

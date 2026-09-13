@@ -1,0 +1,16 @@
+{
+  "name": "log-error-signature-clusterer",
+  "description": "Clusters application log errors into recurring signatures across services, ranks them by frequency and novelty, and surfaces new error types the day they first appear.",
+  "tools": [
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "log-pattern-anomaly-detector",
+    "dependency-health-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

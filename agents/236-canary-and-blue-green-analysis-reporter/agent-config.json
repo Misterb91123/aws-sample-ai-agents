@@ -1,0 +1,17 @@
+{
+  "name": "canary-and-blue-green-analysis-reporter",
+  "description": "Analyzes canary and blue-green rollout metrics by comparing error-rate and latency between old and new fleets and reports promote, hold, or rollback signals.",
+  "tools": [
+    "query_cloudwatch_metrics",
+    "use_aws"
+  ],
+  "skills": [
+    "canary-deployment-analysis",
+    "rollback-decision-framework"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "change-failure-rate-attribution",
+  "description": "Attributes production incidents to the deployment or change that likely caused them and computes change failure rate per service and per team.",
+  "tools": [
+    "list_investigations",
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "change-management-audit-trail",
+    "metric-correlation-investigator",
+    "rollback-decision-framework"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(10 8 ? * MON *)",
+    "description": "Runs weekly on Monday at 08:10 UTC"
+  }
+}

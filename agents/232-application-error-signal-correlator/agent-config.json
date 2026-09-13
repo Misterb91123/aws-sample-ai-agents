@@ -1,0 +1,19 @@
+{
+  "name": "application-error-signal-correlator",
+  "description": "Correlates application error-rate spikes with deploys, config changes, and dependency health to separate cause from symptom.",
+  "tools": [
+    "query_cloudwatch_logs",
+    "query_cloudwatch_metrics",
+    "list_investigations"
+  ],
+  "skills": [
+    "log-pattern-anomaly-detector",
+    "metric-correlation-investigator",
+    "dependency-health-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(4 hours)",
+    "description": "Runs every 4 hours"
+  }
+}
