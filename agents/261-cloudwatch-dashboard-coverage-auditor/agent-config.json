@@ -1,0 +1,17 @@
+{
+  "name": "cloudwatch-dashboard-coverage-auditor",
+  "description": "Audits CloudWatch dashboard coverage: critical services with no dashboard, broken or empty widgets, stale dashboards, and widgets referencing deleted metrics.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "dashboard-gap-analyzer",
+    "operational-excellence-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

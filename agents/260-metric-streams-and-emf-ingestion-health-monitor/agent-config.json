@@ -1,0 +1,18 @@
+{
+  "name": "metric-streams-and-emf-ingestion-health-monitor",
+  "description": "Monitors the metric ingestion pipeline: CloudWatch metric streams and their Firehose delivery health, and embedded metric format ingestion via CloudWatch Logs metric filters.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "observability-cost-optimization",
+    "log-pattern-anomaly-detector"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * THU *)",
+    "description": "Runs weekly on THU at 08:00 UTC"
+  }
+}

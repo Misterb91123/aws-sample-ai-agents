@@ -1,0 +1,18 @@
+{
+  "name": "application-signals-slo-and-service-map-monitor",
+  "description": "Monitors CloudWatch Application Signals auto-discovered services, their service-level objectives, golden signals, and service-map dependency health.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "sli-measurement-validator",
+    "error-budget-tracker",
+    "dependency-health-analyzer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "rate(6 hours)",
+    "description": "Runs every 6 hours"
+  }
+}

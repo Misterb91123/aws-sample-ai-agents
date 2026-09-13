@@ -1,0 +1,16 @@
+{
+  "name": "cross-account-observability-oam-auditor",
+  "description": "Audits CloudWatch cross-account observability via Observability Access Manager sinks and links, the telemetry types shared, and coverage gaps where source accounts are not linked.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "operational-excellence-reviewer",
+    "reliability-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:00 UTC"
+  }
+}

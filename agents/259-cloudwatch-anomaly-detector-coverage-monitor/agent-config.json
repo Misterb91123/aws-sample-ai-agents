@@ -1,0 +1,18 @@
+{
+  "name": "cloudwatch-anomaly-detector-coverage-monitor",
+  "description": "Audits CloudWatch native metric anomaly detection: which critical metrics have detectors configured, band configuration, anomaly-detection alarms, and gaps where high-value metrics lack detectors.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "alarm-noise-reduction-strategy",
+    "metric-correlation-investigator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:00 UTC"
+  }
+}

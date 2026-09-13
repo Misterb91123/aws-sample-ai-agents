@@ -1,0 +1,17 @@
+{
+  "name": "lambda-insights-performance-monitor",
+  "description": "Uses the enhanced CloudWatch Lambda Insights namespace to monitor function memory and CPU utilization, cold starts, and detect mis-provisioned memory and cold-start hot spots.",
+  "tools": [
+    "query_cloudwatch_metrics",
+    "use_aws"
+  ],
+  "skills": [
+    "lambda-cold-start-investigator",
+    "performance-efficiency-reviewer"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 10 * * ? *)",
+    "description": "Runs daily at 10:00 UTC"
+  }
+}
