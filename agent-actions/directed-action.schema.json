@@ -1,0 +1,177 @@
+{
+  "schemaId": "directed-action.schema.json",
+  "schemaDraft": "draft-07 compatible",
+  "title": "Directed Action Proposal",
+  "description": "A machine-readable proposal for a single AWS DevOps Agent directed action, derived from a read-only recommendation record. It names the exact mutating operation, its parameters, the guardrail evaluation, and the approval scope. A directed action is never executed without per-action operator approval in chat; this record describes what would be approved and executed. One directed action corresponds to one approvable operation on one resource.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "derivedFromRecommendationId",
+    "target",
+    "operation",
+    "guardrailStatus",
+    "safetyRating",
+    "reversible",
+    "approval",
+    "rollback"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version of this directed-action schema."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,80}$",
+      "description": "Stable identifier for this directed action proposal."
+    },
+    "derivedFromRecommendationId": {
+      "type": "string",
+      "description": "The id of the recommendation record (recommendation.schema.json) this directed action implements. Links the write-path action back to the read-only finding that justified it."
+    },
+    "target": {
+      "type": "object",
+      "required": ["service", "resourceId"],
+      "additionalProperties": false,
+      "description": "The single resource the directed action mutates.",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "AWS service namespace, for example ec2, s3, cloudwatch, dynamodb."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource identifier or ARN. Referenced by identifier; never embed secrets."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account identifier. HIGH sensitivity; may be masked in stored output."
+        },
+        "region": {
+          "type": "string",
+          "description": "AWS region of the resource."
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "required": ["api", "mutating", "parameters"],
+      "additionalProperties": false,
+      "description": "The exact API operation the agent would invoke via use_aws.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "The mutating API operation in service:Action form, for example ec2:RevokeSecurityGroupIngress or cloudwatch:PutMetricAlarm."
+        },
+        "mutating": {
+          "type": "boolean",
+          "const": true,
+          "description": "Always true for a directed action. Read-only operations are not directed actions and do not use this schema."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The concrete parameters the operation would be called with. Values must be specific (a named CIDR, a specific retention in days), never wildcards or blanket grants.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "guardrailStatus": {
+      "type": "object",
+      "required": ["decision", "prohibitedActionCheck"],
+      "additionalProperties": false,
+      "description": "Evaluation of the operation against the agent's service-side guardrails and this repository's prohibited actions.",
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["allowed", "refused-delete-class", "refused-permissions-boundary", "refused-passrole", "refused-prohibited-action"],
+          "description": "allowed means the operation passes all guardrails. The refused-* values name the specific guardrail that blocks it; a refused action must not be proposed for execution and remains a manual step."
+        },
+        "prohibitedActionCheck": {
+          "type": "string",
+          "enum": ["passed", "failed"],
+          "description": "Result of checking the operation against the SECURITY.md prohibited actions list (no wildcard IAM, no disabling Block Public Access, no 0.0.0.0/0 inbound, no disabling logging or encryption, and so on). failed forces decision to refused-prohibited-action."
+        },
+        "requiresPassRole": {
+          "type": "boolean",
+          "description": "True if the operation would pass an IAM role to a service. Such operations are refused by the agent by default."
+        },
+        "deleteClass": {
+          "type": "boolean",
+          "description": "True if the operation deletes a resource. Delete-class operations are always refused by the agent."
+        }
+      }
+    },
+    "safetyRating": {
+      "type": "string",
+      "enum": ["YELLOW", "RED"],
+      "description": "Directed actions are state-changing, so they are never GREEN. YELLOW is recoverable; RED is hard to reverse. RED actions require senior approval and are rare because delete-class is already refused."
+    },
+    "reversible": {
+      "type": "boolean",
+      "description": "Whether the change can be reverted with the documented rollback."
+    },
+    "escalationRequired": {
+      "type": "boolean",
+      "description": "Whether the change meets an escalation condition in SECURITY.md (IAM in production, security controls, KMS key policy, aws-auth, SCP, CloudTrail, encryption, or blast radius beyond one account or region)."
+    },
+    "blastRadius": {
+      "type": "string",
+      "enum": ["single-resource", "single-account", "multi-account", "multi-region", "organization"],
+      "description": "Scope of impact if executed. Cross-account or cross-region actions require additional explicit approval."
+    },
+    "approval": {
+      "type": "object",
+      "required": ["required", "scope"],
+      "additionalProperties": false,
+      "description": "How the operator approval must be scoped. Every directed action requires approval; this describes the expected finalized scope.",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "const": true,
+          "description": "Always true. AWS DevOps Agent never executes a mutating operation without approval."
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["single-use", "time-window"],
+          "description": "single-use consumes the approval once. time-window allows reuse for a bounded period (up to 4 hours). One-time changes should be single-use."
+        },
+        "ttlSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 14400,
+          "description": "For time-window scope, the reuse window in seconds (maximum 14400 = 4 hours). Omit for single-use."
+        },
+        "argumentPins": {
+          "type": "object",
+          "description": "The parameters that must be pinned in the approval so it cannot be widened, for example operation and resource_arn. The finalized scope can narrow but never widen the request.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "verification": {
+      "type": "string",
+      "description": "The read-only check to run after execution to confirm the change took effect and had the intended result, for example re-describe the security group and confirm the 0.0.0.0/0 rule is gone."
+    },
+    "rollback": {
+      "type": "string",
+      "description": "Explicit steps to revert the change if it makes things worse. Required for every directed action because all directed actions are state-changing."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional caveats, assumptions, or operator guidance for the approval decision."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "guardrailStatus": { "properties": { "prohibitedActionCheck": { "const": "failed" } } } }
+      },
+      "then": {
+        "properties": { "guardrailStatus": { "properties": { "decision": { "const": "refused-prohibited-action" } } } }
+      }
+    }
+  ]
+}

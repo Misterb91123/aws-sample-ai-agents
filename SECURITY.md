@@ -231,6 +231,10 @@ If you choose to let an agent actually apply approved changes, do not add write 
 
 Option 2 materially increases risk. It is described here so the boundary is explicit; this repository intentionally does not ship an executor with write access.
 
+### Directed actions (the native AWS DevOps Agent execution path)
+
+AWS DevOps Agent has a built-in, human-in-the-loop execution capability called directed actions: an operator can ask the agent in chat to carry out an approved fix, and the agent performs the mutating operation under a scoped elevated role after per-action approval. This is the supported way to move from recommendation to execution without building your own executor. It is disabled by default and gated by layered opt-in (agent-space toggle, a registered elevated role, and per-action approval), and the agent enforces its own guardrails that approval cannot override (no delete-class operations, no permissions-boundary mutation, no operations requiring `iam:PassRole`). The [agent-actions/](agent-actions/) folder documents this model, provides the elevated-role IAM, defines a directed-action schema, and maps each read-only finding in this repository to the specific directed action that remediates it (including the fixes that stay manual because the agent refuses them). Enabling directed actions remains your deliberate decision; the agents in this repository stay read-only regardless, because a scheduled run cannot obtain the required chat approval.
+
 ---
 
 ## Data sensitivity classifications

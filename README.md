@@ -45,9 +45,10 @@ ships a generator that turns each config into a copy-paste Chat command
 ## Repository layout
 
 ```
-agents/                 227 custom agents (system-prompt.md + agent-config.json)
-skills/                 145 skills across 19 domains (SKILL.md per skill)
+agents/                 261 custom agents (system-prompt.md + agent-config.json)
+skills/                 169 skills across 24 domains (SKILL.md per skill)
 deploy/                 Deployment options: Console, AWS CLI, Bash, CloudFormation, CDK, Terraform
+agent-actions/          Optional directed actions: turn recommendations into approved changes
 policies/               Least-privilege read-only IAM starting policy
 schemas/                JSON schema for optional machine-readable recommendations
 scripts/                validate.py and generate_deploy_commands.py
@@ -236,6 +237,16 @@ optionally emit machine-readable recommendation records conforming to
 [schemas/recommendation.schema.json](schemas/recommendation.schema.json) for a
 human-approval workflow; emitting a record never executes anything. See
 [SECURITY.md](SECURITY.md) and [AGENT_TEMPLATE.md](AGENT_TEMPLATE.md).
+
+To go beyond recommendations and let AWS DevOps Agent implement an approved fix
+through a directed action, see [agent-actions/](agent-actions/). Directed actions
+are opt-in and disabled by default: they require enabling directed actions on the
+agent space, registering a scoped elevated IAM role, and per-action operator
+approval in chat. That folder maps each read-only finding to the specific
+mutating operation that remediates it, and marks which fixes the agent refuses
+outright (delete-class operations, anything needing `iam:PassRole`, and the
+repository's prohibited actions), so those stay manual. Enabling directed actions
+is a deliberate change to your operating posture; the default remains read-only.
 
 ---
 

@@ -1,0 +1,95 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "NetworkRuleScoping",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
+        "ec2:ModifyInstanceMetadataOptions"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "TaggingAndCompliance",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "s3:PutBucketTagging",
+        "rds:AddTagsToResource",
+        "lambda:TagResource",
+        "resource-groups:Tag"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "StorageLifecycleAndProtection",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutLifecycleConfiguration",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketEncryption",
+        "s3:PutBucketVersioning"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ObservabilityTuning",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:SetAlarmState",
+        "cloudwatch:PutAnomalyDetector",
+        "logs:PutRetentionPolicy",
+        "logs:DeleteRetentionPolicy"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ScalingAndCapacity",
+      "Effect": "Allow",
+      "Action": [
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "autoscaling:UpdateAutoScalingGroup",
+        "lambda:PutFunctionConcurrency",
+        "lambda:PutProvisionedConcurrencyConfig",
+        "dynamodb:UpdateTable",
+        "dynamodb:UpdateContinuousBackups"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SecurityControlEnablement",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:StartVpcFlowLogs",
+        "guardduty:CreateDetector",
+        "kms:EnableKeyRotation"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ReadContextForProposals",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Describe*",
+        "s3:GetBucket*",
+        "s3:ListAllMyBuckets",
+        "rds:Describe*",
+        "cloudwatch:Describe*",
+        "cloudwatch:GetMetricData",
+        "logs:Describe*",
+        "dynamodb:DescribeTable",
+        "lambda:GetFunctionConfiguration",
+        "tag:GetResources"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
