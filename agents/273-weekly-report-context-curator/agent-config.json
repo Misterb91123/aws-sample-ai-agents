@@ -1,0 +1,16 @@
+{
+  "name": "weekly-report-context-curator",
+  "description": "Reviews a custom report-context memory store (for example weekly-report-context) against the recurring report it governs and the current environment, then recommends explicit memory adds, updates, and deletes to keep the report consistent. Recommend-only: it does not write to memory.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "report-context-store-curation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:00 UTC"
+  }
+}

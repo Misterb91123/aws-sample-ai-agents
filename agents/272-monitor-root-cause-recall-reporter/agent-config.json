@@ -1,0 +1,17 @@
+{
+  "name": "monitor-root-cause-recall-reporter",
+  "description": "Reads the managed monitors memory store (per-alarm recurring root-cause history), cross-checks it with live alarm state and the reflections store, and reports repeat-offender alarms clustering on a single fixable cause versus multi-cause chronic and stable alarms, prioritized for fix-at-the-source.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "monitor-root-cause-recall"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:30 UTC"
+  }
+}

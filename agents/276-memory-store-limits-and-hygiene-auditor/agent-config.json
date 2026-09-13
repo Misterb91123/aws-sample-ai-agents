@@ -1,0 +1,15 @@
+{
+  "name": "memory-store-limits-and-hygiene-auditor",
+  "description": "Audits an Agent Space's memory footprint against the service limits (50 stores per space, 200 memories per store, 100 KB per memory) and retrieval-quality best practices (specific descriptions, folder structure, one fact per memory, no duplication), and produces a prioritized cleanup plan. Report-and-recommend only: it never modifies memory and never recommends deleting a managed store.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "memory-store-hygiene-and-limits"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 10 ? * MON *)",
+    "description": "Runs weekly on MON at 10:00 UTC"
+  }
+}

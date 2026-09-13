@@ -26,16 +26,17 @@ All notable changes to this collection are documented here. The format is based 
 - Linked skills to agents: every agent-config.json now references 2 to 4 relevant skills (previously all empty).
 - Staggered agent trigger schedules to avoid a thundering herd (clustered cron slots spread across weekdays, hours, and minutes; the largest single cron slot dropped from 73 agents to 4).
 
-## [2026-09-12] - 269 agents, 170 skills across 24 domains
+## [2026-09-12] - 276 agents, 177 skills across 25 domains
 
 ### Added
-- Grew the collection to 269 custom agents and 170 skills across 24 operational domains.
+- Grew the collection to 276 custom agents and 177 skills across 25 operational domains.
 - Application-perspective agents (228-255): application performance monitoring (golden signals, end-to-end latency tracing, Apdex, p99 regression, error-signal correlation, memory-leak/GC, dependency SLO impact), release management (DORA four keys, canary/blue-green analysis, change-failure attribution, feature-flag drift, release-readiness gate, post-deploy verification, rollback frequency/MTTR), disaster recovery (RTO/RPO attainment, DR game-day readiness, failover dependency validation, per-application recoverability, active-active drift), site reliability and SLO (error-budget burn rate, SLI coverage, alert actionability/toil, user-journey availability), and application troubleshooting (log-signature clustering, cascading-failure/retry-storm detection, slow-query/N+1, thundering-herd/cold-start, incident timeline reconstruction).
 - CloudWatch observability coverage agents (256-261): Application Signals SLO and service map, Lambda Insights performance, cross-account observability (OAM), native metric anomaly-detector coverage, metric-streams and EMF ingestion health, and dashboard coverage.
 - End-of-life and extended-support cost agents (262-266): a cross-service extended-support cost-exposure reporter and per-service detectors for RDS/Aurora, EKS, deprecated Lambda runtimes, and legacy EC2 platforms, each with a 60/90/180-day forecast and migration roadmap and estimate caveats.
 - Cost-governance and account-contact agents (267-268): cost-protection controls enablement auditor (detect and drive enablement of Cost Anomaly Detection, AWS Budgets, Cost Explorer, RI/SP utilization alerts) and an account alternate-contacts and notification-consolidation auditor.
 - Trusted Advisor remediation-and-migration planner (269) and its playbook skill (trusted-advisor-remediation-and-migration-playbook): for every Trusted Advisor check in red or yellow status, complete the recommendation with the validated quantified impact, concrete step-by-step remediation, a safety rating, and a migration path - the next steps Trusted Advisor itself does not provide. Distinct from the trusted-advisor-check-aggregator (226), which aggregates and prioritizes.
-- New skill domains (five): contact-center (Amazon Connect), iot (IoT Core, Greengrass, FleetWise), messaging-deliverability (SES, Pinpoint, Chime SDK), media (AWS Elemental), and purpose-built-databases (DocumentDB, Neptune, Timestream, MemoryDB, Keyspaces).
+- Agent-Space memory agents (270-276) and a new agent-space-memory skill domain (seven skills): a new class of agent that leverages AWS DevOps Agent memory. They read the managed stores (understanding-agent-space topology, understanding-dependencies, monitors, directives, reflections) and custom stores to enrich findings with blast radius (270), report topology drift against expected architecture (271), recall per-monitor recurring root causes (272), and audit memory hygiene and limits (276). The curator and librarian agents (273 report-context, 274 known-noise-and-quirks) and the directives-hygiene auditor (275) are recommend-only: they propose memory edits for a human to apply in chat and never write to memory themselves, preserving the read-only-by-default posture for scheduled runs.
+- New skill domains (six): contact-center (Amazon Connect), iot (IoT Core, Greengrass, FleetWise), messaging-deliverability (SES, Pinpoint, Chime SDK), media (AWS Elemental), purpose-built-databases (DocumentDB, Neptune, Timestream, MemoryDB, Keyspaces), and agent-space-memory (leveraging the DevOps Agent managed and custom memory stores).
 - Directed actions (`agent-actions/`): documentation of the AWS DevOps Agent directed-actions model, elevated-role trust and scoped permission policies, a `directed-action.schema.json`, and per-domain mappings of each read-only finding to the exact mutating operation with guardrail status (allowed, refused-delete-class, refused-passrole, refused-prohibited-action), safety rating, approval scope, and rollback. Read-only remains the default; directed actions are opt-in and human-approved.
 - Adversarial Input Handling guardrail block (prompt injection, exfiltration, LLMjacking, excessive agency) added to `SECURITY.md`, `AGENT_TEMPLATE.md`, and every agent system prompt.
 - Deployment options folder (`deploy/`): a step-by-step quickstart plus Console, AWS CLI, Bash, CloudFormation, CDK, and Terraform guides, and an AI-assistant guide (driving the deploy with, and reusing the skills inside, Kiro, Cursor, Amazon Q, Claude, and Codex).
@@ -43,7 +44,7 @@ All notable changes to this collection are documented here. The format is based 
 
 ### Changed
 - Extended the ASCII check to `.py`, `.ps1`, `.yml`, `.yaml`, and `.txt` and excluded `.git`, `node_modules`, `cdk.out`, and `.terraform` from validation.
-- Updated `README.md` and `CATALOG.md` to the current counts and added catalog sections for all agents through 268 and the new skill domains.
+- Updated `README.md` and `CATALOG.md` to the current counts and added catalog sections for all agents through 276 and the new skill domains.
 
 ## [2026-08-14] - 226 agents, 145 skills
 

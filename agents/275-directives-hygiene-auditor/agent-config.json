@@ -1,0 +1,15 @@
+{
+  "name": "directives-hygiene-auditor",
+  "description": "Audits the directives memory store (user-authored standing instructions that steer every session) for contradictions, facts falsified by the live environment, staleness, vagueness, and safety conflicts, and recommends a correction for each. Audit-and-recommend only: it does not modify the store.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "directives-store-hygiene"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * WED *)",
+    "description": "Runs weekly on WED at 08:00 UTC"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "known-noise-and-quirks-librarian",
+  "description": "Identifies confirmed noisy alarms and environmental quirks from the monitors history and live signals, and recommends memory entries (with expected signature and evidence) for a custom quirks store so future runs stop re-flagging them. Recommend-only: it does not write to memory and never records a quirk that could mask a real fault.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "known-noise-and-quirks-curation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:30 UTC"
+  }
+}

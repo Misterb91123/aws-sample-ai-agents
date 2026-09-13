@@ -578,6 +578,29 @@ To browse agents by the AWS service they cover instead of by operational domain,
 
 ---
 
+## Agent-Space memory
+
+Agents that leverage AWS DevOps Agent memory - the managed stores (topology, dependencies, monitors, directives, reflections) and custom stores. The curator/librarian agents recommend memory edits for a human to apply; they do not write to memory themselves.
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [blast-radius-context-enricher](agents/270-blast-radius-context-enricher/) | Reads the dependency and topology stores to enrich findings with upstream/downstream blast radius, prioritized by reach |
+| Agent | [topology-drift-reporter](agents/271-topology-drift-reporter/) | Reports drift between the discovered topology and expected architecture (directives, required tags, boundaries), corroborated by live reads |
+| Agent | [monitor-root-cause-recall-reporter](agents/272-monitor-root-cause-recall-reporter/) | Summarizes per-monitor recurring root-cause history into repeat-offender and fix-at-the-source lists |
+| Agent | [weekly-report-context-curator](agents/273-weekly-report-context-curator/) | Recommends adds/updates/deletes to a custom report-context store so a recurring report stays consistent (recommend-only) |
+| Agent | [known-noise-and-quirks-librarian](agents/274-known-noise-and-quirks-librarian/) | Recommends recording confirmed noisy alarms and environmental quirks into a custom store (recommend-only) |
+| Agent | [directives-hygiene-auditor](agents/275-directives-hygiene-auditor/) | Audits the directives store for stale, contradictory, falsified, vague, or unsafe standing instructions |
+| Agent | [memory-store-limits-and-hygiene-auditor](agents/276-memory-store-limits-and-hygiene-auditor/) | Audits memory against the 50/200/100KB limits and retrieval-quality best practices with a cleanup plan |
+| Skill | [dependency-graph-blast-radius-enrichment](skills/agent-space-memory/dependency-graph-blast-radius-enrichment/) | Enriches a finding with blast radius from the dependency and topology stores |
+| Skill | [topology-drift-detection](skills/agent-space-memory/topology-drift-detection/) | Detects drift between discovered topology and expected architecture |
+| Skill | [monitor-root-cause-recall](skills/agent-space-memory/monitor-root-cause-recall/) | Turns per-monitor root-cause history into a fix-at-the-source list |
+| Skill | [report-context-store-curation](skills/agent-space-memory/report-context-store-curation/) | Curates a custom report-context store; recommends memory edits |
+| Skill | [known-noise-and-quirks-curation](skills/agent-space-memory/known-noise-and-quirks-curation/) | Recommends recording confirmed noise and quirks into a custom store |
+| Skill | [directives-store-hygiene](skills/agent-space-memory/directives-store-hygiene/) | Audits the directives store for stale, contradictory, or unsafe entries |
+| Skill | [memory-store-hygiene-and-limits](skills/agent-space-memory/memory-store-hygiene-and-limits/) | Audits memory against limits and retrieval-quality best practices |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

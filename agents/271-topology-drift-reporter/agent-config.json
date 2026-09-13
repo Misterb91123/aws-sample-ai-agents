@@ -1,0 +1,15 @@
+{
+  "name": "topology-drift-reporter",
+  "description": "Compares the discovered understanding-agent-space topology against expectation signals (directives, required tags, naming, and any attached expected-architecture store), corroborates with live reads, and reports unexpected components, missing governance tags, and cross-boundary edges with severity.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "topology-drift-detection"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

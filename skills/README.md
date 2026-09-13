@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **170 skills** organized across **24 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **177 skills** organized across **25 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -404,6 +404,22 @@ Skills for AWS purpose-built database engines beyond RDS, Aurora, DynamoDB, and 
 
 ---
 
+### 25. Agent-Space Memory
+
+Skills for leveraging AWS DevOps Agent memory - the managed stores (topology, dependencies, monitors, directives, reflections) and custom stores - to enrich findings, detect drift, recall recurring causes, and keep memory accurate and within limits.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [dependency-graph-blast-radius-enrichment](agent-space-memory/dependency-graph-blast-radius-enrichment/) | Enriches a finding with upstream/downstream blast radius from the dependency and topology stores | Generic |
+| [topology-drift-detection](agent-space-memory/topology-drift-detection/) | Detects drift between the discovered topology and expected architecture (directives, tags, naming) | Generic |
+| [monitor-root-cause-recall](agent-space-memory/monitor-root-cause-recall/) | Summarizes per-monitor recurring root-cause history into repeat-offender and fix-at-the-source lists | Generic |
+| [report-context-store-curation](agent-space-memory/report-context-store-curation/) | Curates a custom report-context store so a recurring report stays consistent; recommends memory edits | Generic |
+| [known-noise-and-quirks-curation](agent-space-memory/known-noise-and-quirks-curation/) | Recommends recording confirmed noisy alarms and environmental quirks into a custom store | Generic |
+| [directives-store-hygiene](agent-space-memory/directives-store-hygiene/) | Audits the directives store for stale, contradictory, falsified, vague, or unsafe standing instructions | Generic |
+| [memory-store-hygiene-and-limits](agent-space-memory/memory-store-hygiene-and-limits/) | Audits memory against the 50/200/100KB limits and retrieval-quality best practices | Generic |
+
+---
+
 ## How to Use
 
 ### Option 1: Create in the UI
@@ -648,6 +664,14 @@ skills/
     +-- cross-region-replication-lag-monitor/SKILL.md
     +-- eventbridge-dlq-and-retry-design/SKILL.md
     +-- step-functions-error-handling-design/SKILL.md
++-- agent-space-memory/
+    +-- dependency-graph-blast-radius-enrichment/SKILL.md
+    +-- topology-drift-detection/SKILL.md
+    +-- monitor-root-cause-recall/SKILL.md
+    +-- report-context-store-curation/SKILL.md
+    +-- known-noise-and-quirks-curation/SKILL.md
+    +-- directives-store-hygiene/SKILL.md
+    +-- memory-store-hygiene-and-limits/SKILL.md
 ```
 
 ---

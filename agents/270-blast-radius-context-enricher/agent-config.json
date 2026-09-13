@@ -1,0 +1,17 @@
+{
+  "name": "blast-radius-context-enricher",
+  "description": "Turns isolated resource-level findings into impact statements by reading the managed understanding-dependencies and understanding-agent-space memory stores: resolves each finding to a component and reports upstream callers, downstream dependencies, request paths, and the classified blast radius, prioritized by reach.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "dependency-graph-blast-radius-enrichment"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * WED *)",
+    "description": "Runs weekly on WED at 09:00 UTC"
+  }
+}
