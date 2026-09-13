@@ -10,3 +10,8 @@ Thumbs.db
 
 # Kiro
 .kiro/
+
+# Internal-only communications (press release, PR/FAQ, Slack drafts).
+# These are internal enablement materials and must NOT be published to GitLab,
+# GitHub, or the public AWS Samples. Kept locally, never committed.
+internal/
