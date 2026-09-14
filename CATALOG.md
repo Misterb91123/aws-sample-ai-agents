@@ -636,6 +636,45 @@ Agents that get more from AWS DevOps Agent integrations - multi-tool telemetry (
 
 ---
 
+## Release integration (CI/CD readiness, testing, and governance)
+
+Agents that operationalize and govern AWS DevOps Agent release management when integrated with GitHub, GitLab, and Azure DevOps - CI/CD integration readiness and testing coverage, pipeline IAM/OIDC trust and deploy-permission scope, artifact provenance, IaC change risk, promotion drift, and the post-deploy feedback loop. They complement (not replace) the native release readiness reviews and release testing. Each recommends, where useful, enabling a relevant AWS MCP server (or a custom MCP) and calling it in addition to telemetry and AWS-infra reads. Several extend an existing agent across CI/CD providers (noted below). All read-only.
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [cicd-integration-readiness-auditor](agents/290-cicd-integration-readiness-auditor/) | Per-repo scorecard: is DevOps Agent correctly wired into GitHub/GitLab/Azure DevOps (coverage, scopes, webhooks, post-deploy QA trigger) |
+| Agent | [release-testing-coverage-and-outcome-reporter](agents/291-release-testing-coverage-and-outcome-reporter/) | Which apps/APIs are covered by release testing, pass/fail and flaky trends, and gaps |
+| Agent | [release-readiness-review-adoption-reporter](agents/292-release-readiness-review-adoption-reporter/) | Readiness-review adoption vs bypass, recurring finding categories, unenrolled repos |
+| Agent | [verification-environment-health-monitor](agents/293-verification-environment-health-monitor/) | Health, cost, and duration of the agent-managed verification environments |
+| Agent | [pipeline-iam-and-oidc-trust-auditor](agents/294-pipeline-iam-and-oidc-trust-auditor/) | Audits CI/CD OIDC trust and deploy-role scope into AWS (extends 07/49 to the pipeline path) |
+| Agent | [deploy-permission-blast-radius-reporter](agents/295-deploy-permission-blast-radius-reporter/) | Reports what each pipeline deploy role can actually do |
+| Agent | [artifact-and-image-provenance-auditor](agents/296-artifact-and-image-provenance-auditor/) | Traces deployed artifacts/images to a reviewed and tested commit; signing/provenance across ECR |
+| Agent | [merge-to-deploy-lead-time-and-gap-reporter](agents/297-merge-to-deploy-lead-time-and-gap-reporter/) | Merged-not-deployed commits and deploys with no reviewed PR, across providers |
+| Agent | [failed-deploy-and-pipeline-flakiness-reporter](agents/298-failed-deploy-and-pipeline-flakiness-reporter/) | Cross-provider pipeline failure/flakiness tied to targeted AWS resources (extends 13 across providers) |
+| Agent | [environment-promotion-drift-reporter](agents/299-environment-promotion-drift-reporter/) | Commit/image-SHA parity across the promotion chain (extends 112 to the promotion chain) |
+| Agent | [iac-change-risk-previewer](agents/300-iac-change-risk-previewer/) | AWS-resource risk of open IaC PRs (deletes, SG opening, IAM broadening); complements the native review |
+| Agent | [secret-and-config-exposure-in-pipeline-auditor](agents/301-secret-and-config-exposure-in-pipeline-auditor/) | Pipeline configs/variables/repo settings for exposed secrets and missing scanning |
+| Agent | [post-deploy-regression-watch-reporter](agents/302-post-deploy-regression-watch-reporter/) | Watches golden signals after a deploy and attributes regressions to a release |
+| Agent | [change-freeze-and-deploy-compliance-reporter](agents/303-change-freeze-and-deploy-compliance-reporter/) | Fleet-wide compliance scoring of freeze/gate violations across providers (extends 282 to fleet scoring) |
+| Agent | [release-management-enablement-gap-reporter](agents/304-release-management-enablement-gap-reporter/) | Adoption of readiness reviews + release testing + CI/CD integration, and enablement gaps |
+| Skill | [cicd-integration-readiness-audit](skills/release-integration/cicd-integration-readiness-audit/) | Per-repo CI/CD integration readiness scorecard |
+| Skill | [release-testing-coverage-and-outcomes](skills/release-integration/release-testing-coverage-and-outcomes/) | Release-testing coverage, outcomes, and flaky trends |
+| Skill | [release-readiness-review-adoption](skills/release-integration/release-readiness-review-adoption/) | Readiness-review adoption and bypass analysis |
+| Skill | [verification-environment-health](skills/release-integration/verification-environment-health/) | Verification-environment health, cost, and duration |
+| Skill | [pipeline-iam-and-oidc-trust-audit](skills/release-integration/pipeline-iam-and-oidc-trust-audit/) | CI/CD OIDC trust and deploy-role scope audit |
+| Skill | [deploy-permission-blast-radius](skills/release-integration/deploy-permission-blast-radius/) | Privilege scope of pipeline deploy roles |
+| Skill | [artifact-and-image-provenance-audit](skills/release-integration/artifact-and-image-provenance-audit/) | Artifact/image provenance to a reviewed, tested commit |
+| Skill | [merge-to-deploy-gap-analysis](skills/release-integration/merge-to-deploy-gap-analysis/) | Merge-to-deploy gaps across providers |
+| Skill | [deploy-and-pipeline-flakiness-analysis](skills/release-integration/deploy-and-pipeline-flakiness-analysis/) | Cross-provider pipeline flakiness tied to AWS resources |
+| Skill | [environment-promotion-drift-detection](skills/release-integration/environment-promotion-drift-detection/) | Promotion-chain SHA/tag parity |
+| Skill | [iac-change-risk-preview](skills/release-integration/iac-change-risk-preview/) | AWS-resource risk preview of open IaC PRs |
+| Skill | [pipeline-secret-and-config-exposure-audit](skills/release-integration/pipeline-secret-and-config-exposure-audit/) | Pipeline secret and config exposure |
+| Skill | [post-deploy-regression-watch](skills/release-integration/post-deploy-regression-watch/) | Post-deploy golden-signal regression watch |
+| Skill | [deploy-freeze-and-gate-compliance](skills/release-integration/deploy-freeze-and-gate-compliance/) | Fleet-wide freeze/gate compliance scoring |
+| Skill | [release-management-enablement-gap-analysis](skills/release-integration/release-management-enablement-gap-analysis/) | Release-management feature adoption and enablement gaps |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

@@ -1,0 +1,16 @@
+{
+  "name": "change-freeze-and-deploy-compliance-reporter",
+  "description": "Fleet-wide compliance scoring of deploys that violated change-freeze windows or skipped required gates (readiness review, release testing, approvals), across GitHub Actions, GitLab CI/CD, and Azure DevOps. Read-only. Recommends AWS MCP augmentation (a custom CI/change-management MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "deploy-freeze-and-gate-compliance"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * SUN *)",
+    "description": "Runs weekly on SUN at 07:00 UTC"
+  }
+}

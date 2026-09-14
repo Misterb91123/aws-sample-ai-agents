@@ -1,0 +1,16 @@
+{
+  "name": "verification-environment-health-monitor",
+  "description": "Monitors the health, duration, and cost of the agent-managed verification environments that power AWS DevOps Agent release readiness reviews: build and test success rates, provisioning failures, run durations, and attributable spend. Read-only. Recommends AWS MCP augmentation (AWS Billing and Cost Management MCP Server and AWS Pricing MCP Server) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "verification-environment-health"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * THU *)",
+    "description": "Runs weekly on THU at 06:00 UTC"
+  }
+}

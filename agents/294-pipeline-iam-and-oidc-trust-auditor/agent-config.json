@@ -1,0 +1,15 @@
+{
+  "name": "pipeline-iam-and-oidc-trust-auditor",
+  "description": "Audits the IAM roles and OIDC trust relationships that CI/CD providers (GitHub Actions OIDC, GitLab, Azure DevOps service connections) assume into AWS for over-broad trust, wildcard or unpinned subjects, and stale deploy roles. Read-only. Recommends AWS MCP augmentation (Agent Toolkit for AWS or a custom IAM-analysis MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "pipeline-iam-and-oidc-trust-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * FRI *)",
+    "description": "Runs weekly on FRI at 06:00 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "failed-deploy-and-pipeline-flakiness-reporter",
+  "description": "Reports cross-provider pipeline failure and flakiness trends across GitHub Actions, GitLab CI/CD, and Azure DevOps, and ties each hot spot to the AWS resources the failing stages target. Read-only. Recommends AWS MCP augmentation (a custom CI MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations"
+  ],
+  "skills": [
+    "deploy-and-pipeline-flakiness-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:00 UTC"
+  }
+}

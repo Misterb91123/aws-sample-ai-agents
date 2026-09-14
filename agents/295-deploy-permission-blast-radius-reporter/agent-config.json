@@ -1,0 +1,15 @@
+{
+  "name": "deploy-permission-blast-radius-reporter",
+  "description": "Reports what each CI/CD pipeline deploy role can actually do in AWS - the effective privilege scope and blast radius of every deploy identity - so teams see where a compromised pipeline could reach. Read-only. Recommends AWS MCP augmentation (Agent Toolkit for AWS) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "deploy-permission-blast-radius"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * SAT *)",
+    "description": "Runs weekly on SAT at 06:00 UTC"
+  }
+}

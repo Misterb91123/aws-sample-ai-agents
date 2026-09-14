@@ -1,0 +1,15 @@
+{
+  "name": "iac-change-risk-previewer",
+  "description": "For open infrastructure-as-code pull requests, reports AWS-side risk (resource deletes and replacements, security-group openings, IAM broadening, weakened data protections) read from the plan or template, complementing the native code review. Read-only. Recommends AWS MCP augmentation (AWS IaC MCP Server and AWS Documentation MCP Server) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "iac-change-risk-preview"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * THU *)",
+    "description": "Runs weekly on THU at 07:00 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "release-management-enablement-gap-reporter",
+  "description": "Meta adoption view of which repos and teams have adopted readiness reviews, release testing, and the CI/CD integration together, and where the enablement gaps are, so the rollout can be driven to completion. Read-only. Recommends AWS MCP augmentation (AWS Documentation MCP Server for enablement steps and a custom source-control MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "release-management-enablement-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:00 UTC"
+  }
+}

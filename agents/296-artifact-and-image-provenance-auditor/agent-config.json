@@ -1,0 +1,15 @@
+{
+  "name": "artifact-and-image-provenance-auditor",
+  "description": "Audits whether deployed artifacts and container images trace back to a reviewed and tested commit, and checks signing and provenance across Amazon ECR and other registries. Read-only. Recommends AWS MCP augmentation (Amazon ECS MCP Server and a custom registry MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "artifact-and-image-provenance-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * SUN *)",
+    "description": "Runs weekly on SUN at 06:00 UTC"
+  }
+}

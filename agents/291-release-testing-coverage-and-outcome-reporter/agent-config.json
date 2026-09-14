@@ -1,0 +1,16 @@
+{
+  "name": "release-testing-coverage-and-outcome-reporter",
+  "description": "Reports which deployed web apps and REST APIs are covered by AWS DevOps Agent release testing, summarizes pass/fail and flaky trends, and surfaces coverage gaps for uncovered services. Read-only. Recommends AWS MCP augmentation (a custom test/CI MCP and the Agent Toolkit for AWS) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "release-testing-coverage-and-outcomes"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * TUE *)",
+    "description": "Runs weekly on TUE at 06:00 UTC"
+  }
+}

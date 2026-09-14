@@ -1,0 +1,15 @@
+{
+  "name": "secret-and-config-exposure-in-pipeline-auditor",
+  "description": "Audits pipeline configs, variables, and repository settings for exposed secrets, plaintext credentials, and missing secret-scanning across GitHub, GitLab, and Azure DevOps. Read-only; references any suspected secret by identifier only, never by value. Recommends AWS MCP augmentation (a custom source-control/CI MCP and the AWS Documentation MCP Server for hardening guidance) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "pipeline-secret-and-config-exposure-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * FRI *)",
+    "description": "Runs weekly on FRI at 07:00 UTC"
+  }
+}

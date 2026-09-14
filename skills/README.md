@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **190 skills** organized across **26 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **205 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -442,6 +442,30 @@ Skills for getting more from AWS DevOps Agent integrations - multi-tool telemetr
 
 ---
 
+### 27. Release Integration
+
+Skills for operationalizing and governing AWS DevOps Agent release management when integrated with GitHub, GitLab, and Azure DevOps - CI/CD integration readiness and testing coverage, pipeline IAM/OIDC trust and deploy-permission scope, artifact provenance, IaC change risk, promotion drift, and the post-deploy feedback loop. Each recommends, where useful, enabling a relevant AWS MCP server (or a custom MCP) and calling it in addition to telemetry and AWS-infra reads. Read-only.
+
+| Skill | Description | Agent Type |
+|-------|-------------|-----------|
+| [cicd-integration-readiness-audit](release-integration/cicd-integration-readiness-audit/) | Per-repo readiness scorecard for the DevOps Agent CI/CD integration (coverage, scopes, webhooks, QA trigger) | Generic |
+| [release-testing-coverage-and-outcomes](release-integration/release-testing-coverage-and-outcomes/) | Which apps/APIs are covered by release testing, pass/fail and flaky trends, and gaps | Generic |
+| [release-readiness-review-adoption](release-integration/release-readiness-review-adoption/) | Readiness-review adoption, bypass rate, recurring finding categories, unenrolled repos | Generic |
+| [verification-environment-health](release-integration/verification-environment-health/) | Health, cost, and duration of agent-managed verification environments | Generic |
+| [pipeline-iam-and-oidc-trust-audit](release-integration/pipeline-iam-and-oidc-trust-audit/) | Audits CI/CD OIDC trust and deploy-role scope into AWS | Generic |
+| [deploy-permission-blast-radius](release-integration/deploy-permission-blast-radius/) | Reports what each pipeline deploy role can actually do | Generic |
+| [artifact-and-image-provenance-audit](release-integration/artifact-and-image-provenance-audit/) | Traces deployed artifacts/images to a reviewed and tested commit | Generic |
+| [merge-to-deploy-gap-analysis](release-integration/merge-to-deploy-gap-analysis/) | Merged-not-deployed commits and deploys with no reviewed PR, across providers | Generic |
+| [deploy-and-pipeline-flakiness-analysis](release-integration/deploy-and-pipeline-flakiness-analysis/) | Cross-provider pipeline failure/flakiness tied to targeted AWS resources | Generic |
+| [environment-promotion-drift-detection](release-integration/environment-promotion-drift-detection/) | Commit/image-SHA parity across the promotion chain | Generic |
+| [iac-change-risk-preview](release-integration/iac-change-risk-preview/) | AWS-resource risk of open IaC PRs (deletes, SG opening, IAM broadening) | Generic |
+| [pipeline-secret-and-config-exposure-audit](release-integration/pipeline-secret-and-config-exposure-audit/) | Pipeline configs/variables for exposed secrets and missing scanning | Generic |
+| [post-deploy-regression-watch](release-integration/post-deploy-regression-watch/) | Watches golden signals after a deploy and attributes regressions to a release | Generic |
+| [deploy-freeze-and-gate-compliance](release-integration/deploy-freeze-and-gate-compliance/) | Fleet-wide compliance scoring of freeze/gate violations across providers | Generic |
+| [release-management-enablement-gap-analysis](release-integration/release-management-enablement-gap-analysis/) | Adoption of readiness reviews + release testing + CI/CD integration, and enablement gaps | Generic |
+
+---
+
 ## How to Use
 
 ### Option 1: Create in the UI
@@ -708,6 +732,22 @@ skills/
     +-- cross-cloud-dependency-and-egress-cost/SKILL.md
     +-- a2a-and-mcp-integration-health/SKILL.md
     +-- webhook-trigger-coverage/SKILL.md
++-- release-integration/
+    +-- cicd-integration-readiness-audit/SKILL.md
+    +-- release-testing-coverage-and-outcomes/SKILL.md
+    +-- release-readiness-review-adoption/SKILL.md
+    +-- verification-environment-health/SKILL.md
+    +-- pipeline-iam-and-oidc-trust-audit/SKILL.md
+    +-- deploy-permission-blast-radius/SKILL.md
+    +-- artifact-and-image-provenance-audit/SKILL.md
+    +-- merge-to-deploy-gap-analysis/SKILL.md
+    +-- deploy-and-pipeline-flakiness-analysis/SKILL.md
+    +-- environment-promotion-drift-detection/SKILL.md
+    +-- iac-change-risk-preview/SKILL.md
+    +-- pipeline-secret-and-config-exposure-audit/SKILL.md
+    +-- post-deploy-regression-watch/SKILL.md
+    +-- deploy-freeze-and-gate-compliance/SKILL.md
+    +-- release-management-enablement-gap-analysis/SKILL.md
 ```
 
 ---

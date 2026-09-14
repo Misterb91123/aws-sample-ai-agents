@@ -1,0 +1,15 @@
+{
+  "name": "environment-promotion-drift-reporter",
+  "description": "Reports whether production matches what actually passed testing in the promotion chain, comparing image tags and commit SHAs across dev, staging, and prod to catch promotion drift. Read-only. Recommends AWS MCP augmentation (Amazon ECS MCP Server and a custom CI MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "environment-promotion-drift-detection"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * WED *)",
+    "description": "Runs weekly on WED at 07:00 UTC"
+  }
+}

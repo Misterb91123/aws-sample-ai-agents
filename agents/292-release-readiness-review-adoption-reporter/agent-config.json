@@ -1,0 +1,16 @@
+{
+  "name": "release-readiness-review-adoption-reporter",
+  "description": "Reports how many merges and PRs went through an AWS DevOps Agent release readiness review versus bypassed it, the recurring finding categories those reviews surface, and which repositories are not enrolled. Read-only. Recommends AWS MCP augmentation (a custom source-control MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "release-readiness-review-adoption"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:00 UTC"
+  }
+}

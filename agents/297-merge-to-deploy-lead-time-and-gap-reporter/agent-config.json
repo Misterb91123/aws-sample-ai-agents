@@ -1,0 +1,16 @@
+{
+  "name": "merge-to-deploy-lead-time-and-gap-reporter",
+  "description": "Reports merge-to-deploy lead time, commits merged but never deployed, and deploys that reached AWS with no reviewed PR, correlated across GitHub, GitLab, and Azure DevOps. Read-only. Recommends AWS MCP augmentation (a custom source-control MCP) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "merge-to-deploy-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * MON *)",
+    "description": "Runs weekly on MON at 07:00 UTC"
+  }
+}

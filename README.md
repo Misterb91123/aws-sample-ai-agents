@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Sample Custom Agents and Skills
 
-A curated, ready-to-deploy collection of **289 custom agents** and **190 skills** for
+A curated, ready-to-deploy collection of **304 custom agents** and **205 skills** for
 [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-custom-agents-index.html).
 
 Every agent is read-only and produces an operational report or recommendation:
@@ -12,7 +12,7 @@ when a task matches.
 - **Agents** live under [`agents/`](agents/), one directory per agent, each with a
   `system-prompt.md` (the agent's instructions) and an `agent-config.json`
   (its recommended tools, skills, and schedule trigger).
-- **Skills** live under [`skills/`](skills/), grouped into 26 operational domains,
+- **Skills** live under [`skills/`](skills/), grouped into 27 operational domains,
   each with a `SKILL.md` containing `name`, `description`, and `agent_type`
   frontmatter plus the procedure itself.
 
@@ -30,12 +30,12 @@ flowchart LR
     subgraph Repo["This repository"]
         SP[system-prompt.md]
         CFG[agent-config.json<br/>tools, skills, trigger]
-        SK[SKILL.md files<br/>26 domains]
+        SK[SKILL.md files<br/>27 domains]
     end
 
     subgraph Space["AWS DevOps Agent - Agent Space"]
-        AG[Custom agent<br/>289 available]
-        SKA[Skills<br/>190 available]
+        AG[Custom agent<br/>304 available]
+        SKA[Skills<br/>205 available]
         MEM[Memory stores<br/>optional]
         TRG[Schedule trigger]
     end
@@ -122,8 +122,8 @@ ships a generator that turns each config into a copy-paste Chat command
 ## Repository layout
 
 ```
-agents/                 289 custom agents (system-prompt.md + agent-config.json)
-skills/                 190 skills across 26 domains (SKILL.md per skill)
+agents/                 304 custom agents (system-prompt.md + agent-config.json)
+skills/                 205 skills across 27 domains (SKILL.md per skill)
 deploy/                 Deployment options: Console, AWS CLI, Bash, CloudFormation, CDK, Terraform
 agent-actions/          Optional directed actions: turn recommendations into approved changes
 policies/               Least-privilege read-only IAM starting policy

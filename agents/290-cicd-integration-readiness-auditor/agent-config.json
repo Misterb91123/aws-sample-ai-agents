@@ -1,0 +1,16 @@
+{
+  "name": "cicd-integration-readiness-auditor",
+  "description": "Audits whether AWS DevOps Agent is correctly and completely wired into GitHub, GitLab, and Azure DevOps for release management: connection health, repo/pipeline coverage, permission scopes, webhook wiring, and presence of the post-deployment release-testing trigger. Produces a per-repo readiness scorecard with the exact gap to close. Read-only. Recommends AWS MCP augmentation (custom source-control/CI MCP, AWS Documentation MCP) used alongside the connected associations.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "cicd-integration-readiness-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * MON *)",
+    "description": "Runs weekly on MON at 06:00 UTC"
+  }
+}

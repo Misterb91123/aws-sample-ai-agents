@@ -1,0 +1,18 @@
+{
+  "name": "post-deploy-regression-watch-reporter",
+  "description": "After a deploy, watches the target service golden signals for a window and attributes any regression to that release, correlating error rate, latency, and saturation shifts to the deploy time. Read-only. Recommends optional AWS MCP augmentation (a custom telemetry MCP for a non-connected tool) used alongside the connected associations and AWS reads.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs",
+    "list_investigations"
+  ],
+  "skills": [
+    "post-deploy-regression-watch"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * SAT *)",
+    "description": "Runs weekly on SAT at 07:00 UTC"
+  }
+}
