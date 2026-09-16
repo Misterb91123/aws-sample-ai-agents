@@ -101,6 +101,7 @@ To browse agents by the AWS service they cover instead of by operational domain,
 | Type | Name | Description |
 |------|------|-------------|
 | Agent | [devops-agent-usage-credit-monitor](agents/101-devops-agent-usage-credit-monitor/) | Monitors DevOps Agent usage and cost against the support-tier credit allowance and forecasts month-end net charges |
+| Agent | [devops-agent-usage-cost-reporter](agents/305-devops-agent-usage-cost-reporter/) | Measures the downstream API-call cost of running DevOps Agent (CloudWatch Logs Insights dominates), prices it live, and reconciles against the bill |
 | Agent | [cost-anomaly-detector](agents/02-cost-anomaly-detector/) | Identifies cost spikes, waste, and budget breaches |
 | Agent | [resource-tagging-compliance](agents/08-resource-tagging-compliance/) | Enforces tagging standards for cost allocation |
 | Agent | [storage-cost-optimizer](agents/24-storage-cost-optimizer/) | Identifies EBS, S3, snapshot, and EFS savings |
@@ -128,6 +129,7 @@ To browse agents by the AWS service they cover instead of by operational domain,
 | Agent | [elb-idle-and-cost-optimizer](agents/209-elb-idle-and-cost-optimizer/) | Identifies idle and low-traffic load balancers wasting cost |
 | Agent | [cloudtrail-lake-query-cost-monitor](agents/224-cloudtrail-lake-query-cost-monitor/) | Monitors CloudTrail Lake storage and query cost |
 | Agent | [tag-coverage-and-cost-attribution-auditor](agents/225-tag-coverage-and-cost-attribution-auditor/) | Audits resource tag coverage for cost attribution |
+| Skill | [devops-agent-usage-cost-estimation](skills/cost-management/devops-agent-usage-cost-estimation/) | Measures and prices the downstream API-call cost of running DevOps Agent and reconciles it against the bill |
 | Skill | [ebs-snapshot-cleanup-strategy](skills/cost-management/ebs-snapshot-cleanup-strategy/) | Reclaims cost from orphaned and redundant EBS snapshots |
 | Skill | [load-balancer-cost-rationalization](skills/cost-management/load-balancer-cost-rationalization/) | Rationalizes idle and low-traffic load balancers |
 | Skill | [cloudtrail-lake-cost-control](skills/cost-management/cloudtrail-lake-cost-control/) | Controls CloudTrail Lake storage and query cost |

@@ -26,10 +26,11 @@ All notable changes to this collection are documented here. The format is based 
 - Linked skills to agents: every agent-config.json now references 2 to 4 relevant skills (previously all empty).
 - Staggered agent trigger schedules to avoid a thundering herd (clustered cron slots spread across weekdays, hours, and minutes; the largest single cron slot dropped from 73 agents to 4).
 
-## [2026-09-12] - 304 agents, 205 skills across 27 domains
+## [2026-09-12] - 305 agents, 206 skills across 27 domains
 
 ### Added
-- Grew the collection to 304 custom agents and 205 skills across 27 operational domains.
+- Grew the collection to 305 custom agents and 206 skills across 27 operational domains.
+- DevOps Agent usage-cost reporter (305) and its paired skill (devops-agent-usage-cost-estimation, in cost-management): answers "what does running AWS DevOps Agent cost me in API usage?" by measuring the downstream, second-order cost on the regular AWS bill. It reads the agent's own call log, isolates the few billed operations (CloudWatch Logs Insights StartQuery dominates at roughly 95 percent; almost everything else is a free Describe/List/Get), prices them live from the AWS Price List API (HALT on an empty lookup, list price treated as an upper bound), and reconciles a bottom-up GB-scanned estimate against Cost Explorer or the CUR. Distinct from the usage-credit monitor (101), which covers direct agent-second usage versus support credits. Read-only and estimate-only; recommends AWS Pricing and Billing and Cost Management MCP augmentation used alongside the direct reads.
 - Application-perspective agents (228-255): application performance monitoring (golden signals, end-to-end latency tracing, Apdex, p99 regression, error-signal correlation, memory-leak/GC, dependency SLO impact), release management (DORA four keys, canary/blue-green analysis, change-failure attribution, feature-flag drift, release-readiness gate, post-deploy verification, rollback frequency/MTTR), disaster recovery (RTO/RPO attainment, DR game-day readiness, failover dependency validation, per-application recoverability, active-active drift), site reliability and SLO (error-budget burn rate, SLI coverage, alert actionability/toil, user-journey availability), and application troubleshooting (log-signature clustering, cascading-failure/retry-storm detection, slow-query/N+1, thundering-herd/cold-start, incident timeline reconstruction).
 - CloudWatch observability coverage agents (256-261): Application Signals SLO and service map, Lambda Insights performance, cross-account observability (OAM), native metric anomaly-detector coverage, metric-streams and EMF ingestion health, and dashboard coverage.
 - End-of-life and extended-support cost agents (262-266): a cross-service extended-support cost-exposure reporter and per-service detectors for RDS/Aurora, EKS, deprecated Lambda runtimes, and legacy EC2 platforms, each with a 60/90/180-day forecast and migration roadmap and estimate caveats.
@@ -46,7 +47,7 @@ All notable changes to this collection are documented here. The format is based 
 
 ### Changed
 - Extended the ASCII check to `.py`, `.ps1`, `.yml`, `.yaml`, and `.txt` and excluded `.git`, `node_modules`, `cdk.out`, and `.terraform` from validation.
-- Updated `README.md` and `CATALOG.md` to the current counts and added catalog sections for all agents through 304 and the new skill domains.
+- Updated `README.md` and `CATALOG.md` to the current counts and added catalog sections for all agents through 305 and the new skill domains.
 
 ## [2026-08-14] - 226 agents, 145 skills
 

@@ -1,0 +1,16 @@
+{
+  "name": "devops-agent-usage-cost-reporter",
+  "description": "Answers 'what does running AWS DevOps Agent cost me in API usage?' by measuring the downstream, second-order cost on the regular AWS bill: reads the agent's own call log, isolates the few billed operations (CloudWatch Logs Insights StartQuery dominates), prices them live from the AWS Price List API (HALT on empty, list price = upper bound), and reconciles against Cost Explorer or the CUR. Distinct from the usage-credit monitor (101), which covers direct agent-second usage versus support credits. Read-only, estimate-only. Recommends AWS Pricing and Billing/Cost MCP augmentation used alongside the direct reads.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "devops-agent-usage-cost-estimation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 1 * ? *)",
+    "description": "Runs monthly on the 1st at 09:00 UTC"
+  }
+}

@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **205 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **206 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -86,6 +86,7 @@ Skills for optimizing AWS spend and maintaining financial accountability.
 | [ebs-snapshot-cleanup-strategy](cost-management/ebs-snapshot-cleanup-strategy/) | Reclaims cost from orphaned and redundant EBS snapshots | Generic |
 | [load-balancer-cost-rationalization](cost-management/load-balancer-cost-rationalization/) | Rationalizes idle and low-traffic load balancers | Generic |
 | [cloudtrail-lake-cost-control](cost-management/cloudtrail-lake-cost-control/) | Controls CloudTrail Lake storage and query cost | Generic |
+| [devops-agent-usage-cost-estimation](cost-management/devops-agent-usage-cost-estimation/) | Measures and prices the downstream API-call cost of running DevOps Agent and reconciles it against the bill | Generic |
 
 ---
 
