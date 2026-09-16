@@ -124,15 +124,15 @@ stay manual.
 
 | Field | Value |
 | --- | --- |
-| Read-only finding | A Lambda function runs on a runtime that is end-of-life or nearing deprecation, so it loses security patches and eventually the ability to update or invoke. |
-| Source | 165-lambda-runtime-deprecation-tracker. |
-| Directed action | lambda:UpdateFunctionConfiguration (Runtime=<supported>). |
+| Read-only finding | A Lambda function runs on a runtime that is end-of-life or nearing deprecation (flagged by the Trusted Advisor deprecated-runtime check or the Lambda deprecated-runtime data), so it loses security patches and eventually the ability to update or invoke. |
+| Source | 165-lambda-runtime-deprecation-tracker; 265-lambda-deprecated-runtime-migration-planner; 306-lambda-deprecated-runtime-transform-remediation-planner. |
+| Directed action | lambda:UpdateFunctionConfiguration (Runtime=<supported>), applied only after the code has been upgraded to the target language version. |
 | Parameters | FunctionName=<fn>, Runtime=<supported-runtime-identifier>. |
 | Guardrail status | allowed-but-disruptive - modifies an existing function's runtime; no deletion, no iam:PassRole, but a runtime change can break code that depends on the old runtime. |
-| Safety | YELLOW - recoverable by setting the prior runtime, but the new runtime may be code-incompatible; test in a non-production stage or alias first. |
-| Approval scope | One UpdateFunctionConfiguration call on the named function setting the named supported runtime. Operator can choose the target runtime and the timing. |
-| Rollback | UpdateFunctionConfiguration again to set the prior runtime. |
-| Notes | Changing the runtime identifier does not run the code; validate compatibility before promoting to production, since a mismatched runtime can fail at invocation. |
+| Safety | YELLOW - recoverable by setting the prior runtime, but the new runtime may be code-incompatible; upgrade and verify the code first, and test in a non-production stage or alias before promoting. |
+| Approval scope | One UpdateFunctionConfiguration call on the named function setting the named supported runtime, after the approved and verified code change. Operator chooses the target runtime and the timing. |
+| Rollback | UpdateFunctionConfiguration again to set the prior runtime (Zip functions), or redeploy the prior image tag (Image functions); pair with reverting to the previous published function version. |
+| Notes | Changing the runtime identifier does not run or migrate the code. When the language version needs code changes, the code upgrade is done first through AWS Transform (an AWS-managed language-version-upgrade transformation that analyzes code, updates syntax, and adjusts dependencies), reviewed and merged by a human, and verified, and only then is this runtime bump applied - never ahead of the code. Container-image functions upgrade by rebuilding to a supported base image and publishing a new tag; custom runtimes (provided.*) are a manual base-image path, not an AWS-managed transformation. Agent 306 produces this end-to-end Transform plan with the human-approval gates and the rollback. |
 
 ## EKS cluster/nodegroup past or near standard support
 

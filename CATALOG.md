@@ -420,6 +420,7 @@ To browse agents by the AWS service they cover instead of by operational domain,
 | Skill | [database-migration-planner](skills/migration-modernization/database-migration-planner/) | Plans database migrations with DMS and native tools |
 | Skill | [serverless-migration-evaluator](skills/migration-modernization/serverless-migration-evaluator/) | Evaluates workloads for serverless with cost comparison |
 | Skill | [legacy-dependency-mapper](skills/migration-modernization/legacy-dependency-mapper/) | Discovers hidden dependencies in legacy applications |
+| Skill | [lambda-runtime-transform-remediation](skills/migration-modernization/lambda-runtime-transform-remediation/) | TA-sourced, AWS Transform-driven, human-gated Lambda deprecated-runtime remediation with rollback |
 
 ---
 
@@ -565,6 +566,7 @@ To browse agents by the AWS service they cover instead of by operational domain,
 | Agent | [rds-aurora-extended-support-charge-detector](agents/263-rds-aurora-extended-support-charge-detector/) | RDS/Aurora versions in or entering Extended Support with per-vCPU-hour estimates |
 | Agent | [eks-extended-support-charge-detector](agents/264-eks-extended-support-charge-detector/) | EKS versions in or entering Extended Support with the per-cluster-hour delta |
 | Agent | [lambda-deprecated-runtime-migration-planner](agents/265-lambda-deprecated-runtime-migration-planner/) | Deprecated Lambda runtimes, block-deploy deadlines, and a migration roadmap |
+| Agent | [lambda-deprecated-runtime-transform-remediation-planner](agents/306-lambda-deprecated-runtime-transform-remediation-planner/) | TA-sourced Lambda deprecated-runtime remediation via AWS Transform (assess, transform, verify) with human approvals and per-function rollback |
 | Agent | [ec2-legacy-platform-eos-cost-detector](agents/266-ec2-legacy-platform-eos-cost-detector/) | EC2 on end-of-support OS/instance families with AWS vs third-party cost exposure |
 
 ---

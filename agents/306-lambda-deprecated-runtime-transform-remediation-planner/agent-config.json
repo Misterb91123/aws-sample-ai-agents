@@ -1,0 +1,16 @@
+{
+  "name": "lambda-deprecated-runtime-transform-remediation-planner",
+  "description": "Starts from the Trusted Advisor Lambda deprecated-runtime check, classifies each flagged function against the deprecation phases with block-deploy deadlines, and plans the code upgrade through AWS Transform (assessment, transformation, verification) with human approval gates and a per-function rollback. Read-only and plan-only: a human starts each Transform job, approves each code change, and approves each deploy. Complements the runtime tracker (165) and the deadline/roadmap planner (265) by orchestrating the Transform-driven, TA-sourced remediation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "lambda-runtime-transform-remediation"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * TUE *)",
+    "description": "Runs weekly on TUE at 08:00 UTC"
+  }
+}

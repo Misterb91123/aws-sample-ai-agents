@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **206 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **207 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -171,6 +171,7 @@ Skills for planning and executing workload migrations to AWS and modernization i
 | [database-migration-planner](migration-modernization/database-migration-planner/) | Plans database migrations with schema compatibility, DMS strategy, and cutover procedures | Generic |
 | [serverless-migration-evaluator](migration-modernization/serverless-migration-evaluator/) | Evaluates workloads for serverless migration with cost comparison and architecture design | Generic |
 | [legacy-dependency-mapper](migration-modernization/legacy-dependency-mapper/) | Discovers hidden dependencies in legacy applications via network, config, and runtime analysis | Generic |
+| [lambda-runtime-transform-remediation](migration-modernization/lambda-runtime-transform-remediation/) | Plans a TA-sourced, AWS Transform-driven, human-gated Lambda deprecated-runtime upgrade with per-function rollback | Generic |
 
 ---
 
