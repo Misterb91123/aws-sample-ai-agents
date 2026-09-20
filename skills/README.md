@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **207 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **213 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -64,6 +64,7 @@ Skills for detecting, investigating, and responding to security threats.
 | [sqs-access-and-encryption-hardening](security-operations/sqs-access-and-encryption-hardening/) | Hardens SQS encryption and access policies | Evaluation |
 | [tls-policy-modernization](security-operations/tls-policy-modernization/) | Modernizes ELB and CloudFront TLS policies and removes weak ciphers | Evaluation |
 | [waf-rate-based-rule-tuning](security-operations/waf-rate-based-rule-tuning/) | Tunes WAF rate-based rules to observed attack volume | Generic |
+| [aiml-access-chain-diagnosis](security-operations/aiml-access-chain-diagnosis/) | Traces the AI/ML access-denied chain (identity, role, trust, PassRole, resource/KMS policy, SCP) and generates the minimal least-privilege fix | Incident RCA |
 
 ---
 
@@ -189,6 +190,8 @@ Skills for diagnosing, optimizing, and validating application and infrastructure
 | [cloudfront-cache-optimization](performance-engineering/cloudfront-cache-optimization/) | Raises CloudFront cache hit ratio to cut origin load and cost | Generic |
 | [apigateway-throttling-tuning](performance-engineering/apigateway-throttling-tuning/) | Tunes API Gateway throttling and quota limits | Incident RCA |
 | [dynamodb-hot-partition-remediation](performance-engineering/dynamodb-hot-partition-remediation/) | Remediates DynamoDB hot partitions and throttling | Incident RCA |
+| [fsx-ontap-diagnostics](performance-engineering/fsx-ontap-diagnostics/) | Diagnoses FSx for NetApp ONTAP volume sizing, tiering, throughput, SnapMirror, and multi-protocol access | Generic |
+| [storage-gateway-health-diagnostics](performance-engineering/storage-gateway-health-diagnostics/) | Deep Storage Gateway health checks (VM, cache/upload buffer, throughput, mount stability) with preventive maintenance | Generic |
 
 ---
 
@@ -210,6 +213,8 @@ Skills for troubleshooting network connectivity, DNS resolution, and TLS issues.
 | [dns-failover-and-latency-routing-design](networking-dns/dns-failover-and-latency-routing-design/) | Designs Route 53 failover and latency-based routing | Generic |
 | [vpc-route-and-peering-troubleshooting](networking-dns/vpc-route-and-peering-troubleshooting/) | Troubleshoots VPC peering and Transit Gateway routing | Incident RCA |
 | [nacl-and-sg-conflict-resolution](networking-dns/nacl-and-sg-conflict-resolution/) | Resolves NACL and security group conflicts causing drops | Incident RCA |
+| [network-service-quota-guarding](networking-dns/network-service-quota-guarding/) | Guards VPC/ELB/Global Accelerator/VPN quotas across regions with 80% alerts and increase recommendations | Generic |
+| [database-connectivity-path-trace](networking-dns/database-connectivity-path-trace/) | Traces the DB endpoint-to-client network path (SG/NACL/route/endpoint/DNS/TLS) to the break point | Incident RCA |
 
 ---
 
@@ -274,6 +279,7 @@ Skills for troubleshooting containerized and serverless service operations.
 | [ecs-deployment-stability-troubleshooting](container-operations/ecs-deployment-stability-troubleshooting/) | Diagnoses unstable ECS deployments, rollbacks, and task churn | Incident RCA |
 | [ecr-image-scan-remediation](container-operations/ecr-image-scan-remediation/) | Triages ECR image scan findings and enforces lifecycle policies | Generic |
 | [eks-rbac-least-privilege-review](container-operations/eks-rbac-least-privilege-review/) | Reviews EKS RBAC and pod security for least privilege | Evaluation |
+| [eks-node-join-diagnosis](container-operations/eks-node-join-diagnosis/) | Diagnoses EKS node registration/join failures (VPC endpoints, node SG reachability, launch-template bootstrap, node role, aws-auth) | Incident RCA |
 
 ---
 
@@ -573,6 +579,7 @@ skills/
 | +-- sqs-access-and-encryption-hardening/SKILL.md
 | +-- tls-policy-modernization/SKILL.md
 | +-- waf-rate-based-rule-tuning/SKILL.md
+| +-- aiml-access-chain-diagnosis/SKILL.md
 +-- cost-management/
 | +-- rightsizing-recommendation-engine/SKILL.md
 | +-- data-transfer-cost-analyzer/SKILL.md
@@ -640,6 +647,8 @@ skills/
 | +-- cloudfront-cache-optimization/SKILL.md
 | +-- apigateway-throttling-tuning/SKILL.md
 | +-- dynamodb-hot-partition-remediation/SKILL.md
+| +-- fsx-ontap-diagnostics/SKILL.md
+| +-- storage-gateway-health-diagnostics/SKILL.md
 +-- networking-dns/
 | +-- dns-resolution-troubleshooter/SKILL.md
 | +-- cross-account-connectivity-debugger/SKILL.md
@@ -653,6 +662,8 @@ skills/
 | +-- dns-failover-and-latency-routing-design/SKILL.md
 | +-- vpc-route-and-peering-troubleshooting/SKILL.md
 | +-- nacl-and-sg-conflict-resolution/SKILL.md
+| +-- network-service-quota-guarding/SKILL.md
+| +-- database-connectivity-path-trace/SKILL.md
 +-- backup-data-protection/
 | +-- backup-coverage-auditor/SKILL.md
 | +-- retention-policy-optimizer/SKILL.md
@@ -684,6 +695,7 @@ skills/
 | +-- ecs-deployment-stability-troubleshooting/SKILL.md
 | +-- ecr-image-scan-remediation/SKILL.md
 | +-- eks-rbac-least-privilege-review/SKILL.md
+| +-- eks-node-join-diagnosis/SKILL.md
 +-- data-analytics/
 | +-- glue-job-failure-diagnosis/SKILL.md
 | +-- kinesis-data-pipeline-lag-investigation/SKILL.md

@@ -1,0 +1,16 @@
+{
+  "name": "storage-gateway-health",
+  "description": "Runs deep health checks on AWS Storage Gateway (File, Volume, and Tape) - gateway VM CPU, memory, and state; cache and upload-buffer utilization and eviction; network throughput to AWS against the bandwidth rate limit; iSCSI, NFS, and SMB mount stability; and working-storage exhaustion - and produces preventive maintenance recommendations before cases reopen. Read-only and recommend-only. Recommends the AWS Documentation MCP, or a custom on-prem-appliance MCP, as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "storage-gateway-health-diagnostics"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * FRI *)",
+    "description": "Runs weekly on FRI at 05:00 UTC"
+  }
+}

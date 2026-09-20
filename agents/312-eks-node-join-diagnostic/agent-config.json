@@ -1,0 +1,16 @@
+{
+  "name": "eks-node-join-diagnostic",
+  "description": "Given an EKS cluster and node group, diagnoses node registration and join failures - enumerates the VPC endpoints required for the cluster access mode (EKS, ECR, S3, STS, EC2, CloudWatch Logs) and verifies each exists and is reachable from the node security group, diffs the node launch-template user-data against the EKS-managed bootstrap, checks the node IAM role for AmazonEKSWorkerNodePolicy, AmazonEC2ContainerRegistryReadOnly, and AmazonEKS_CNI_Policy, and checks the aws-auth or access-entry mapping - and returns a ranked pass/fail remediation list. Read-only and recommend-only. Recommends the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "use_kubectl"
+  ],
+  "skills": [
+    "eks-node-join-diagnosis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 10 ? * SAT *)",
+    "description": "Runs weekly on SAT at 10:30 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "aiml-access-doctor",
+  "description": "A read-only shared identity and access diagnostic for all AI/ML services (Bedrock, SageMaker, Lex, Textract, Comprehend, Rekognition, and others). For an AI/ML access-denied, it traces the full authorization chain - caller identity, IAM identity policy, service or execution role, role trust, PassRole, resource policy, and SCP or permission boundary - pinpoints the exact permission gap, and generates the minimal least-privilege IAM fix with no wildcards. Read-only. Recommends the Agent Toolkit for AWS or a custom IAM-analysis MCP and the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "aiml-access-chain-diagnosis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * MON *)",
+    "description": "Runs weekly on MON at 08:00 UTC"
+  }
+}

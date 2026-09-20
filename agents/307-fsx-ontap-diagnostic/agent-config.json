@@ -1,0 +1,16 @@
+{
+  "name": "fsx-ontap-diagnostic",
+  "description": "Diagnoses Amazon FSx for NetApp ONTAP performance and configuration issues - volume sizing and autosize, capacity-pool tiering and cooling, throughput/SSD-IOPS fit, SnapMirror replication lag and health, and multi-protocol (NFS+SMB) security-style conflicts - and produces a ranked, read-only-safe remediation plan. Read-only. Recommends a custom ONTAP-REST MCP and the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "fsx-ontap-diagnostics"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 7 ? * TUE *)",
+    "description": "Runs weekly on TUE at 07:00 UTC"
+  }
+}

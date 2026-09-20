@@ -1,0 +1,16 @@
+{
+  "name": "db-connectivity-pathtrace",
+  "description": "Given a database endpoint (Aurora, RDS, DocumentDB, or DynamoDB via VPC endpoint) and a failing client, traces the complete network path and finds the break point - security group egress and inbound, NACLs, route tables, VPC endpoints or PrivateLink for DynamoDB, DNS resolution of the endpoint, TLS certificate validation, and cross-VPC or cross-account reachability - using VPC Reachability Analyzer and Flow Log REJECT records. Read-only and cross-engine. Native AWS reads need no MCP; optionally recommends a custom DB-endpoint MCP.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "database-connectivity-path-trace"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

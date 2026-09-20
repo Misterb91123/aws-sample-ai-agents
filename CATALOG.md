@@ -679,6 +679,27 @@ Agents that operationalize and govern AWS DevOps Agent release management when i
 
 ---
 
+## High-demand diagnostics (support-pattern driven)
+
+Agents built from the highest-volume, highest-time-to-resolution support patterns. Each is read-only and diagnostic: it isolates the root cause and produces a ranked remediation plan (recommend-only). Several recommend an AWS or custom MCP server as augmentation, called in addition to the AWS-native reads.
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [fsx-ontap-diagnostic](agents/307-fsx-ontap-diagnostic/) | Diagnoses FSx for NetApp ONTAP volume sizing, tiering, throughput, SnapMirror, and multi-protocol access issues |
+| Agent | [aiml-access-doctor](agents/308-aiml-access-doctor/) | Shared AI/ML access-denied chain tracer (identity, role, trust, PassRole, resource/KMS policy, SCP) that generates the minimal least-privilege fix |
+| Agent | [network-quota-guardian](agents/309-network-quota-guardian/) | Guards VPC/ELB/Global Accelerator/VPN quotas across regions at 80%, with an opt-in human-approved auto-file directed action |
+| Agent | [db-connectivity-pathtrace](agents/310-db-connectivity-pathtrace/) | Traces the database endpoint-to-client network path to the exact break point across Aurora/RDS/DocumentDB/DynamoDB |
+| Agent | [storage-gateway-health](agents/311-storage-gateway-health/) | Deep Storage Gateway health checks with preventive maintenance to reduce reopens |
+| Agent | [eks-node-join-diagnostic](agents/312-eks-node-join-diagnostic/) | Diagnoses EKS node registration/join failures (VPC endpoints, node SG reachability, bootstrap, node role, aws-auth) |
+| Skill | [fsx-ontap-diagnostics](skills/performance-engineering/fsx-ontap-diagnostics/) | FSx for NetApp ONTAP diagnosis |
+| Skill | [aiml-access-chain-diagnosis](skills/security-operations/aiml-access-chain-diagnosis/) | AI/ML access-denied chain diagnosis and minimal fix |
+| Skill | [network-service-quota-guarding](skills/networking-dns/network-service-quota-guarding/) | Network-scoped service-quota guarding |
+| Skill | [database-connectivity-path-trace](skills/networking-dns/database-connectivity-path-trace/) | DB endpoint-to-client path trace |
+| Skill | [storage-gateway-health-diagnostics](skills/performance-engineering/storage-gateway-health-diagnostics/) | Storage Gateway health diagnostics |
+| Skill | [eks-node-join-diagnosis](skills/container-operations/eks-node-join-diagnosis/) | EKS node-join failure diagnosis |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

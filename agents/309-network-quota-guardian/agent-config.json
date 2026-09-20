@@ -1,0 +1,16 @@
+{
+  "name": "network-quota-guardian",
+  "description": "Monitors VPC, ELB, Global Accelerator, and VPN service quotas across all active regions - EIPs, VPCs, security groups, ENIs, rules-per-SG, NAT gateways, managed-prefix-list capacity and effective-rule consumption, ELB count, Global Accelerator accelerators, and VPN connections - and flags any at 80 percent or higher with a recommended increase value. Read-only and recommend-only; describes an opt-in, human-approved auto-file directed action for quota increases in prose but never files one itself. Recommends the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "network-service-quota-guarding"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 6 ? * WED *)",
+    "description": "Runs weekly on WED at 06:30 UTC"
+  }
+}
