@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **225 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **221 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -90,8 +90,6 @@ Skills for optimizing AWS spend and maintaining financial accountability.
 | [load-balancer-cost-rationalization](cost-management/load-balancer-cost-rationalization/) | Rationalizes idle and low-traffic load balancers | Generic |
 | [cloudtrail-lake-cost-control](cost-management/cloudtrail-lake-cost-control/) | Controls CloudTrail Lake storage and query cost | Generic |
 | [devops-agent-usage-cost-estimation](cost-management/devops-agent-usage-cost-estimation/) | Measures and prices the downstream API-call cost of running DevOps Agent and reconciles it against the bill | Generic |
-| [s3-bucket-hygiene-cleanup](cost-management/s3-bucket-hygiene-cleanup/) | Reclaims cost/object-count from noncurrent versions, delete markers, and incomplete multipart uploads; lints policy size | Generic |
-| [security-service-cost-optimization](cost-management/security-service-cost-optimization/) | Finds over-provisioned CloudTrail/Config/GuardDuty without reducing security posture | Generic |
 
 ---
 
@@ -222,7 +220,6 @@ Skills for troubleshooting network connectivity, DNS resolution, and TLS issues.
 | [nacl-and-sg-conflict-resolution](networking-dns/nacl-and-sg-conflict-resolution/) | Resolves NACL and security group conflicts causing drops | Incident RCA |
 | [network-service-quota-guarding](networking-dns/network-service-quota-guarding/) | Guards VPC/ELB/Global Accelerator/VPN quotas across regions with 80% alerts and increase recommendations | Generic |
 | [database-connectivity-path-trace](networking-dns/database-connectivity-path-trace/) | Traces the DB endpoint-to-client network path (SG/NACL/route/endpoint/DNS/TLS) to the break point | Incident RCA |
-| [elb-healthcheck-diagnosis](networking-dns/elb-healthcheck-diagnosis/) | Auto-diagnoses ELB UnHealthyHostCount from target-group health-check config, reason codes, and security-group rules | Incident RCA |
 
 ---
 
@@ -288,7 +285,6 @@ Skills for troubleshooting containerized and serverless service operations.
 | [ecr-image-scan-remediation](container-operations/ecr-image-scan-remediation/) | Triages ECR image scan findings and enforces lifecycle policies | Generic |
 | [eks-rbac-least-privilege-review](container-operations/eks-rbac-least-privilege-review/) | Reviews EKS RBAC and pod security for least privilege | Evaluation |
 | [eks-node-join-diagnosis](container-operations/eks-node-join-diagnosis/) | Diagnoses EKS node registration/join failures (VPC endpoints, node SG reachability, launch-template bootstrap, node role, aws-auth) | Incident RCA |
-| [ecs-healthcheck-mismatch-diagnosis](container-operations/ecs-healthcheck-mismatch-diagnosis/) | Flags ECS container vs ALB target-group health-check mismatches (grace period, path/port, SG blocking ALB-to-task) | Incident RCA |
 
 ---
 
@@ -608,8 +604,6 @@ skills/
 | +-- ebs-snapshot-cleanup-strategy/SKILL.md
 | +-- load-balancer-cost-rationalization/SKILL.md
 | +-- cloudtrail-lake-cost-control/SKILL.md
-| +-- s3-bucket-hygiene-cleanup/SKILL.md
-| +-- security-service-cost-optimization/SKILL.md
 +-- resiliency-reliability/
 | +-- az-failure-readiness-assessment/SKILL.md
 | +-- dependency-health-analyzer/SKILL.md
@@ -683,7 +677,6 @@ skills/
 | +-- nacl-and-sg-conflict-resolution/SKILL.md
 | +-- network-service-quota-guarding/SKILL.md
 | +-- database-connectivity-path-trace/SKILL.md
-| +-- elb-healthcheck-diagnosis/SKILL.md
 +-- backup-data-protection/
 | +-- backup-coverage-auditor/SKILL.md
 | +-- retention-policy-optimizer/SKILL.md
@@ -716,7 +709,6 @@ skills/
 | +-- ecr-image-scan-remediation/SKILL.md
 | +-- eks-rbac-least-privilege-review/SKILL.md
 | +-- eks-node-join-diagnosis/SKILL.md
-| +-- ecs-healthcheck-mismatch-diagnosis/SKILL.md
 +-- data-analytics/
 | +-- glue-job-failure-diagnosis/SKILL.md
 | +-- kinesis-data-pipeline-lag-investigation/SKILL.md
