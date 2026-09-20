@@ -705,6 +705,17 @@ Agents built from the highest-volume, highest-time-to-resolution support pattern
 | Skill | [ecs-healthcheck-mismatch-diagnosis](skills/container-operations/ecs-healthcheck-mismatch-diagnosis/) | ECS health-check mismatch diagnosis |
 | Skill | [elb-healthcheck-diagnosis](skills/networking-dns/elb-healthcheck-diagnosis/) | ELB UnHealthyHostCount auto-diagnosis |
 | Skill | [aurora-pg-parameter-advisory](skills/performance-engineering/aurora-pg-parameter-advisory/) | Aurora PostgreSQL parameter tuning |
+| Agent | [elasticache-cluster-rightsizer](agents/320-elasticache-cluster-rightsizer/) | Rightsizes ElastiCache nodes/shards/replicas from memory, CPU, eviction, hit-ratio, and connection metrics |
+| Agent | [s3-high-volume-deflector](agents/321-s3-high-volume-deflector/) | Triages high-volume S3 failures (403 access-denied, replication stalls, lifecycle conflicts, 503 SlowDown) with a per-class decision tree |
+| Agent | [s3-bucket-hygiene](agents/322-s3-bucket-hygiene/) | Reclaims cost/object-count from noncurrent versions, delete markers, and incomplete multipart uploads; lints policy size |
+| Agent | [athena-partition-doctor](agents/323-athena-partition-doctor/) | Flags unpartitioned log-shaped tables and emits partition-projection DDL, CTAS reorg, and Parquet-conversion recommendations |
+| Agent | [unified-security-cost-optimizer](agents/324-unified-security-cost-optimizer/) | Finds over-provisioned CloudTrail/Config/GuardDuty without reducing security posture |
+| Agent | [vpc-reachability-connectivity-diagnostic](agents/325-vpc-reachability-connectivity-diagnostic/) | Operationalizes VPC connectivity diagnosis (Reachability Analyzer + Flow Log REJECT + route/NACL) on a triggered case; reuses existing networking skills |
+| Skill | [elasticache-rightsizing](skills/performance-engineering/elasticache-rightsizing/) | ElastiCache node rightsizing |
+| Skill | [s3-request-failure-triage](skills/security-operations/s3-request-failure-triage/) | High-volume S3 failure triage |
+| Skill | [s3-bucket-hygiene-cleanup](skills/cost-management/s3-bucket-hygiene-cleanup/) | S3 version/marker/MPU cleanup and policy-size lint |
+| Skill | [athena-partition-projection-advisory](skills/data-analytics/athena-partition-projection-advisory/) | Athena partition-projection DDL advisory |
+| Skill | [security-service-cost-optimization](skills/cost-management/security-service-cost-optimization/) | CloudTrail/Config/GuardDuty cost optimization |
 | Skill | [fsx-ontap-diagnostics](skills/performance-engineering/fsx-ontap-diagnostics/) | FSx for NetApp ONTAP diagnosis |
 | Skill | [aiml-access-chain-diagnosis](skills/security-operations/aiml-access-chain-diagnosis/) | AI/ML access-denied chain diagnosis and minimal fix |
 | Skill | [network-service-quota-guarding](skills/networking-dns/network-service-quota-guarding/) | Network-scoped service-quota guarding |

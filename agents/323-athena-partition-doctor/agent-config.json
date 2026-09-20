@@ -1,0 +1,16 @@
+{
+  "name": "athena-partition-doctor",
+  "description": "Enumerates Amazon Glue tables, flags unpartitioned tables over log-shaped S3 prefixes, correlates them with recent high-ProcessedBytes Athena queries, and emits ready-to-run partition-projection DDL plus an optional partitioned-CTAS reorg and Parquet-conversion recommendation, quantifying the projected bytes-scanned reduction. Read-only and recommend-only. Distinct from general query tuning and scan-limit governance; this is the automated partition-projection-DDL emit angle. Recommends the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "athena-partition-projection-advisory"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * WED *)",
+    "description": "Runs weekly on WED at 05:00 UTC"
+  }
+}

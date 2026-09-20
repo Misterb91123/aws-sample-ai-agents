@@ -1,0 +1,16 @@
+{
+  "name": "s3-high-volume-deflector",
+  "description": "Proactively diagnoses the highest-volume Amazon S3 failure modes - 403 access-denied across bucket policy, IAM, Block Public Access, VPC endpoint policy, KMS, and Object Ownership or ACL; replication stalls; lifecycle rule conflicts; and 503 SlowDown request-rate throttling from prefix fan-out - and produces a triage decision tree per failure class with self-service resolution guidance. Read-only and recommend-only. Recommends the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "s3-request-failure-triage"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 5 ? * MON *)",
+    "description": "Runs weekly on MON at 05:30 UTC"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "s3-bucket-hygiene",
+  "description": "Enumerates Amazon S3 noncurrent object versions, delete markers, and incomplete multipart uploads that block bucket deletion or inflate cost and object count, generates the exact lifecycle rule or S3 Batch Operations job to remediate, and lints the bucket policy against the 20 KB size limit. Read-only and recommend-only. Distinct from storage-class tiering and EBS snapshot cleanup; this is version, delete-marker, and multipart cleanup plus policy-size lint. Recommends the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "s3-bucket-hygiene-cleanup"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * TUE *)",
+    "description": "Runs weekly on TUE at 05:00 UTC"
+  }
+}

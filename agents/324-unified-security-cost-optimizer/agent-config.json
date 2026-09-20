@@ -1,0 +1,16 @@
+{
+  "name": "unified-security-cost-optimizer",
+  "description": "Finds over-provisioned AWS security services without reducing security posture - CloudTrail duplicate or overlapping multi-region trails and redundant management-event delivery, AWS Config recorders collecting unused resource types or high-churn resources, and GuardDuty findings suppressed but not archived plus usage by data source - and generates cost-optimization recommendations that preserve coverage. Read-only and recommend-only. Recommends the AWS Billing and Cost Management MCP and AWS Pricing MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "security-service-cost-optimization"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 5 ? * THU *)",
+    "description": "Runs weekly on THU at 05:00 UTC"
+  }
+}

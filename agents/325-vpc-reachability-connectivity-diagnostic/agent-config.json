@@ -1,0 +1,18 @@
+{
+  "name": "vpc-reachability-connectivity-diagnostic",
+  "description": "Operationalizes VPC connectivity diagnosis on a triggered case: given a source and destination, runs VPC Reachability Analyzer, parses VPC Flow Log REJECT entries on the path, validates route tables for blackholes and missing Transit Gateway attachments, and checks NACLs for asymmetric denies, producing a structured diagnostic that identifies the likely failure point. Read-only and recommend-only. Packages existing networking skills into a scheduled or triggered agent; no new skill introduced.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "cross-account-connectivity-debugger",
+    "nacl-and-sg-conflict-resolution",
+    "vpc-route-and-peering-troubleshooting"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 4 ? * FRI *)",
+    "description": "Runs weekly on FRI at 04:30 UTC"
+  }
+}

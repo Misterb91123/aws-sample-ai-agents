@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **220 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **225 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -66,6 +66,7 @@ Skills for detecting, investigating, and responding to security threats.
 | [waf-rate-based-rule-tuning](security-operations/waf-rate-based-rule-tuning/) | Tunes WAF rate-based rules to observed attack volume | Generic |
 | [aiml-access-chain-diagnosis](security-operations/aiml-access-chain-diagnosis/) | Traces the AI/ML access-denied chain (identity, role, trust, PassRole, resource/KMS policy, SCP) and generates the minimal least-privilege fix | Incident RCA |
 | [iam-object-limit-audit](security-operations/iam-object-limit-audit/) | Flags IAM objects near size/count limits (managed-per-role, trust 2048, managed 6144, inline 10240, entity quotas) with consolidate-vs-increase plan | Generic |
+| [s3-request-failure-triage](security-operations/s3-request-failure-triage/) | Triages high-volume S3 failures (403 access-denied, replication stalls, lifecycle conflicts, 503 SlowDown) with a decision tree per class | Incident RCA |
 
 ---
 
@@ -89,6 +90,8 @@ Skills for optimizing AWS spend and maintaining financial accountability.
 | [load-balancer-cost-rationalization](cost-management/load-balancer-cost-rationalization/) | Rationalizes idle and low-traffic load balancers | Generic |
 | [cloudtrail-lake-cost-control](cost-management/cloudtrail-lake-cost-control/) | Controls CloudTrail Lake storage and query cost | Generic |
 | [devops-agent-usage-cost-estimation](cost-management/devops-agent-usage-cost-estimation/) | Measures and prices the downstream API-call cost of running DevOps Agent and reconciles it against the bill | Generic |
+| [s3-bucket-hygiene-cleanup](cost-management/s3-bucket-hygiene-cleanup/) | Reclaims cost/object-count from noncurrent versions, delete markers, and incomplete multipart uploads; lints policy size | Generic |
+| [security-service-cost-optimization](cost-management/security-service-cost-optimization/) | Finds over-provisioned CloudTrail/Config/GuardDuty without reducing security posture | Generic |
 
 ---
 
@@ -195,6 +198,7 @@ Skills for diagnosing, optimizing, and validating application and infrastructure
 | [storage-gateway-health-diagnostics](performance-engineering/storage-gateway-health-diagnostics/) | Deep Storage Gateway health checks (VM, cache/upload buffer, throughput, mount stability) with preventive maintenance | Generic |
 | [fsx-windows-sla-diagnostics](performance-engineering/fsx-windows-sla-diagnostics/) | Diagnoses FSx for Windows DFS resolution, AD trust/auth, VSS shadow-copy exhaustion, and repeating throughput warnings | Generic |
 | [aurora-pg-parameter-advisory](performance-engineering/aurora-pg-parameter-advisory/) | Scans Aurora PostgreSQL parameter groups for memory, wal_level, connection, and extension misconfigurations | Generic |
+| [elasticache-rightsizing](performance-engineering/elasticache-rightsizing/) | Rightsizes ElastiCache nodes/shards/replicas from memory, CPU, eviction, hit-ratio, and connection metrics | Generic |
 
 ---
 
@@ -302,6 +306,7 @@ Skills for diagnosing and optimizing data processing and analytics workloads.
 | [opensearch-index-lifecycle-optimization](data-analytics/opensearch-index-lifecycle-optimization/) | Optimizes OpenSearch index lifecycle and storage | Generic |
 | [redshift-wlm-tuning](data-analytics/redshift-wlm-tuning/) | Tunes Redshift WLM queues and concurrency | Generic |
 | [datalake-access-chain-analysis](data-analytics/datalake-access-chain-analysis/) | Diagnoses a Lake Formation governed-resource access denial across LF grants, resource links, RAM, IAM, S3, and KMS | Incident RCA |
+| [athena-partition-projection-advisory](data-analytics/athena-partition-projection-advisory/) | Flags unpartitioned log-shaped tables and emits partition-projection DDL, CTAS reorg, and Parquet-conversion recommendations | Generic |
 
 ---
 
@@ -588,6 +593,7 @@ skills/
 | +-- waf-rate-based-rule-tuning/SKILL.md
 | +-- aiml-access-chain-diagnosis/SKILL.md
 | +-- iam-object-limit-audit/SKILL.md
+| +-- s3-request-failure-triage/SKILL.md
 +-- cost-management/
 | +-- rightsizing-recommendation-engine/SKILL.md
 | +-- data-transfer-cost-analyzer/SKILL.md
@@ -602,6 +608,8 @@ skills/
 | +-- ebs-snapshot-cleanup-strategy/SKILL.md
 | +-- load-balancer-cost-rationalization/SKILL.md
 | +-- cloudtrail-lake-cost-control/SKILL.md
+| +-- s3-bucket-hygiene-cleanup/SKILL.md
+| +-- security-service-cost-optimization/SKILL.md
 +-- resiliency-reliability/
 | +-- az-failure-readiness-assessment/SKILL.md
 | +-- dependency-health-analyzer/SKILL.md
@@ -659,6 +667,7 @@ skills/
 | +-- storage-gateway-health-diagnostics/SKILL.md
 | +-- fsx-windows-sla-diagnostics/SKILL.md
 | +-- aurora-pg-parameter-advisory/SKILL.md
+| +-- elasticache-rightsizing/SKILL.md
 +-- networking-dns/
 | +-- dns-resolution-troubleshooter/SKILL.md
 | +-- cross-account-connectivity-debugger/SKILL.md
@@ -717,6 +726,7 @@ skills/
 | +-- opensearch-index-lifecycle-optimization/SKILL.md
 | +-- redshift-wlm-tuning/SKILL.md
 | +-- datalake-access-chain-analysis/SKILL.md
+| +-- athena-partition-projection-advisory/SKILL.md
 +-- ml-ai-operations/
 | +-- sagemaker-endpoint-health-investigation/SKILL.md
 | +-- sagemaker-training-job-cost-optimizer/SKILL.md

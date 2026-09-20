@@ -1,0 +1,16 @@
+{
+  "name": "elasticache-cluster-rightsizer",
+  "description": "Analyzes Amazon ElastiCache (Redis, Valkey, and Memcached) node utilization - memory pressure against maxmemory, engine and host CPU saturation, evictions, cache hit rate, connection load, and read-replica replication lag - to identify over- and under-provisioned nodes and recommend an optimal node type, shard count, and read-replica count. Read-only and recommend-only. Distinct from health monitoring and serverless cost tracking; this is node rightsizing. Recommends the AWS Pricing MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "elasticache-rightsizing"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 6 ? * SUN *)",
+    "description": "Runs weekly on SUN at 06:00 UTC"
+  }
+}
