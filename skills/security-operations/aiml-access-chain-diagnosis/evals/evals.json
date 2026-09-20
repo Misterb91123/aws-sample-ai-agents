@@ -1,0 +1,62 @@
+[
+  {
+    "id": "bedrock-invoke-access-denied",
+    "prompt": "My application calls Bedrock InvokeModel for anthropic.claude in us-east-1 and gets AccessDenied. Find the exact permission gap and give me the minimal fix.",
+    "expected_output": "The skill resolves the calling principal, reads the CloudTrail AccessDenied event, evaluates the IAM identity policy for the InvokeModel action on the model ARN, checks Bedrock model access, and identifies the single deciding layer. It returns a per-layer pass/fail view and a minimal least-privilege policy scoped to the exact action and model ARN, with no wildcard.",
+    "assertions": [
+      "The output identifies the calling principal via sts:GetCallerIdentity or the assumed role",
+      "The output evaluates the IAM identity policy for the bedrock:InvokeModel action on the specific model resource",
+      "The output checks Bedrock model access as a resource/service layer",
+      "The output states the single deciding layer as either an explicit deny or a missing allow",
+      "The proposed IAM fix contains no wildcard in the action or the resource",
+      "The output does not modify any policy or role and presents the fix as a recommendation"
+    ]
+  },
+  {
+    "id": "sagemaker-passrole-failure",
+    "prompt": "A SageMaker CreateTrainingJob call fails with an access error involving the execution role. What is wrong and how do I fix it least-privilege?",
+    "expected_output": "The skill checks whether the execution role exists, whether its trust policy allows sagemaker.amazonaws.com to assume it, and whether the calling principal has iam:PassRole scoped to that role. It names the missing element and proposes the minimal PassRole or trust-policy correction.",
+    "assertions": [
+      "The output evaluates the execution role trust policy for the SageMaker service principal",
+      "The output checks iam:PassRole on the calling principal scoped to the execution role",
+      "The output distinguishes a missing PassRole from a trust-policy problem",
+      "The proposed fix is scoped to the specific role ARN with no wildcard resource",
+      "The output is read-only and recommends the change for a human to apply"
+    ]
+  },
+  {
+    "id": "textract-s3-kms-denied",
+    "prompt": "Textract returns AccessDenied when reading an input document from an S3 bucket that uses a KMS CMK. Trace the chain and tell me the fix.",
+    "expected_output": "The skill evaluates the identity policy for the Textract and S3 read actions, the S3 bucket policy, and the KMS key policy for decrypt permission on the CMK, then names the layer that denies and the minimal grant needed.",
+    "assertions": [
+      "The output evaluates the S3 bucket policy for the input bucket",
+      "The output evaluates the KMS key policy for kms:Decrypt on the CMK",
+      "The output identifies which layer (S3 policy, KMS policy, or identity policy) is the deciding one",
+      "The proposed fix grants only the specific actions needed on the specific bucket and key",
+      "The output references ARNs and account IDs by identifier and does not reproduce credentials"
+    ]
+  },
+  {
+    "id": "scp-boundary-explicit-deny",
+    "prompt": "A Comprehend call is denied even though the role's identity policy clearly allows it. Why?",
+    "expected_output": "The skill recognizes that an allow in the identity policy can be overridden by an explicit deny in a permission boundary or an Organizations SCP, evaluates those guardrail layers, and reports the explicit deny as the deciding layer rather than proposing a broader identity-policy grant.",
+    "assertions": [
+      "The output evaluates the permission boundary and any Organizations SCP",
+      "The output explains that an explicit deny or a boundary overrides an identity-policy allow",
+      "The output reports the deciding layer as the guardrail, not a missing identity-policy allow",
+      "The output does not recommend widening the identity policy to work around a deliberate guardrail",
+      "The output is read-only and recommend-only"
+    ]
+  },
+  {
+    "id": "no-fabricated-policy",
+    "prompt": "Rekognition DetectLabels is returning AccessDenied but I cannot share the CloudTrail event. Diagnose what you can.",
+    "expected_output": "The skill proceeds from the reported action and resource, notes that the CloudTrail event was unavailable, evaluates the readable layers, and clearly labels any layer it could not read as not evaluated rather than asserting a cause it did not verify.",
+    "assertions": [
+      "The output notes the missing CloudTrail event and proceeds with the readable layers",
+      "The output labels any layer it could not read as not evaluated rather than guessing",
+      "The output does not fabricate a policy statement or an account-specific value it did not read",
+      "The output separates confirmed findings from hypotheses"
+    ]
+  }
+]

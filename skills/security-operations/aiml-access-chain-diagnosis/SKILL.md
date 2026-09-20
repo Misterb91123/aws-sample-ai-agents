@@ -10,6 +10,9 @@ description: Diagnoses access-denied failures across all AI/ML services (Bedrock
   generate the minimal least-privilege IAM fix with no wildcards.
 version: "1.0.0"
 last_updated: "2026-09-12"
+metadata:
+  version: "1.0"
+  author: solair
 ---
 
 # AI/ML Access Chain Diagnosis
