@@ -1,0 +1,16 @@
+{
+  "name": "bedrock-capacity-planner",
+  "description": "Plans Amazon Bedrock capacity per production model per region - pulls CloudWatch AWS/Bedrock Invocations, InvocationThrottles, and InvocationLatency, computes utilization against current Service Quotas (requests-per-minute and tokens-per-minute), forecasts headroom against the growth trend, classifies throttling as raise-quota versus fix-client-backoff-or-architecture, and pre-drafts justified quota-increase requests with evidence. Read-only. Recommends the AWS Pricing MCP and AWS Documentation MCP as augmentation. This is capacity and quota planning, not cost tracking.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "bedrock-capacity-planning"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(30 16 ? * WED *)",
+    "description": "Runs weekly on WED at 16:30 UTC"
+  }
+}

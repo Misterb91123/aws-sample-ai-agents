@@ -1,0 +1,16 @@
+{
+  "name": "datalake-access-analyzer",
+  "description": "Evaluates the full data-lake access chain for a principal and a governed AWS Lake Formation resource (or a failed request) - Lake Formation permissions and grants, resource links, cross-account RAM shares, IAM identity policy, underlying S3 bucket policy, and KMS key policy - and pinpoints the missing or incorrect grant that causes a denial, including granted-but-unlinked resources and catalog-versus-table grant-scope errors. Produces a ranked, read-only-safe remediation plan. Read-only. Recommends an Agent Toolkit for AWS or custom IAM and Lake Formation MCP and the AWS Documentation MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "datalake-access-chain-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 13 ? * MON *)",
+    "description": "Runs weekly on MON at 13:00 UTC"
+  }
+}

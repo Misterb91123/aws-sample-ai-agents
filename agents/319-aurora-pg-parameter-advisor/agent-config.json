@@ -1,0 +1,16 @@
+{
+  "name": "aurora-pg-parameter-advisor",
+  "description": "Scans Aurora PostgreSQL cluster parameter groups for known misconfiguration - memory-hungry parameters on small instances (shared_buffers, work_mem, maintenance_work_mem exceeding capacity), wal_level=logical without logical replication use, max_connections too high for instance memory, and extension conflicts during upgrades - compares against best-practice baselines using CloudWatch memory and connection signals, and produces a ranked, read-only-safe list of safe parameter changes. Read-only. Recommends a custom Postgres MCP (pg_settings and Performance Insights) and the AWS Documentation MCP as augmentation. This is Aurora-PostgreSQL-specific tuning, not generic parameter-group drift.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "aurora-pg-parameter-advisory"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 22 ? * SAT *)",
+    "description": "Runs weekly on SAT at 22:00 UTC"
+  }
+}

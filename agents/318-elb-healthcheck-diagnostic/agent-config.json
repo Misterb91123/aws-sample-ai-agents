@@ -1,0 +1,16 @@
+{
+  "name": "elb-healthcheck-diagnostic",
+  "description": "Auto-diagnoses Elastic Load Balancing UnHealthyHostCount events - pulls the target-group health-check config and DescribeTargetHealth failure reason codes, validates security-group rules (ALB outbound and target inbound), cross-references the health-check port and protocol with the app config, and checks grace-period misconfiguration - then produces a ranked, read-only-safe remediation plan. Read-only. Recommends the AWS Documentation MCP as augmentation and references the existing load-balancer-health-investigator skill conceptually.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "elb-healthcheck-diagnosis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 18 ? * FRI *)",
+    "description": "Runs weekly on FRI at 18:00 UTC"
+  }
+}

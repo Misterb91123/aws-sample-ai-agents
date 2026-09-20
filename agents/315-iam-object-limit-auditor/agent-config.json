@@ -1,0 +1,15 @@
+{
+  "name": "iam-object-limit-auditor",
+  "description": "Enumerates IAM roles and policies and flags every object approaching an IAM size or count limit - managed policies per role near the limit, trust policy near 2048 characters, managed policy near 6144, inline policy near 10240, and entity counts near account quotas - then produces a prioritized remediation plan (consolidate versus request increase) and pre-drafts the Service Quotas requests. Read-only. Recommends the AWS Documentation MCP for current IAM quota values as augmentation.",
+  "tools": [
+    "use_aws"
+  ],
+  "skills": [
+    "iam-object-limit-audit"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 15 ? * TUE *)",
+    "description": "Runs weekly on TUE at 15:00 UTC"
+  }
+}

@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **213 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **220 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -65,6 +65,7 @@ Skills for detecting, investigating, and responding to security threats.
 | [tls-policy-modernization](security-operations/tls-policy-modernization/) | Modernizes ELB and CloudFront TLS policies and removes weak ciphers | Evaluation |
 | [waf-rate-based-rule-tuning](security-operations/waf-rate-based-rule-tuning/) | Tunes WAF rate-based rules to observed attack volume | Generic |
 | [aiml-access-chain-diagnosis](security-operations/aiml-access-chain-diagnosis/) | Traces the AI/ML access-denied chain (identity, role, trust, PassRole, resource/KMS policy, SCP) and generates the minimal least-privilege fix | Incident RCA |
+| [iam-object-limit-audit](security-operations/iam-object-limit-audit/) | Flags IAM objects near size/count limits (managed-per-role, trust 2048, managed 6144, inline 10240, entity quotas) with consolidate-vs-increase plan | Generic |
 
 ---
 
@@ -192,6 +193,8 @@ Skills for diagnosing, optimizing, and validating application and infrastructure
 | [dynamodb-hot-partition-remediation](performance-engineering/dynamodb-hot-partition-remediation/) | Remediates DynamoDB hot partitions and throttling | Incident RCA |
 | [fsx-ontap-diagnostics](performance-engineering/fsx-ontap-diagnostics/) | Diagnoses FSx for NetApp ONTAP volume sizing, tiering, throughput, SnapMirror, and multi-protocol access | Generic |
 | [storage-gateway-health-diagnostics](performance-engineering/storage-gateway-health-diagnostics/) | Deep Storage Gateway health checks (VM, cache/upload buffer, throughput, mount stability) with preventive maintenance | Generic |
+| [fsx-windows-sla-diagnostics](performance-engineering/fsx-windows-sla-diagnostics/) | Diagnoses FSx for Windows DFS resolution, AD trust/auth, VSS shadow-copy exhaustion, and repeating throughput warnings | Generic |
+| [aurora-pg-parameter-advisory](performance-engineering/aurora-pg-parameter-advisory/) | Scans Aurora PostgreSQL parameter groups for memory, wal_level, connection, and extension misconfigurations | Generic |
 
 ---
 
@@ -215,6 +218,7 @@ Skills for troubleshooting network connectivity, DNS resolution, and TLS issues.
 | [nacl-and-sg-conflict-resolution](networking-dns/nacl-and-sg-conflict-resolution/) | Resolves NACL and security group conflicts causing drops | Incident RCA |
 | [network-service-quota-guarding](networking-dns/network-service-quota-guarding/) | Guards VPC/ELB/Global Accelerator/VPN quotas across regions with 80% alerts and increase recommendations | Generic |
 | [database-connectivity-path-trace](networking-dns/database-connectivity-path-trace/) | Traces the DB endpoint-to-client network path (SG/NACL/route/endpoint/DNS/TLS) to the break point | Incident RCA |
+| [elb-healthcheck-diagnosis](networking-dns/elb-healthcheck-diagnosis/) | Auto-diagnoses ELB UnHealthyHostCount from target-group health-check config, reason codes, and security-group rules | Incident RCA |
 
 ---
 
@@ -280,6 +284,7 @@ Skills for troubleshooting containerized and serverless service operations.
 | [ecr-image-scan-remediation](container-operations/ecr-image-scan-remediation/) | Triages ECR image scan findings and enforces lifecycle policies | Generic |
 | [eks-rbac-least-privilege-review](container-operations/eks-rbac-least-privilege-review/) | Reviews EKS RBAC and pod security for least privilege | Evaluation |
 | [eks-node-join-diagnosis](container-operations/eks-node-join-diagnosis/) | Diagnoses EKS node registration/join failures (VPC endpoints, node SG reachability, launch-template bootstrap, node role, aws-auth) | Incident RCA |
+| [ecs-healthcheck-mismatch-diagnosis](container-operations/ecs-healthcheck-mismatch-diagnosis/) | Flags ECS container vs ALB target-group health-check mismatches (grace period, path/port, SG blocking ALB-to-task) | Incident RCA |
 
 ---
 
@@ -296,6 +301,7 @@ Skills for diagnosing and optimizing data processing and analytics workloads.
 | [emr-cluster-cost-performance-optimizer](data-analytics/emr-cluster-cost-performance-optimizer/) | Optimizes EMR utilization, Spot usage, and job efficiency | Generic |
 | [opensearch-index-lifecycle-optimization](data-analytics/opensearch-index-lifecycle-optimization/) | Optimizes OpenSearch index lifecycle and storage | Generic |
 | [redshift-wlm-tuning](data-analytics/redshift-wlm-tuning/) | Tunes Redshift WLM queues and concurrency | Generic |
+| [datalake-access-chain-analysis](data-analytics/datalake-access-chain-analysis/) | Diagnoses a Lake Formation governed-resource access denial across LF grants, resource links, RAM, IAM, S3, and KMS | Incident RCA |
 
 ---
 
@@ -310,6 +316,7 @@ Skills for operating machine learning and generative AI workloads on AWS.
 | [bedrock-usage-cost-monitor](ml-ai-operations/bedrock-usage-cost-monitor/) | Monitors Bedrock token consumption, cost, and throttling | Generic |
 | [ml-model-drift-monitor](ml-ai-operations/ml-model-drift-monitor/) | Monitors deployed models for data and quality drift | Generic |
 | [feature-store-freshness-auditor](ml-ai-operations/feature-store-freshness-auditor/) | Audits Feature Store freshness and online/offline consistency | Generic |
+| [bedrock-capacity-planning](ml-ai-operations/bedrock-capacity-planning/) | Plans Bedrock capacity vs Service Quotas (RPM/TPM), classifies throttling, forecasts headroom, and pre-drafts increases | Generic |
 
 ---
 
@@ -580,6 +587,7 @@ skills/
 | +-- tls-policy-modernization/SKILL.md
 | +-- waf-rate-based-rule-tuning/SKILL.md
 | +-- aiml-access-chain-diagnosis/SKILL.md
+| +-- iam-object-limit-audit/SKILL.md
 +-- cost-management/
 | +-- rightsizing-recommendation-engine/SKILL.md
 | +-- data-transfer-cost-analyzer/SKILL.md
@@ -649,6 +657,8 @@ skills/
 | +-- dynamodb-hot-partition-remediation/SKILL.md
 | +-- fsx-ontap-diagnostics/SKILL.md
 | +-- storage-gateway-health-diagnostics/SKILL.md
+| +-- fsx-windows-sla-diagnostics/SKILL.md
+| +-- aurora-pg-parameter-advisory/SKILL.md
 +-- networking-dns/
 | +-- dns-resolution-troubleshooter/SKILL.md
 | +-- cross-account-connectivity-debugger/SKILL.md
@@ -664,6 +674,7 @@ skills/
 | +-- nacl-and-sg-conflict-resolution/SKILL.md
 | +-- network-service-quota-guarding/SKILL.md
 | +-- database-connectivity-path-trace/SKILL.md
+| +-- elb-healthcheck-diagnosis/SKILL.md
 +-- backup-data-protection/
 | +-- backup-coverage-auditor/SKILL.md
 | +-- retention-policy-optimizer/SKILL.md
@@ -696,6 +707,7 @@ skills/
 | +-- ecr-image-scan-remediation/SKILL.md
 | +-- eks-rbac-least-privilege-review/SKILL.md
 | +-- eks-node-join-diagnosis/SKILL.md
+| +-- ecs-healthcheck-mismatch-diagnosis/SKILL.md
 +-- data-analytics/
 | +-- glue-job-failure-diagnosis/SKILL.md
 | +-- kinesis-data-pipeline-lag-investigation/SKILL.md
@@ -704,12 +716,14 @@ skills/
 | +-- emr-cluster-cost-performance-optimizer/SKILL.md
 | +-- opensearch-index-lifecycle-optimization/SKILL.md
 | +-- redshift-wlm-tuning/SKILL.md
+| +-- datalake-access-chain-analysis/SKILL.md
 +-- ml-ai-operations/
 | +-- sagemaker-endpoint-health-investigation/SKILL.md
 | +-- sagemaker-training-job-cost-optimizer/SKILL.md
 | +-- bedrock-usage-cost-monitor/SKILL.md
 | +-- ml-model-drift-monitor/SKILL.md
 | +-- feature-store-freshness-auditor/SKILL.md
+| +-- bedrock-capacity-planning/SKILL.md
 +-- developer-experience/
 | +-- build-pipeline-bottleneck-analyzer/SKILL.md
 | +-- developer-environment-drift-detector/SKILL.md

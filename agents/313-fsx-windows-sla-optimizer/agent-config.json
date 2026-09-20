@@ -1,0 +1,16 @@
+{
+  "name": "fsx-windows-sla-optimizer",
+  "description": "Diagnoses Amazon FSx for Windows File Server SLA and reopen problems - DFS namespace resolution failures, Active Directory trust and authentication errors, shadow-copy (VSS) storage exhaustion and scheduling conflicts, and repeating throughput-capacity warnings - and produces a ranked, read-only-safe remediation plan. Read-only. Recommends the AWS Documentation MCP and a custom Windows-event-log or Active Directory MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "fsx-windows-sla-diagnostics"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 11 ? * SUN *)",
+    "description": "Runs weekly on SUN at 11:00 UTC"
+  }
+}

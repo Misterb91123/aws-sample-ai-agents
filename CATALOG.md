@@ -691,6 +691,20 @@ Agents built from the highest-volume, highest-time-to-resolution support pattern
 | Agent | [db-connectivity-pathtrace](agents/310-db-connectivity-pathtrace/) | Traces the database endpoint-to-client network path to the exact break point across Aurora/RDS/DocumentDB/DynamoDB |
 | Agent | [storage-gateway-health](agents/311-storage-gateway-health/) | Deep Storage Gateway health checks with preventive maintenance to reduce reopens |
 | Agent | [eks-node-join-diagnostic](agents/312-eks-node-join-diagnostic/) | Diagnoses EKS node registration/join failures (VPC endpoints, node SG reachability, bootstrap, node role, aws-auth) |
+| Agent | [fsx-windows-sla-optimizer](agents/313-fsx-windows-sla-optimizer/) | Diagnoses FSx for Windows DFS resolution, AD trust/auth, VSS shadow-copy exhaustion, and repeating throughput warnings |
+| Agent | [datalake-access-analyzer](agents/314-datalake-access-analyzer/) | Diagnoses a Lake Formation governed-resource access denial across LF grants, resource links, RAM, IAM, S3, and KMS |
+| Agent | [iam-object-limit-auditor](agents/315-iam-object-limit-auditor/) | Flags IAM objects near size/count limits with a consolidate-vs-request-increase plan and pre-drafted quota requests |
+| Agent | [bedrock-capacity-planner](agents/316-bedrock-capacity-planner/) | Plans Bedrock capacity vs Service Quotas (RPM/TPM), classifies throttling as raise-quota vs client-backoff, forecasts headroom |
+| Agent | [ecs-healthcheck-doctor](agents/317-ecs-healthcheck-doctor/) | Flags ECS container vs ALB target-group health-check mismatches (grace period, path/port, SG blocking ALB-to-task) |
+| Agent | [elb-healthcheck-diagnostic](agents/318-elb-healthcheck-diagnostic/) | Auto-diagnoses ELB UnHealthyHostCount from target-group config, reason codes, and security-group rules |
+| Agent | [aurora-pg-parameter-advisor](agents/319-aurora-pg-parameter-advisor/) | Scans Aurora PostgreSQL parameter groups for memory, wal_level, connection, and extension misconfigurations |
+| Skill | [fsx-windows-sla-diagnostics](skills/performance-engineering/fsx-windows-sla-diagnostics/) | FSx for Windows SLA/reopen diagnosis |
+| Skill | [datalake-access-chain-analysis](skills/data-analytics/datalake-access-chain-analysis/) | Lake Formation access-denial chain diagnosis |
+| Skill | [iam-object-limit-audit](skills/security-operations/iam-object-limit-audit/) | IAM object size/count limit audit |
+| Skill | [bedrock-capacity-planning](skills/ml-ai-operations/bedrock-capacity-planning/) | Bedrock capacity and quota planning |
+| Skill | [ecs-healthcheck-mismatch-diagnosis](skills/container-operations/ecs-healthcheck-mismatch-diagnosis/) | ECS health-check mismatch diagnosis |
+| Skill | [elb-healthcheck-diagnosis](skills/networking-dns/elb-healthcheck-diagnosis/) | ELB UnHealthyHostCount auto-diagnosis |
+| Skill | [aurora-pg-parameter-advisory](skills/performance-engineering/aurora-pg-parameter-advisory/) | Aurora PostgreSQL parameter tuning |
 | Skill | [fsx-ontap-diagnostics](skills/performance-engineering/fsx-ontap-diagnostics/) | FSx for NetApp ONTAP diagnosis |
 | Skill | [aiml-access-chain-diagnosis](skills/security-operations/aiml-access-chain-diagnosis/) | AI/ML access-denied chain diagnosis and minimal fix |
 | Skill | [network-service-quota-guarding](skills/networking-dns/network-service-quota-guarding/) | Network-scoped service-quota guarding |
