@@ -1,0 +1,17 @@
+{
+  "name": "fis-continuous-chaos-cicd-readiness-reporter",
+  "description": "Reports whether continuous chaos testing is wired into delivery: AWS Fault Injection Service (FIS) experiments automated in CodePipeline post-deployment, experiments gated by CloudWatch alarm stop conditions, CloudWatch Synthetics monitoring user experience during experiments, results tracked over time, and a regular GameDay cadence. Identifies gaps and a maturity level per application. Read-only and recommend-only - it reports and recommends, never starts or modifies an experiment or pipeline. Recommends the awslabs FIS-recommender MCP server as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "continuous-chaos-cicd-readiness",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * SAT *)",
+    "description": "Runs weekly on SAT at 08:00 UTC"
+  }
+}

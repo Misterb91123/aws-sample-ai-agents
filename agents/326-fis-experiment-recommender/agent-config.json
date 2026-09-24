@@ -1,0 +1,17 @@
+{
+  "name": "fis-experiment-recommender",
+  "description": "Maps AWS DevOps Agent resilience findings to AWS Fault Injection Service (FIS) experiments: classifies the failure category, selects the matching FIS action, sets a conservative duration and a tag/COUNT-scoped non-production-first target, and defines a CloudWatch stop condition, prioritized by finding severity. Read-only and recommend-only - it designs experiments for a human to review and run, never injects a fault. Recommends the awslabs FIS-recommender MCP server as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_investigations"
+  ],
+  "skills": [
+    "fis-experiment-recommendation",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * WED *)",
+    "description": "Runs weekly on WED at 08:00 UTC"
+  }
+}

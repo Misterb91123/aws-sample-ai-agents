@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **221 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **226 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -104,6 +104,11 @@ Skills for validating and improving infrastructure resilience.
 | [error-budget-tracker](resiliency-reliability/error-budget-tracker/) | Tracks SLO compliance and error budget burn rates for release decisions | Generic |
 | [disaster-recovery-validation](resiliency-reliability/disaster-recovery-validation/) | Validates DR configurations, backup integrity, and RTO/RPO compliance | Generic |
 | [chaos-experiment-planner](resiliency-reliability/chaos-experiment-planner/) | Designs controlled chaos experiments to validate resilience hypotheses | Generic |
+| [fis-experiment-recommendation](resiliency-reliability/fis-experiment-recommendation/) | Maps resilience findings to AWS FIS actions with duration, scoped target, and stop condition | Generic |
+| [fis-experiment-template-design](resiliency-reliability/fis-experiment-template-design/) | Generates a complete, ready-to-review FIS experiment template from a recommendation | Generic |
+| [fis-experiment-safety-audit](resiliency-reliability/fis-experiment-safety-audit/) | Safety-gates a proposed FIS experiment (stop condition, scoped target, blast radius, rollback) before it runs | Generic |
+| [continuous-chaos-cicd-readiness](resiliency-reliability/continuous-chaos-cicd-readiness/) | Reports whether continuous chaos testing is wired into CI/CD with maturity gaps | Generic |
+| [fis-experiment-result-analysis](resiliency-reliability/fis-experiment-result-analysis/) | Analyzes FIS experiment results against hypothesis, time-to-detect/recover, and residual gaps | Generic |
 
 ---
 
@@ -610,6 +615,11 @@ skills/
 | +-- error-budget-tracker/SKILL.md
 | +-- disaster-recovery-validation/SKILL.md
 | +-- chaos-experiment-planner/SKILL.md
+| +-- fis-experiment-recommendation/SKILL.md
+| +-- fis-experiment-template-design/SKILL.md
+| +-- fis-experiment-safety-audit/SKILL.md
+| +-- continuous-chaos-cicd-readiness/SKILL.md
+| +-- fis-experiment-result-analysis/SKILL.md
 +-- observability-monitoring/
 | +-- trace-analysis-investigator/SKILL.md
 | +-- sli-measurement-validator/SKILL.md

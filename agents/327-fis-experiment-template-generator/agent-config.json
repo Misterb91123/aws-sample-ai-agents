@@ -1,0 +1,17 @@
+{
+  "name": "fis-experiment-template-generator",
+  "description": "Turns a reviewed AWS Fault Injection Service (FIS) recommendation into a complete, ready-to-review FIS experiment template: the action, a tag- or COUNT/PERCENT-scoped non-production-first target selection, an ISO 8601 duration, stop conditions bound to a CloudWatch alarm, the FIS experiment IAM role reference, and logging configuration. Read-only and generate-only - it produces the template text for a human to review and deploy, never creates or starts the experiment. Recommends the awslabs FIS-recommender MCP server as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "fis-experiment-template-design",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * THU *)",
+    "description": "Runs weekly on THU at 08:00 UTC"
+  }
+}

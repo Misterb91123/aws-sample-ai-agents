@@ -8,12 +8,13 @@ This guide provides step-by-step instructions for deploying the custom agents an
 2. [Understanding the deployment model](#understanding-the-deployment-model)
 3. [Deploying skills](#deploying-skills)
 4. [Deploying agents](#deploying-agents)
-5. [Configuring triggers](#configuring-triggers)
-6. [Assigning skills to agents](#assigning-skills-to-agents)
-7. [Verifying deployment](#verifying-deployment)
-8. [Bulk deployment](#bulk-deployment)
-9. [Updating and maintenance](#updating-and-maintenance)
-10. [Troubleshooting](#troubleshooting)
+5. [Deploying with an AI assistant (Claude, Kiro, Cursor, Amazon Q)](#deploying-with-an-ai-assistant-claude-kiro-cursor-amazon-q)
+6. [Configuring triggers](#configuring-triggers)
+7. [Assigning skills to agents](#assigning-skills-to-agents)
+8. [Verifying deployment](#verifying-deployment)
+9. [Bulk deployment](#bulk-deployment)
+10. [Updating and maintenance](#updating-and-maintenance)
+11. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -177,6 +178,101 @@ The form method does not support tool assignment. You assign tools through Chat 
 For automated or bulk deployment, use the AWS CLI or SDK to manage assets. See [Managing Assets](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-managing-assets.html) for the API reference.
 
 This approach is suited to teams that want to manage agent definitions through their own CI/CD pipeline.
+
+---
+
+## Deploying with an AI assistant (Claude, Kiro, Cursor, Amazon Q)
+
+If you work in an AI coding assistant, you can drive the whole deployment from there instead of the web app. AWS DevOps Agent exposes a remote MCP endpoint, so any MCP-capable assistant can create agents, import skills, and run them in your Agent Space. You can also use the assistant purely as an authoring aid (to read this repository's files and hand you ready-to-paste Chat commands) without connecting to the endpoint at all.
+
+There are two patterns:
+
+- **Pattern A - Connect the assistant to your Agent Space over MCP.** The assistant calls the DevOps Agent remote MCP endpoint directly to create and run agents and import skills. Requires the endpoint URL for your Agent Space and either an access token or AWS SigV4 credentials. See [Accessing DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-accessing-devops-agent-index.html).
+- **Pattern B - Author locally, apply through Chat.** Point the assistant at this repository so it reads each `agent-config.json` and `system-prompt.md`, then have it generate the Chat commands (or the Asset API calls) you paste into the DevOps Agent web app. This needs no endpoint credentials and keeps a human in the loop for the create step.
+
+Use whichever fits your security posture. Pattern B is the safer default for a first rollout; Pattern A is faster for bulk or repeatable deployment.
+
+### Kiro
+
+Add the DevOps Agent remote MCP server to your MCP config (workspace `.kiro/settings/mcp.json` or user `~/.kiro/settings/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "devops-agent": {
+      "command": "npx",
+      "args": ["-y", "@aws/devops-agent-mcp-server"],
+      "env": {
+        "AWS_REGION": "us-east-1",
+        "DEVOPS_AGENT_ENDPOINT": "https://<your-agent-space-endpoint>"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+```
+
+Then prompt Kiro, for example: "Using the devops-agent MCP server, create a custom agent from `agents/307-fsx-ontap-diagnostic/agent-config.json` and `system-prompt.md`, then import the paired skill from `skills/performance-engineering/fsx-ontap-diagnostics/`." Keep `autoApprove` empty so each create/import step is confirmed. For Pattern B, drop the MCP server and just ask Kiro to "read the agent files and generate the Chat commands to create them."
+
+### Claude (Claude Code or Claude Desktop)
+
+For Claude Code, add the server with the CLI:
+
+```bash
+claude mcp add devops-agent -e AWS_REGION=us-east-1 -e DEVOPS_AGENT_ENDPOINT=https://<your-agent-space-endpoint> -- npx -y @aws/devops-agent-mcp-server
+```
+
+For Claude Desktop, add the same block to `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`; Windows: `%APPDATA%\Claude\claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "devops-agent": {
+      "command": "npx",
+      "args": ["-y", "@aws/devops-agent-mcp-server"],
+      "env": {
+        "AWS_REGION": "us-east-1",
+        "DEVOPS_AGENT_ENDPOINT": "https://<your-agent-space-endpoint>"
+      }
+    }
+  }
+}
+```
+
+Then ask Claude to create the agents and import the skills from this repository. Review each proposed action before approving.
+
+### Cursor
+
+Add the server to `.cursor/mcp.json` in the project (or the global Cursor MCP settings):
+
+```json
+{
+  "mcpServers": {
+    "devops-agent": {
+      "command": "npx",
+      "args": ["-y", "@aws/devops-agent-mcp-server"],
+      "env": {
+        "AWS_REGION": "us-east-1",
+        "DEVOPS_AGENT_ENDPOINT": "https://<your-agent-space-endpoint>"
+      }
+    }
+  }
+}
+```
+
+Enable the server in Cursor Settings > MCP, then use the assistant to create agents and import skills from the repository files.
+
+### Amazon Q Developer
+
+Amazon Q Developer (CLI or IDE) is MCP-capable; add the same `devops-agent` server block to its MCP configuration (`~/.aws/amazonq/mcp.json` for the Q CLI, or the IDE MCP settings), then prompt Q to create the agents and import the skills.
+
+### Notes and caveats
+
+- Replace `<your-agent-space-endpoint>` with your Agent Space's remote MCP endpoint, and the exact MCP server package/command with the current one from [Accessing DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-accessing-devops-agent-index.html) - the package name and connection details evolve, so verify against the docs before relying on them.
+- Prefer per-action approval (do not blanket auto-approve) so a human confirms each agent creation and skill import.
+- Authentication is an access token or AWS SigV4; store credentials in the assistant's environment or your standard credential provider, never hard-coded in a committed config file.
+- The agents in this repository stay read-only regardless of how they are deployed. Deploying through an assistant does not grant any write capability the agent config does not already declare.
 
 ---
 

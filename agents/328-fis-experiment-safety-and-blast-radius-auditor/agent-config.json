@@ -1,0 +1,17 @@
+{
+  "name": "fis-experiment-safety-and-blast-radius-auditor",
+  "description": "Audits a proposed AWS Fault Injection Service (FIS) experiment or template for safety before it runs: stop condition present and bound to a real CloudWatch alarm, target scoped by tags or COUNT rather than all-resources, non-production-first, blast radius limited on the first run, rollback and abort defined, off-peak timing, and no prohibited or critical resource targeted without escalation. It also checks CI/CD continuous-chaos readiness. Read-only and recommend-only - it produces a pass/fail safety scorecard for a human, never starts or modifies an experiment. Recommends the awslabs FIS-recommender MCP server as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "fis-experiment-safety-audit",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * FRI *)",
+    "description": "Runs weekly on FRI at 08:00 UTC"
+  }
+}

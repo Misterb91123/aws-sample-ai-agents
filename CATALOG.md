@@ -717,6 +717,25 @@ Agents built from the highest-volume, highest-time-to-resolution support pattern
 
 ---
 
+## Resilience and chaos engineering (AWS FIS)
+
+Agents that turn resilience findings into AWS Fault Injection Service (FIS) chaos experiments and analyze the results - recommend, template, safety-gate, and post-run analysis. All read-only and recommend-only: they design and evaluate experiments; a human reviews the safety scorecard and runs the experiment. Adapted from the awslabs Resilience guidance (guidance-for-enhancing-resilience-devops-agent-fis) and paired with the existing chaos-experiment-planner skill. Running an experiment (fis:StartExperiment) is documented as a special, human-only, RED-by-default action in agent-actions/mappings/reliability.md - never autonomous.
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [fis-experiment-recommender](agents/326-fis-experiment-recommender/) | Maps resilience findings to FIS actions with duration, scoped non-production-first target, and CloudWatch stop condition, prioritized by severity |
+| Agent | [fis-experiment-template-generator](agents/327-fis-experiment-template-generator/) | Generates a complete, ready-to-review FIS experiment template (action, target, duration, stop conditions, role reference) for a human to deploy |
+| Agent | [fis-experiment-safety-and-blast-radius-auditor](agents/328-fis-experiment-safety-and-blast-radius-auditor/) | Safety-gates a proposed experiment before it runs: stop condition, scoped target, limited blast radius, rollback, off-peak, non-production-first |
+| Agent | [fis-continuous-chaos-cicd-readiness-reporter](agents/329-fis-continuous-chaos-cicd-readiness-reporter/) | Reports whether continuous chaos is wired into CI/CD (CodePipeline gates, Synthetics, alarm stop conditions, GameDay cadence) with a maturity level |
+| Agent | [fis-experiment-result-and-resilience-analyzer](agents/330-fis-experiment-result-and-resilience-analyzer/) | Analyzes experiment results: steady-state vs observed, hypothesis held, time-to-detect/recover, and residual gaps to fix and re-test |
+| Skill | [fis-experiment-recommendation](skills/resiliency-reliability/fis-experiment-recommendation/) | Finding-to-FIS-action mapping |
+| Skill | [fis-experiment-template-design](skills/resiliency-reliability/fis-experiment-template-design/) | FIS experiment template generation |
+| Skill | [fis-experiment-safety-audit](skills/resiliency-reliability/fis-experiment-safety-audit/) | Pre-run FIS experiment safety and blast-radius audit |
+| Skill | [continuous-chaos-cicd-readiness](skills/resiliency-reliability/continuous-chaos-cicd-readiness/) | Continuous chaos CI/CD readiness assessment |
+| Skill | [fis-experiment-result-analysis](skills/resiliency-reliability/fis-experiment-result-analysis/) | Post-experiment result and resilience-gap analysis |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

@@ -1,0 +1,18 @@
+{
+  "name": "fis-experiment-result-and-resilience-analyzer",
+  "description": "After an AWS Fault Injection Service (FIS) experiment runs, analyzes the results against the chaos-engineering scientific method: compares the steady-state baseline against behavior observed during the experiment, whether the hypothesis held, time-to-detect and time-to-recover, whether stop conditions fired appropriately, observed versus expected blast radius, and the residual resilience gaps to fix and re-test, using CloudWatch metrics over the experiment window. Read-only and recommend-only - it analyzes and recommends, never starts, re-runs, or modifies an experiment. Recommends the awslabs FIS-recommender MCP server as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "list_investigations"
+  ],
+  "skills": [
+    "fis-experiment-result-analysis",
+    "chaos-experiment-planner"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 8 ? * SUN *)",
+    "description": "Runs weekly on SUN at 08:00 UTC"
+  }
+}

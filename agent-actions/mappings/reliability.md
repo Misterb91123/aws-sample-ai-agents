@@ -160,3 +160,27 @@ launch template/configuration, or an execution role on a new Lambda - does pass
 a role, needs iam:PassRole, and is refused. When in doubt, check whether the
 parameters carry a role ARN (IamInstanceProfile, Role) that is being handed to a
 service; if so, it is refused-passrole and stays manual.
+
+
+## Running a FIS chaos experiment (special case - never autonomous)
+
+The FIS resilience agents (326 fis-experiment-recommender, 327
+fis-experiment-template-generator, 328 fis-experiment-safety-and-blast-radius-auditor,
+329 fis-continuous-chaos-cicd-readiness-reporter, 330
+fis-experiment-result-and-resilience-analyzer) do not remediate a finding - they
+recommend, design, safety-gate, and analyze AWS Fault Injection Service
+experiments that validate a resilience finding. Actually running an experiment is
+a special case that is deliberately disruptive, and it is treated more strictly
+than an ordinary directed action.
+
+| Field | Value |
+| --- | --- |
+| Read-only finding | A resilience finding (single-AZ dependency, unverified failover, retry/timeout handling, capacity limit) needs a controlled fault-injection experiment to confirm the system withstands the failure. |
+| Source | 326 recommends the experiment; 327 generates the template; 328 safety-gates it. |
+| Directed action | fis:StartExperiment (with the reviewed template). This injects a real fault and is never run autonomously by a scheduled agent. |
+| Parameters | experimentTemplateId=<reviewed-template>, on a non-production target scoped by tags or COUNT, with a CloudWatch-alarm stop condition attached. |
+| Guardrail status | special - not part of the standard directed-action catalog. A scheduled agent never starts an experiment; only a human starts it interactively, after the 328 safety scorecard passes, on a non-production-first target, during an agreed window. |
+| Safety | RED-by-default - a chaos experiment is a deliberate, customer-impacting fault. Requires explicit human approval, a passing safety audit (stop condition bound to a real alarm, scoped target, limited blast radius, rollback/abort defined), and non-production first. |
+| Approval scope | One StartExperiment call on the named reviewed template against the named non-production target, initiated by a human. The agents never hold or exercise fis:StartExperiment. |
+| Rollback | fis:StopExperiment (and the template's own stop condition aborts automatically when the CloudWatch alarm fires); recover the injected resources per the experiment's documented recovery steps. |
+| Notes | The agents are read-only and recommend-only: they produce the recommendation, the template, the safety scorecard, and the post-run analysis. Starting and stopping the experiment is a human action with their own credentials. This entry documents the boundary; it is not an authorization for an agent to inject faults. |
