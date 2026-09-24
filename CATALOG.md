@@ -736,6 +736,21 @@ Agents that turn resilience findings into AWS Fault Injection Service (FIS) chao
 
 ---
 
+## CloudWatch Omni observability
+
+Agents that get more from Amazon CloudWatch Omni - the application-centric, OpenTelemetry-native observability workspace where DevOps Agent participates in every investigation session. All read-only and recommend-only. Because Omni does not expose a confirmed dedicated use_aws action set, these agents rely on CloudWatch-native reads (Application Signals, metrics, logs, alarms, resource inventory) plus surfaced Omni context and recommend a CloudWatch/Omni MCP as augmentation; they do not assume an Omni API.
+
+| Type | Name | Description |
+|------|------|-------------|
+| Agent | [omni-space-and-slo-coverage-auditor](agents/331-omni-space-and-slo-coverage-auditor/) | Audits which discovered services belong to an Omni Space with declared targets vs unowned or target-less; separates blind spots from consolidation gaps |
+| Agent | [opentelemetry-instrumentation-coverage-reporter](agents/332-opentelemetry-instrumentation-coverage-reporter/) | Reports which services emit OpenTelemetry (traces/metrics/logs) vs partial or none, flagging gaps that leave Omni and DevOps Agent investigations blind |
+| Agent | [omni-investigation-history-and-mttr-reporter](agents/333-omni-investigation-history-and-mttr-reporter/) | Summarizes Omni/DevOps Agent investigation history into recurring-root-cause clusters, MTTR trends, and cross-team repeat offenders |
+| Skill | [omni-space-and-slo-coverage-audit](skills/observability-monitoring/omni-space-and-slo-coverage-audit/) | Omni Space and SLO/target coverage audit |
+| Skill | [opentelemetry-instrumentation-coverage](skills/observability-monitoring/opentelemetry-instrumentation-coverage/) | OpenTelemetry instrumentation coverage for Omni discovery |
+| Skill | [omni-investigation-history-analysis](skills/observability-monitoring/omni-investigation-history-analysis/) | Omni investigation-history root-cause and MTTR analysis |
+
+---
+
 ## Contact center, IoT, media, messaging, and purpose-built databases (skills)
 
 Skill domains added for whole AWS service categories. See [skills/README.md](skills/README.md) for the full skill tables.

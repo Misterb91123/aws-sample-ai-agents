@@ -26,10 +26,11 @@ All notable changes to this collection are documented here. The format is based 
 - Linked skills to agents: every agent-config.json now references 2 to 4 relevant skills (previously all empty).
 - Staggered agent trigger schedules to avoid a thundering herd (clustered cron slots spread across weekdays, hours, and minutes; the largest single cron slot dropped from 73 agents to 4).
 
-## [2026-09-12] - 326 agents, 226 skills across 27 domains
+## [2026-09-12] - 329 agents, 229 skills across 27 domains
 
 ### Added
-- Grew the collection to 326 custom agents and 226 skills across 27 operational domains.
+- Grew the collection to 329 custom agents and 229 skills across 27 operational domains.
+- Amazon CloudWatch Omni observability agents (331-333), added after AWS launched CloudWatch Omni (the application-centric, OpenTelemetry-native observability workspace where DevOps Agent is enabled by default in every investigation session): omni-space-and-slo-coverage-auditor (331, Space membership and declared-target coverage), opentelemetry-instrumentation-coverage-reporter (332, which services emit OTel telemetry that Omni discovery depends on), and omni-investigation-history-and-mttr-reporter (333, cross-team root-cause clusters and MTTR from captured investigation history). All read-only and recommend-only. Because Omni does not expose a confirmed dedicated use_aws action set, these agents rely on CloudWatch-native reads (Application Signals, metrics, logs, alarms, resource inventory) plus surfaced Omni context and recommend a CloudWatch/Omni MCP as augmentation - they do not assume or invent an Omni API. Existing observability agents are unchanged; these fill the Omni-specific coverage, instrumentation, and program-level-MTTR gaps rather than re-doing the live investigation Omni and DevOps Agent already perform.
 - Resilience and chaos-engineering agents (326-330) that turn resilience findings into AWS Fault Injection Service (FIS) experiments, adapted from the awslabs Resilience guidance (guidance-for-enhancing-resilience-devops-agent-fis): fis-experiment-recommender (326, finding-to-FIS-action mapping), fis-experiment-template-generator (327), fis-experiment-safety-and-blast-radius-auditor (328), fis-continuous-chaos-cicd-readiness-reporter (329), and fis-experiment-result-and-resilience-analyzer (330). All read-only and recommend-only: they recommend, template, safety-gate, and analyze experiments and reuse the existing chaos-experiment-planner skill; a human reviews the safety scorecard and runs the experiment. Running an experiment (fis:StartExperiment) is documented in agent-actions/mappings/reliability.md as a special, human-only, RED-by-default action that a scheduled agent never performs.
 - DEPLOYMENT.md: a new "Deploying with an AI assistant" section covering Claude (Code and Desktop), Kiro, Cursor, and Amazon Q Developer - both connecting the assistant to the DevOps Agent remote MCP endpoint (Pattern A) and authoring locally then applying through Chat (Pattern B), with per-action approval and read-only posture preserved.
 - High-demand diagnostic agents wave 3 (320-325): elasticache-cluster-rightsizer (320), s3-high-volume-deflector (321), athena-partition-doctor (323), and vpc-reachability-connectivity-diagnostic (325). Agent 325 deliberately introduces no new skill - it reuses the existing networking skills (cross-account-connectivity-debugger, nacl-and-sg-conflict-resolution, vpc-route-and-peering-troubleshooting) and adds Reachability Analyzer plus Flow Log REJECT orchestration, honoring the reuse-first principle. This wave completes the "most wanted" build: of the 25 requested items, 5 were already covered (AWS Backup 58, VPN tunnel 128, hybrid asymmetric routing and VPC connectivity skills) and were not rebuilt, and 4 were duplicate entries.
@@ -56,7 +57,7 @@ All notable changes to this collection are documented here. The format is based 
 
 ### Changed
 - Extended the ASCII check to `.py`, `.ps1`, `.yml`, `.yaml`, and `.txt` and excluded `.git`, `node_modules`, `cdk.out`, and `.terraform` from validation.
-- Updated `README.md` and `CATALOG.md` to the current counts (326 agents, 226 skills) and added catalog sections for all agents through 330 (317/318/322/324 retired) and the new skill domains.
+- Updated `README.md` and `CATALOG.md` to the current counts (329 agents, 229 skills) and added catalog sections for all agents through 333 (317/318/322/324 retired) and the new skill domains.
 
 ## [2026-08-14] - 226 agents, 145 skills
 

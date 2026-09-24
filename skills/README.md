@@ -1,6 +1,6 @@
 # AWS DevOps Agent - Skills Library for SRE, Platform & DevOps
 
-A curated library of **226 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
+A curated library of **229 skills** organized across **27 operational dimensions** for [AWS DevOps Agent](https://docs.aws.amazon.com/devopsagent/latest/userguide/about-aws-devops-agent-devops-agent-skills.html). Each skill provides domain-specific investigation procedures, decision frameworks, and operational knowledge that the agent loads automatically when relevant to a task.
 
 ---
 
@@ -129,6 +129,9 @@ Skills for understanding system behavior and detecting issues early.
 | [alarm-noise-reduction-strategy](observability-monitoring/alarm-noise-reduction-strategy/) | Reduces alarm noise and false pages | Generic |
 | [config-conformance-drift-remediation](observability-monitoring/config-conformance-drift-remediation/) | Remediates Config conformance pack noncompliance and rule drift | Evaluation |
 | [guardduty-trend-analysis](observability-monitoring/guardduty-trend-analysis/) | Analyzes GuardDuty severity trends and recurring finding types | Incident RCA |
+| [omni-space-and-slo-coverage-audit](observability-monitoring/omni-space-and-slo-coverage-audit/) | Audits CloudWatch Omni Space membership and declared service-health targets vs discovered services | Generic |
+| [opentelemetry-instrumentation-coverage](observability-monitoring/opentelemetry-instrumentation-coverage/) | Reports OpenTelemetry instrumentation coverage (traces/metrics/logs) that feeds Omni discovery | Generic |
+| [omni-investigation-history-analysis](observability-monitoring/omni-investigation-history-analysis/) | Summarizes Omni/DevOps Agent investigation history into root-cause clusters and MTTR trends | Generic |
 
 ---
 
@@ -632,6 +635,9 @@ skills/
 | +-- alarm-noise-reduction-strategy/SKILL.md
 | +-- config-conformance-drift-remediation/SKILL.md
 | +-- guardduty-trend-analysis/SKILL.md
+| +-- omni-space-and-slo-coverage-audit/SKILL.md
+| +-- opentelemetry-instrumentation-coverage/SKILL.md
+| +-- omni-investigation-history-analysis/SKILL.md
 +-- platform-engineering/
 | +-- capacity-planning-forecaster/SKILL.md
 | +-- infrastructure-drift-detector/SKILL.md

@@ -86,3 +86,5 @@ Produce a single artifact titled "Application Signals SLO and Service Map Report
 Create a recommendation when an SLO is breaching its goal, when remaining error budget is below 20 percent, or when a dependency edge error rate exceeds 5 percent:
 - A clear title, for example "Checkout service SLO at 99.2 percent against a 99.9 percent goal with 8 percent error budget remaining, downstream payments dependency erroring at 6 percent".
 - A summary stating the observed attainment or edge error rate, the specific service or SLO, and the recommended investigation or fix.
+
+Where Amazon CloudWatch Omni is in use, note that the Application Signals services and SLOs assessed here are the same data Omni organizes into application-centric Spaces and that DevOps Agent uses during Omni investigation sessions; a breaching SLO or degraded dependency found here can be handed to an Omni investigation for live root-cause work. The omni-space-and-slo-coverage-auditor (331) reports whether these services are actually covered by an Omni Space with declared targets.

@@ -1,0 +1,18 @@
+{
+  "name": "opentelemetry-instrumentation-coverage-reporter",
+  "description": "Reports OpenTelemetry instrumentation coverage that feeds CloudWatch Omni: which services emit telemetry over OTLP or the CloudWatch OTel/ADOT path (traces, metrics, logs) versus which appear in the topology or resource inventory with missing or partial telemetry (no traces, no custom metrics, logs only). Flags instrumentation gaps that leave Omni and DevOps Agent investigations blind and prioritizes by service criticality. Read-only and recommend-only; relies on CloudWatch-native reads plus surfaced Omni context (no assumed Omni API) and recommends a CloudWatch/Omni MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "query_cloudwatch_metrics",
+    "query_cloudwatch_logs"
+  ],
+  "skills": [
+    "opentelemetry-instrumentation-coverage",
+    "distributed-tracing-gap-analysis"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * WED *)",
+    "description": "Runs weekly on WED at 09:00 UTC"
+  }
+}

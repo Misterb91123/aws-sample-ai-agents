@@ -1,0 +1,18 @@
+{
+  "name": "omni-investigation-history-and-mttr-reporter",
+  "description": "Summarizes CloudWatch Omni investigation history and DevOps Agent investigations into a program-level reliability view: recurring-root-cause clusters, time-to-detect and time-to-recover (MTTR) trends, and repeat-offender services and dependencies across teams and Spaces. Omni captures full investigation history automatically and DevOps Agent participates in every session. Read-only and recommend-only; relies on CloudWatch-native reads plus surfaced Omni context (no assumed Omni API) and recommends a CloudWatch/Omni MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_investigations",
+    "query_cloudwatch_metrics"
+  ],
+  "skills": [
+    "omni-investigation-history-analysis",
+    "metric-correlation-investigator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * THU *)",
+    "description": "Runs weekly on THU at 09:00 UTC"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "omni-space-and-slo-coverage-auditor",
+  "description": "Audits CloudWatch Omni coverage: which discovered applications/services belong to an Omni Space with declared service-health targets (availability, latency budget, error rate) versus which are discovered but unowned or target-less. Cross-checks Application Signals SLOs and CloudWatch alarms to separate true blind spots from consolidation gaps. Read-only and recommend-only; relies on CloudWatch-native reads plus surfaced Omni context (no assumed Omni API) and recommends a CloudWatch/Omni MCP as augmentation.",
+  "tools": [
+    "use_aws",
+    "list_cloudwatch_alarms"
+  ],
+  "skills": [
+    "omni-space-and-slo-coverage-audit",
+    "sli-measurement-validator"
+  ],
+  "trigger": {
+    "type": "schedule",
+    "expression": "cron(0 9 ? * TUE *)",
+    "description": "Runs weekly on TUE at 09:00 UTC"
+  }
+}
