@@ -6,6 +6,8 @@ Give finance and platform teams a single dollar-denominated view of AWS extended
 
 ## Approach
 
+Start from Trusted Advisor, then enrich with direct inventory. Call `use_aws` with the Support API `DescribeTrustedAdvisorCheckResult` for the extended-support and deprecated-runtime checks (for example the RDS/Aurora "engine version in or entering Extended Support" checks and the Lambda deprecated-runtime check) to get AWS's own flagged list as the starting point. The Support and Trusted Advisor API requires a Business or Enterprise Support plan; if the account is not entitled, say so and rely on the direct inventory calls below. Use the Trusted Advisor findings to cross-check and prioritize, not to replace, the per-service enumeration.
+
 1. Call `use_aws` to inventory RDS and Aurora engines:
    - `rds DescribeDBInstances` for EngineVersion, Engine, DBInstanceClass, MultiAZ, DBInstanceIdentifier, and instance count.
    - `rds DescribeDBClusters` for Aurora EngineVersion, Engine, and cluster membership.
@@ -40,6 +42,7 @@ Give finance and platform teams a single dollar-denominated view of AWS extended
 
 ## Exception Handling
 
+- If the Support/Trusted Advisor API is not entitled (no Business or Enterprise Support plan), note "Trusted Advisor unavailable - no Support entitlement" and proceed using the direct inventory calls; the exposure analysis still runs, it just does not start from AWS's pre-flagged list.
 - If an AWS API call is throttled, wait and retry once. If the retry fails, note "Unable to inventory {resource_type} in {region} due to API throttling" and proceed with other resource types.
 - If access is denied for a service or account, skip that scope and note "Access denied for {service} in {account} - exposure incomplete for that scope."
 - If a service returns no resources, report "No {resource_type} resources found" and continue; this is a valid result.

@@ -6,6 +6,8 @@ Surface EC2 workloads that carry hidden end-of-support cost and risk, and be hon
 
 ## Approach
 
+Check Trusted Advisor first where it helps, then rely on direct inventory. Call `use_aws` with the Support API `DescribeTrustedAdvisorCheckResult` for any available EC2-related checks and use those findings as one input. Be honest about the limit: Trusted Advisor does not comprehensively flag operating-system end of support for EC2, so the operating-system classification below (via SSM and AMI metadata) remains the primary source, not Trusted Advisor. The Support and Trusted Advisor API requires a Business or Enterprise Support plan; if the account is not entitled, note that and proceed with the direct inventory calls.
+
 1. Call `use_aws` with `ec2 DescribeInstances` to inventory instances:
    - Capture instance ID, `Platform` and `PlatformDetails`, `ImageId`, `InstanceType` and its family, `LaunchTime`, state, tags, and environment.
 
@@ -33,6 +35,7 @@ Surface EC2 workloads that carry hidden end-of-support cost and risk, and be hon
 
 ## Exception Handling
 
+- If the Support/Trusted Advisor API is not entitled (no Business or Enterprise Support plan), note "Trusted Advisor unavailable - no Support entitlement" and proceed using the EC2, SSM, and AMI inventory calls; the operating-system end-of-support classification does not depend on Trusted Advisor.
 - If an AWS API call is throttled, wait and retry once. If the retry fails, note "Unable to inventory EC2 or SSM data in {region} due to API throttling" and proceed with what was gathered.
 - If access is denied for a service, account, or region, skip that scope and note "Access denied for {scope} - platform coverage incomplete for that scope".
 - If SSM has no record for an instance, fall back to AMI metadata and mark the OS version "inferred from AMI" rather than treating it as authoritative.

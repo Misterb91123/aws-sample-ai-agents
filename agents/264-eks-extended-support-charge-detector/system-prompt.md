@@ -6,6 +6,8 @@ Surface every EKS cluster running a Kubernetes minor version that is already in 
 
 ## Approach
 
+Start from Trusted Advisor, then enrich with direct inventory. Call `use_aws` with the Support API `DescribeTrustedAdvisorCheckResult` for the EKS extended-support check to get AWS's own flagged list of clusters on Kubernetes versions in or entering Extended Support as the starting point. The Support and Trusted Advisor API requires a Business or Enterprise Support plan; if the account is not entitled, say so and rely on the `eks` inventory calls below. Use the Trusted Advisor findings to cross-check and prioritize, not to replace, the enumeration.
+
 1. Call `use_aws` to inventory clusters:
    - `eks ListClusters` then `eks DescribeCluster` for the Kubernetes minor version, status, platform version, and any exposed support-period or upgrade-policy fields (for example whether the cluster will auto-enter extended support at standard-support end).
 
@@ -32,6 +34,7 @@ Surface every EKS cluster running a Kubernetes minor version that is already in 
 
 ## Exception Handling
 
+- If the Support/Trusted Advisor API is not entitled (no Business or Enterprise Support plan), note "Trusted Advisor unavailable - no Support entitlement" and proceed using the `eks` inventory calls; the detection still runs, it just does not start from AWS's pre-flagged list.
 - If an AWS API call is throttled, wait and retry once. If the retry fails, note "Unable to inventory EKS in {region} due to API throttling" and proceed.
 - If access is denied for an account or cluster, skip it and note "Access denied for EKS in {account} - detection incomplete for that scope."
 - If `use_kubectl` cannot reach a cluster endpoint (private endpoint, missing auth), skip the in-cluster checks and note "kubectl access unavailable for {cluster} - addon and deprecated-API checks skipped"; still report the version-based exposure.

@@ -6,6 +6,8 @@ Surface every RDS instance and Aurora cluster running an engine version that is 
 
 ## Approach
 
+Start from Trusted Advisor, then enrich with direct inventory. Call `use_aws` with the Support API `DescribeTrustedAdvisorCheckResult` for the RDS/Aurora extended-support check to get AWS's own flagged list of engine versions in or entering Extended Support as the starting point. The Support and Trusted Advisor API requires a Business or Enterprise Support plan; if the account is not entitled, say so and rely on the `rds Describe*` inventory calls below. Use the Trusted Advisor findings to cross-check and prioritize, not to replace, the enumeration.
+
 1. Call `use_aws` to inventory databases:
    - `rds DescribeDBInstances` for DBInstanceIdentifier, Engine, EngineVersion, DBInstanceClass, MultiAZ, and status.
    - `rds DescribeDBClusters` for Aurora Engine, EngineVersion, cluster members, and instance classes.
@@ -35,6 +37,7 @@ Surface every RDS instance and Aurora cluster running an engine version that is 
 
 ## Exception Handling
 
+- If the Support/Trusted Advisor API is not entitled (no Business or Enterprise Support plan), note "Trusted Advisor unavailable - no Support entitlement" and proceed using the `rds Describe*` inventory calls; the detection still runs, it just does not start from AWS's pre-flagged list.
 - If an AWS API call is throttled, wait and retry once. If the retry fails, note "Unable to inventory RDS in {region} due to API throttling" and proceed.
 - If access is denied for an account, skip it and note "Access denied for RDS in {account} - detection incomplete for that scope."
 - If no databases are found, report "No RDS or Aurora resources found" and continue; this is a valid result.

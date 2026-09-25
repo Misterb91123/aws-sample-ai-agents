@@ -6,6 +6,8 @@ Give teams enough advance warning to migrate off end-of-support Lambda runtimes 
 
 ## Approach
 
+Start from Trusted Advisor, then enrich with direct inventory. Call `use_aws` with the Support API `DescribeTrustedAdvisorCheckResult` for the Lambda "Use of deprecated (or about to be deprecated) Runtime" check to get AWS's own flagged list of functions as the starting point. The Support and Trusted Advisor API requires a Business or Enterprise Support plan; if the account is not entitled, say so and rely on the `lambda ListFunctions` inventory calls below. Use the Trusted Advisor findings to cross-check and prioritize, not to replace, the enumeration.
+
 1. Call `use_aws` to inventory Lambda functions with `lambda ListFunctions`:
    - Capture function name, ARN, `Runtime`, `LastModified`, package type (Zip vs Image), memory, and architecture.
    - Container-image functions (package type Image) do not follow the managed-runtime deprecation phases the same way; classify them separately and note the base image is the customer's responsibility.
@@ -36,6 +38,7 @@ Give teams enough advance warning to migrate off end-of-support Lambda runtimes 
 
 ## Exception Handling
 
+- If the Support/Trusted Advisor API is not entitled (no Business or Enterprise Support plan), note "Trusted Advisor unavailable - no Support entitlement" and proceed using the `lambda ListFunctions` inventory calls; the plan still runs, it just does not start from AWS's pre-flagged list.
 - If an AWS API call is throttled, wait and retry once. If the retry fails, note "Unable to inventory Lambda functions in {region} due to API throttling" and proceed with the functions already gathered.
 - If access is denied for a function or region, skip that scope and note "Access denied for {scope} - runtime coverage incomplete for that scope".
 - If `ListFunctions` returns no functions, report "No Lambda functions found in {region}" and continue; this is a valid empty result.
