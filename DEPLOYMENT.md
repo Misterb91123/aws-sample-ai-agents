@@ -49,6 +49,14 @@ AWS DevOps Agent is a managed service. There is no infrastructure to provision (
 
 The recommended approach is to import skills from GitHub (for automatic synchronization) and create agents through Chat (for guided tool assignment).
 
+### Skill dependency: import skills before or with the agent
+
+Each agent declares the skills it uses in the `skills` array of its `agent-config.json`. For example, agent 326 lists `fis-experiment-recommendation` and `chaos-experiment-planner`. Those skills are the paired procedure the agent follows.
+
+Import an agent's referenced skills into your Agent Space before, or at the same time as, creating the agent. An agent whose referenced skills are absent still creates and runs (skills enhance an agent, they are not a hard requirement to create it), but it runs without its paired procedure and produces shallow or degraded output. This looks like a silent bug rather than a clear failure, so treat the `skills` array as a deployment prerequisite.
+
+To find what an agent needs, open its `agent-config.json` and read the `skills` array. The same pairing is also listed in [skills/README.md](skills/README.md) and [CATALOG.md](CATALOG.md).
+
 ---
 
 ## Deploying skills
@@ -75,7 +83,7 @@ Choose one of the three methods below. Import from GitHub is recommended because
 
 6. Choose **Import skill**.
 
-7. Repeat for each skill. There are 75 skills across 15 category directories under `skills/`.
+7. Repeat for each skill. There are 229 skills across 27 category directories under `skills/`.
 
 The DevOps Agent reads the `SKILL.md` frontmatter to extract the skill name and description, then imports all files in the directory.
 
@@ -371,7 +379,7 @@ After deploying an agent:
 
 ## Bulk deployment
 
-To deploy all 100 agents efficiently, generate the Chat commands programmatically, then paste them into Chat in batches.
+To deploy all 329 agents efficiently, generate the Chat commands programmatically, then paste them into Chat in batches.
 
 ### Generate Chat commands (PowerShell)
 
@@ -468,6 +476,7 @@ Keep this repository as the source of truth. When you change a system prompt or 
 | Agent reports "API throttling" and partial data | High API call volume or shared throttle limits | Stagger agent schedules; the agents retry once and degrade gracefully |
 | Agent produces no artifact | Tool not assigned or system prompt incomplete | Verify tools in agent-config.json are assigned; re-run |
 | Skill not activating during invocation | Skill description does not match the task | Review the skill frontmatter description; make it specific to the trigger scenario |
+| Agent runs but the analysis is shallow or missing its documented procedure | A skill the agent references was not imported into the Agent Space | Open the agent's agent-config.json, import each skill named in its `skills` array, then re-run |
 | Skill import fails | SKILL.md missing or frontmatter invalid | Confirm SKILL.md is at the directory root with valid name and description frontmatter |
 | Agent reports "metrics not enabled" | The metric source is not turned on (for example, VPC Flow Logs, TGW metrics) | Enable the relevant metric or logging source, then re-run |
 | Agent times out on large inventories | Account has many resources of the analyzed type | Agents batch large inventories automatically; if it persists, scope the agent to specific accounts via the system prompt |
