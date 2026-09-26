@@ -12,6 +12,9 @@ description: Drives an end-to-end, human-gated remediation for AWS Lambda
   does not modify functions or code itself.
 version: "1.0.0"
 last_updated: "2026-09-12"
+metadata:
+  version: "1.0"
+  author: solair
 ---
 
 # Lambda Runtime Transform Remediation

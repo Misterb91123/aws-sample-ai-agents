@@ -1,0 +1,248 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: >-
+  Read-only IAM policies for the skills in this repository that document
+  additional permissions in their README Prerequisites. Most skill permissions
+  are already covered by the AWS managed policy AIDevOpsAgentAccessPolicy; this
+  template provisions the extra read-only actions a subset of skills need. Each
+  skill's policy can be enabled or disabled independently, an optional region
+  restriction can be applied, and the policies can be attached to an existing
+  DevOps Agent role or to a new role this template creates. All actions are
+  read-only (Describe, Get, List, Lookup, Simulate). No write, create, update, or
+  delete permission is granted.
+
+########################################################################
+# Parameters
+########################################################################
+Parameters:
+  ExistingRoleName:
+    Type: String
+    Default: ""
+    Description: >-
+      Name of an existing DevOps Agent execution role to attach these policies
+      to. Leave empty to have this template create a new role instead.
+
+  CreateNewRole:
+    Type: String
+    Default: "false"
+    AllowedValues: ["true", "false"]
+    Description: >-
+      Set to true to create a new IAM role (with the DevOps Agent service as
+      trusted principal) and attach the enabled policies to it. Leave false to
+      attach to ExistingRoleName.
+
+  RestrictToRegion:
+    Type: String
+    Default: ""
+    Description: >-
+      Optional. An AWS region (for example us-east-1) to restrict these
+      permissions to via an aws:RequestedRegion condition. Leave empty for no
+      region restriction. IAM and other global-service reads are not
+      region-restricted even when this is set.
+
+  EnableLambdaRuntimeTransformRemediation:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: Enable read-only permissions for the lambda-runtime-transform-remediation skill.
+
+  EnableEksVersionUpgradePlanning:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: Enable read-only permissions for the eks-version-upgrade-planning skill.
+
+  EnableAmiAndOsLifecycleManagement:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: Enable read-only permissions for the ami-and-os-lifecycle-management skill.
+
+  EnableDatabaseMigrationPlanner:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: Enable read-only permissions for the database-migration-planner skill.
+
+########################################################################
+# Conditions
+########################################################################
+Conditions:
+  ShouldCreateRole: !Equals [!Ref CreateNewRole, "true"]
+  UseExistingRole: !Not [!Equals [!Ref ExistingRoleName, ""]]
+  HasRegionRestriction: !Not [!Equals [!Ref RestrictToRegion, ""]]
+
+  LambdaEnabled: !Equals [!Ref EnableLambdaRuntimeTransformRemediation, "true"]
+  EksEnabled: !Equals [!Ref EnableEksVersionUpgradePlanning, "true"]
+  AmiEnabled: !Equals [!Ref EnableAmiAndOsLifecycleManagement, "true"]
+  DbEnabled: !Equals [!Ref EnableDatabaseMigrationPlanner, "true"]
+
+########################################################################
+# Resources
+########################################################################
+Resources:
+
+  # Optional new role, trusted by the DevOps Agent service principal.
+  DevOpsAgentSkillRole:
+    Type: AWS::IAM::Role
+    Condition: ShouldCreateRole
+    Properties:
+      Description: Read-only role for AWS DevOps Agent skills in this repository.
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: devops-agent.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AIDevOpsAgentAccessPolicy
+
+  # lambda-runtime-transform-remediation
+  LambdaRuntimeTransformRemediationPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Condition: LambdaEnabled
+    Properties:
+      Description: Read-only permissions for the lambda-runtime-transform-remediation skill.
+      Roles:
+        !If
+          - ShouldCreateRole
+          - [!Ref DevOpsAgentSkillRole]
+          - !If [UseExistingRole, [!Ref ExistingRoleName], !Ref "AWS::NoValue"]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: LambdaRuntimeReadOnly
+            Effect: Allow
+            Action:
+              - lambda:ListFunctions
+              - lambda:GetFunction
+              - lambda:GetFunctionConfiguration
+              - cloudwatch:GetMetricData
+              - cloudwatch:GetMetricStatistics
+            Resource: "*"
+            Condition:
+              !If
+                - HasRegionRestriction
+                - StringEquals: { "aws:RequestedRegion": !Ref RestrictToRegion }
+                - !Ref "AWS::NoValue"
+          - Sid: LambdaRuntimeSupportAndHealthReadOnly
+            Effect: Allow
+            Action:
+              - support:DescribeTrustedAdvisorCheckResult
+              - support:DescribeTrustedAdvisorChecks
+              - health:DescribeEvents
+              - health:DescribeEventDetails
+            Resource: "*"
+
+  # eks-version-upgrade-planning
+  EksVersionUpgradePlanningPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Condition: EksEnabled
+    Properties:
+      Description: Read-only permissions for the eks-version-upgrade-planning skill.
+      Roles:
+        !If
+          - ShouldCreateRole
+          - [!Ref DevOpsAgentSkillRole]
+          - !If [UseExistingRole, [!Ref ExistingRoleName], !Ref "AWS::NoValue"]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: EksReadOnly
+            Effect: Allow
+            Action:
+              - eks:ListClusters
+              - eks:DescribeCluster
+              - eks:ListNodegroups
+              - eks:DescribeNodegroup
+              - eks:ListAddons
+              - eks:DescribeAddon
+              - eks:DescribeAddonVersions
+              - eks:ListInsights
+              - eks:DescribeInsight
+            Resource: "*"
+            Condition:
+              !If
+                - HasRegionRestriction
+                - StringEquals: { "aws:RequestedRegion": !Ref RestrictToRegion }
+                - !Ref "AWS::NoValue"
+
+  # ami-and-os-lifecycle-management
+  AmiAndOsLifecycleManagementPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Condition: AmiEnabled
+    Properties:
+      Description: Read-only permissions for the ami-and-os-lifecycle-management skill.
+      Roles:
+        !If
+          - ShouldCreateRole
+          - [!Ref DevOpsAgentSkillRole]
+          - !If [UseExistingRole, [!Ref ExistingRoleName], !Ref "AWS::NoValue"]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AmiAndOsReadOnly
+            Effect: Allow
+            Action:
+              - ec2:DescribeImages
+              - ec2:DescribeInstances
+              - ec2:DescribeLaunchTemplates
+              - ec2:DescribeLaunchTemplateVersions
+              - autoscaling:DescribeAutoScalingGroups
+              - ssm:DescribeInstanceInformation
+              - ssm:DescribeInstancePatchStates
+              - ssm:DescribeInstancePatchStatesForPatchGroup
+              - ssm:GetParameter
+            Resource: "*"
+            Condition:
+              !If
+                - HasRegionRestriction
+                - StringEquals: { "aws:RequestedRegion": !Ref RestrictToRegion }
+                - !Ref "AWS::NoValue"
+
+  # database-migration-planner
+  DatabaseMigrationPlannerPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Condition: DbEnabled
+    Properties:
+      Description: Read-only permissions for the database-migration-planner skill.
+      Roles:
+        !If
+          - ShouldCreateRole
+          - [!Ref DevOpsAgentSkillRole]
+          - !If [UseExistingRole, [!Ref ExistingRoleName], !Ref "AWS::NoValue"]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DatabaseMigrationReadOnly
+            Effect: Allow
+            Action:
+              - rds:DescribeDBInstances
+              - rds:DescribeDBClusters
+              - rds:DescribeDBEngineVersions
+              - rds:DescribeOrderableDBInstanceOptions
+              - dms:DescribeReplicationInstances
+              - dms:DescribeReplicationTasks
+              - dms:DescribeEndpoints
+              - cloudwatch:GetMetricData
+              - cloudwatch:GetMetricStatistics
+            Resource: "*"
+            Condition:
+              !If
+                - HasRegionRestriction
+                - StringEquals: { "aws:RequestedRegion": !Ref RestrictToRegion }
+                - !Ref "AWS::NoValue"
+
+########################################################################
+# Outputs
+########################################################################
+Outputs:
+  RoleName:
+    Description: The role these policies were attached to.
+    Value: !If [ShouldCreateRole, !Ref DevOpsAgentSkillRole, !Ref ExistingRoleName]
+
+  RoleArn:
+    Condition: ShouldCreateRole
+    Description: ARN of the newly created DevOps Agent skill role.
+    Value: !GetAtt DevOpsAgentSkillRole.Arn

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "detect-from-trusted-advisor",
+    "prompt": "Trusted Advisor flags several Lambda functions on deprecated runtimes. Build a remediation plan.",
+    "expected_output": "The skill reads the Trusted Advisor deprecated-runtime check result to build the authoritative list of flagged functions, cross-checks with Lambda for the $LATEST runtime and package type, and produces a detection summary. If Support entitlement is missing it says so and falls back to the Lambda deprecated-runtime data and AWS Health.",
+    "assertions": [
+      "The output starts from the Trusted Advisor deprecated-runtime check result",
+      "The output states that the Support and Trusted Advisor API requires a Business or Enterprise Support plan and describes the fallback when it is absent",
+      "The output cross-checks the flagged list against Lambda ListFunctions and the per-function runtime",
+      "The output does not modify any function and presents the plan as a recommendation"
+    ]
+  },
+  {
+    "id": "classify-phase-and-deadline",
+    "prompt": "Our payment-processor function runs python3.8. When am I blocked and how urgent is this?",
+    "expected_output": "The skill classifies the runtime against Phase 1 (create blocked, no security patches) and Phase 2 (update blocked), computes days-to-phase from AWS published deprecation dates, and prioritizes by deadline proximity then production criticality. A runtime with no valid published date is marked deprecation unknown, not assigned a placeholder deadline.",
+    "assertions": [
+      "The output classifies the runtime against Phase 1 and Phase 2 with their distinct effects",
+      "The output computes days-to-phase from AWS published runtime deprecation dates",
+      "The output marks a runtime with no valid published date as deprecation unknown rather than guessing a date",
+      "The output prioritizes by deadline proximity and production criticality"
+    ]
+  },
+  {
+    "id": "transform-plan-with-gates",
+    "prompt": "Plan the actual code upgrade for these deprecated functions and keep a human in the loop.",
+    "expected_output": "The skill plans an AWS Transform assessment and an AWS-managed language-version-upgrade transformation per function or repository, names the target supported runtime, and requires human approval to run the transformation and to merge the resulting code change before any deploy.",
+    "assertions": [
+      "The output plans an AWS Transform assessment and transformation to reach a supported runtime",
+      "The output requires human approval for the assessment, the transformation, the code merge, and the deploy",
+      "The output states that AWS Transform proposes the code change and a person approves it",
+      "The output groups functions that share a repository into one Transform job where efficient"
+    ]
+  },
+  {
+    "id": "config-vs-code-and-rollback",
+    "prompt": "Can you just bump the runtime identifier on these functions to fix them fast?",
+    "expected_output": "The skill explains that the runtime bump (UpdateFunctionConfiguration) must follow the approved, verified code upgrade, never precede it, because a forward bump without the code change can break the function. It states a per-function rollback (previous published version or prior image tag).",
+    "assertions": [
+      "The output states the runtime bump must follow the approved, verified code change and never precede it",
+      "The output explains that a forward bump without the code change can break the function",
+      "The output specifies an explicit rollback per function (previous published version or prior image tag)",
+      "The output does not recommend bumping the runtime ahead of the code as a shortcut"
+    ]
+  },
+  {
+    "id": "image-and-custom-runtimes",
+    "prompt": "Some of our functions are container images and one uses a custom runtime. How do those get remediated?",
+    "expected_output": "The skill routes container-image functions through a rebuilt supported base image and a new image tag (rollback is the prior tag), and flags custom runtimes (provided.*) for a manual base-image path rather than an AWS-managed language transformation.",
+    "assertions": [
+      "The output routes container-image functions through a rebuilt supported base image and a new tag",
+      "The output states the rollback for an image function is the prior image tag",
+      "The output flags custom (provided.*) runtimes for a manual path, not an AWS-managed transformation",
+      "The output does not claim an AWS extended-support surcharge applies to deprecated Lambda runtimes"
+    ]
+  }
+]

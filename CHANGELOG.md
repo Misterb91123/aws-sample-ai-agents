@@ -8,6 +8,8 @@ All notable changes to this collection are documented here. The format is based 
 - Relicensed from MIT to MIT-0 (MIT No Attribution); no attribution required for use, modification, or distribution.
 
 ### Added
+- Reference-standard packaging for the extended-support and end-of-life skills referenced by agents 262-266 (`lambda-runtime-transform-remediation`, `eks-version-upgrade-planning`, `ami-and-os-lifecycle-management`, `database-migration-planner`): per-skill `README.md` with IAM prerequisites and a sample-code disclaimer, `CHANGELOG.md`, an `evals/` folder (`evals.json` graded cases + `eval_queries.json` should-trigger cases), and open-spec `metadata` (version and author) in the SKILL.md frontmatter. Deepened the EKS and AMI/OS SKILL.md files with extended-support cost and lifecycle reference detail (both to 1.1.0).
+- CloudFormation template `cloudformation/devops-agent-skill-policies.yaml` that provisions the extra read-only IAM a subset of skills document, with a per-skill enable/disable toggle, an optional region restriction, and attach-to-existing-role or create-new-role modes (validated with cfn-lint).
 - Prominent sample and use-at-your-own-risk notice at the top of `README.md` and a full `Disclaimer` section covering due diligence, testing in non-production, permissions ownership, and no warranty.
 - Security and guardrails framework in `SECURITY.md`, adapted from the AWS sample-ai-agent-skills SECURITY.md and tailored to these read-only agents (threat model, prohibited recommendations, GREEN/YELLOW/RED safety classification, escalation conditions, anti-hallucination rules, data sensitivity classifications, production deployment recommendations).
 - Reusable `## Guardrails` block embedded in all 226 agent system prompts.

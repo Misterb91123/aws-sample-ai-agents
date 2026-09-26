@@ -2,8 +2,11 @@
 name: eks-version-upgrade-planning
 agent_type: "Generic"
 description: Use when planning Amazon EKS Kubernetes version upgrades ahead of end of support. It detects clusters near EOL, control plane to node version skew, and incompatible add-on versions, then sequences a safe upgrade path. Apply during quarterly platform maintenance or when EKS announces version deprecation.
-version: "1.0.0"
-last_updated: "2026-08-14"
+version: "1.1.0"
+last_updated: "2026-09-12"
+metadata:
+  version: "1.1"
+  author: solair
 ---
 
 # EKS Version Upgrade Planning
@@ -42,5 +45,18 @@ Plan EKS control plane and node upgrades before versions reach end of standard s
 - Recommend surge upgrade settings with maxUnavailable of 1 and a canary node group.
 - Schedule upgrades to complete at least 30 days before EOL.
 
+## Step 6: Quantify Extended-Support Exposure
+- A cluster that reaches end of standard support enters EKS extended support, which raises the control-plane per-cluster-hour charge for up to 12 months, after which the cluster is auto-upgraded.
+- Read the cluster upgrade policy (DescribeCluster) to see whether the cluster will auto-enter extended support at standard-support end, so the charge begins without any action.
+- Estimate the monthly delta = (extended-support per-cluster-hour minus standard per-cluster-hour) x 730 per cluster. State the assumed rates as estimates; authoritative pricing is in AWS Pricing and Cost Explorer.
+- Use this to rank clusters: those already in extended support (incurring now) and those set to auto-enter soonest lead the plan.
+
+## Version skew and support reference
+
+- EKS supports a node kubelet up to 3 minor versions older than the control plane on recent versions (historically 2); treat skew greater than the supported window as unsupported and upgrade nodes first.
+- Upgrades move one minor version at a time; you cannot skip a minor version on the control plane.
+- Standard support for an EKS minor version runs about 14 months from release; extended support adds up to 12 months at a higher control-plane rate. Use the AWS published EKS version lifecycle calendar for the exact dates per minor version; do not assume dates.
+- Core managed add-ons to validate against the target version: vpc-cni, coredns, kube-proxy, and aws-ebs-csi-driver.
+
 ## Output
-Produce a titled "EKS Version Upgrade Plan" listing each cluster version with its EOL date and days remaining, control plane to node skew, incompatible add-on versions, and deprecated API usage. Include a prioritized remediation list: upgrade clusters within 60 days of EOL first, resolve version skew greater than 2 by upgrading nodes, apply required add-on version bumps, then schedule remaining upgrades in one-minor-version increments.
+Produce a titled "EKS Version Upgrade Plan" listing each cluster version with its EOL date and days remaining, control plane to node skew, incompatible add-on versions, deprecated API usage, and the extended-support cost exposure (already incurring, or the monthly delta that begins if the cluster auto-enters extended support). Include a prioritized remediation list: upgrade clusters already in or nearest to extended support first, resolve version skew greater than the supported window by upgrading nodes, apply required add-on version bumps, then schedule remaining upgrades in one-minor-version increments to complete at least 30 days before EOL. Label every cost figure an estimate.

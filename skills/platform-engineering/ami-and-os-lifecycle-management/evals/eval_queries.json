@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Find EC2 instances running end-of-life operating systems and stale AMIs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Which launch templates and ASGs still pin old AMIs, and what should we refresh?",
+    "should_trigger": true
+  },
+  {
+    "query": "Audit our AMI hygiene and patch compliance before the compliance review.",
+    "should_trigger": true
+  },
+  {
+    "query": "Diagnose why my EC2 instance is failing its status checks.",
+    "should_trigger": false
+  },
+  {
+    "query": "Right-size my EC2 instances to reduce compute cost.",
+    "should_trigger": false
+  },
+  {
+    "query": "Audit my security groups for overly permissive inbound rules.",
+    "should_trigger": false
+  },
+  {
+    "query": "Plan an EKS cluster version upgrade before end of support.",
+    "should_trigger": false
+  },
+  {
+    "query": "Which Lambda functions are on deprecated runtimes?",
+    "should_trigger": false
+  }
+]

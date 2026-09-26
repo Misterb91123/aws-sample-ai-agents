@@ -1,0 +1,57 @@
+[
+  {
+    "id": "inventory-stale-amis",
+    "prompt": "Find our self-owned AMIs that are old but still in use.",
+    "expected_output": "The skill calls DescribeImages with Owners self, reads CreationDate and DeprecationTime, computes AMI age, and flags AMIs older than 180 days that are still referenced by running instances, launch templates, or Auto Scaling groups, plus AMIs with no deprecation date set.",
+    "assertions": [
+      "The output reads self-owned AMIs and computes AMI age from CreationDate",
+      "The output flags AMIs older than 180 days that are still in active use",
+      "The output identifies AMIs with no DeprecationTime set",
+      "The output is read-only and presents remediation as a recommendation"
+    ]
+  },
+  {
+    "id": "end-of-life-os",
+    "prompt": "Which EC2 instances are running operating systems that are past end of support?",
+    "expected_output": "The skill maps instances to their OS release, preferring the SSM-reported PlatformName and PlatformVersion over AMI-name inference, and classifies each against published vendor end-of-support dates, marking any undeterminable date as EOS date unknown rather than guessing.",
+    "assertions": [
+      "The output prefers SSM DescribeInstanceInformation for the reported OS and falls back to AMI metadata marked inferred",
+      "The output classifies OS releases against published vendor end-of-support dates",
+      "The output marks an undeterminable date as EOS date unknown rather than guessing",
+      "The output flags instances running an OS past vendor end of life"
+    ]
+  },
+  {
+    "id": "launch-template-asg-drift",
+    "prompt": "Are any of our launch templates or Auto Scaling groups pinning old AMIs?",
+    "expected_output": "The skill reads launch template versions and Auto Scaling group configurations, flags those referencing AMIs older than 180 days or superseded builds, and recommends updating to the latest hardened AMI via an SSM Parameter reference rather than a hard-coded AMI ID.",
+    "assertions": [
+      "The output reads launch template versions and Auto Scaling group AMI references",
+      "The output flags templates or groups pinning stale or superseded AMIs",
+      "The output recommends referencing the latest hardened AMI via SSM Parameter Store",
+      "The output does not modify any launch template or Auto Scaling group"
+    ]
+  },
+  {
+    "id": "cost-attribution-honesty",
+    "prompt": "What is AWS charging us extra for these end-of-life Windows and SQL Server instances?",
+    "expected_output": "The skill states that AWS does not charge an operating-system extended-support surcharge for EC2 itself, and separates the exposure into third-party OS and database vendor extended-support and licensing cost, security exposure from unpatched software, and the previous-generation price-performance premium, labeling dollar figures as estimates.",
+    "assertions": [
+      "The output states EC2 has no AWS OS extended-support surcharge",
+      "The output attributes Windows and SQL Server exposure to third-party vendor extended-support and licensing cost",
+      "The output separates security exposure and price-performance premium from vendor licensing cost",
+      "The output labels dollar figures as estimates and defers to AWS Pricing and Cost Explorer"
+    ]
+  },
+  {
+    "id": "patch-and-deregistered-ami",
+    "prompt": "Check patch compliance and whether any instances are on AMIs we can no longer launch from.",
+    "expected_output": "The skill reads SSM patch compliance and flags instances with NON_COMPLIANT state or no patch association, and separately flags instances referencing a deregistered AMI as unable to recover from termination, distinct from a merely stale AMI.",
+    "assertions": [
+      "The output reads SSM patch compliance and flags NON_COMPLIANT or unassociated instances",
+      "The output flags instances referencing a deregistered AMI as unrecoverable from termination",
+      "The output distinguishes a deregistered-AMI risk from a merely stale AMI",
+      "The output orders remediation with end-of-life OS instances first"
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "profile-source",
+    "prompt": "We want to migrate a large on-premises Oracle database to AWS. Where do we start?",
+    "expected_output": "The skill profiles the source database first: engine and exact version, edition, character set, total data size, transaction rate, largest tables, schema complexity (stored procedures, triggers, materialized views, partitioning, LOBs), and the applications and ETL jobs that depend on it, before recommending a target.",
+    "assertions": [
+      "The output gathers engine, exact version, edition, and size of the source",
+      "The output captures transaction rate and read/write characteristics",
+      "The output inventories schema complexity (stored procedures, views, partitioning, LOBs)",
+      "The output identifies application, ETL, and replication dependencies before recommending a target"
+    ]
+  },
+  {
+    "id": "target-recommendation",
+    "prompt": "Should we move our Oracle workload to RDS Oracle or to PostgreSQL?",
+    "expected_output": "The skill distinguishes a homogeneous migration (lower risk, full DMS compatibility) from a heterogeneous one (schema conversion needed, higher effort), and recommends a target with justification based on the source profile, cost, licensing, and feature compatibility.",
+    "assertions": [
+      "The output distinguishes homogeneous from heterogeneous migration and their relative risk",
+      "The output recommends a target engine with explicit justification",
+      "The output weighs cost, licensing, and feature compatibility in the recommendation",
+      "The output notes heterogeneous migrations require schema conversion (SCT)"
+    ]
+  },
+  {
+    "id": "schema-conversion-assessment",
+    "prompt": "How much schema conversion effort should we expect moving from SQL Server to PostgreSQL?",
+    "expected_output": "The skill plans an AWS Schema Conversion Tool assessment and categorizes items into auto-converted, manual-conversion-needed, and no-equivalent (redesign), and names common conversion challenges such as T-SQL to PL/pgSQL, IDENTITY to SERIAL/SEQUENCE, and linked databases requiring FDW.",
+    "assertions": [
+      "The output plans an AWS Schema Conversion Tool assessment",
+      "The output categorizes conversion items into auto-converted, manual, and no-equivalent",
+      "The output names concrete conversion challenges for the engine pair",
+      "The output estimates effort rather than asserting a fixed number"
+    ]
+  },
+  {
+    "id": "method-and-downtime",
+    "prompt": "We need near-zero downtime for this migration. What method should we use?",
+    "expected_output": "The skill selects a migration method against the downtime tolerance, choosing DMS full load plus CDC for low-downtime cutover, explains full-load-time estimation from data size and throughput, and covers LOB-handling and DMS instance sizing considerations.",
+    "assertions": [
+      "The output selects DMS full load plus CDC for a low-downtime requirement",
+      "The output estimates full-load time from data size and DMS throughput",
+      "The output addresses LOB-handling strategy and DMS instance sizing",
+      "The output matches the method to the stated downtime tolerance"
+    ]
+  },
+  {
+    "id": "cutover-and-rollback",
+    "prompt": "Give us the cutover runbook and a rollback plan for the migration.",
+    "expected_output": "The skill produces a minimal-downtime cutover procedure (full load, CDC catch-up to near-zero lag, stop writes, confirm lag zero, redirect connections, validate), with row-count and smoke-test validation, and an explicit rollback keeping the source operational for an agreed window.",
+    "assertions": [
+      "The output gives an ordered cutover procedure driven by CDC lag reaching zero",
+      "The output includes row-count and application smoke-test validation at cutover",
+      "The output provides an explicit rollback that keeps the source operational for a defined window",
+      "The output presents the plan for a human to execute and does not perform the migration"
+    ]
+  }
+]

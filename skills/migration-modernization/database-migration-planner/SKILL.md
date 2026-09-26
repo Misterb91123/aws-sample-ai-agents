@@ -8,6 +8,9 @@ description: Plans database migrations to AWS by assessing schema compatibility,
   or minimal-downtime migration strategies.
 version: "1.0.0"
 last_updated: "2026-08-14"
+metadata:
+  version: "1.0"
+  author: solair
 ---
 
 # Database Migration Planner

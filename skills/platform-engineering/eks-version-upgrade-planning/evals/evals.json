@@ -1,0 +1,57 @@
+[
+  {
+    "id": "detect-clusters-near-eol",
+    "prompt": "Which of our EKS clusters are approaching end of support and need upgrading?",
+    "expected_output": "The skill reads each cluster version via DescribeCluster, compares it against the AWS published EKS lifecycle calendar, and flags clusters within the upgrade window or already past standard support, reporting the EOL date and days remaining. It does not assume lifecycle dates.",
+    "assertions": [
+      "The output reads each cluster version and compares it against the published EKS lifecycle calendar",
+      "The output reports the end-of-standard-support date and days remaining per cluster",
+      "The output does not invent lifecycle dates and defers to the AWS published calendar",
+      "The output is read-only and presents an upgrade plan as a recommendation"
+    ]
+  },
+  {
+    "id": "version-skew",
+    "prompt": "Our node groups look older than the control plane on a couple of clusters. Is that a problem?",
+    "expected_output": "The skill measures control-plane-to-node minor-version skew via DescribeNodegroup and flags skew beyond the supported window as unsupported, recommending the nodes be upgraded first before the control plane advances further.",
+    "assertions": [
+      "The output measures control-plane-to-node minor-version skew",
+      "The output flags skew beyond the supported window as unsupported",
+      "The output recommends upgrading nodes first to close the skew",
+      "The output states upgrades proceed one minor version at a time"
+    ]
+  },
+  {
+    "id": "addon-and-api-compatibility",
+    "prompt": "Before we upgrade to the next EKS minor version, what add-on and API issues should we expect?",
+    "expected_output": "The skill validates the core managed add-ons (vpc-cni, coredns, kube-proxy, aws-ebs-csi-driver) against the target version and checks for deprecated-API usage via cluster insights, recording the required add-on bumps and any workloads on removed APIs to remediate before the upgrade.",
+    "assertions": [
+      "The output validates the core managed add-ons against the target version",
+      "The output checks deprecated-API usage (cluster insights or kubectl warnings) before the upgrade",
+      "The output records the required add-on version bumps to apply during the upgrade",
+      "The output orders the upgrade as control plane, then add-ons, then node groups"
+    ]
+  },
+  {
+    "id": "extended-support-cost",
+    "prompt": "One cluster is stuck on an old version - is EKS charging us extra for it?",
+    "expected_output": "The skill recognizes that a cluster past end of standard support enters EKS extended support at a higher control-plane per-cluster-hour rate, checks whether the cluster will auto-enter extended support, and estimates the monthly delta, clearly labeling the figure an estimate and deferring authoritative pricing to AWS Pricing and Cost Explorer.",
+    "assertions": [
+      "The output explains that extended support raises the control-plane per-cluster-hour charge",
+      "The output checks whether the cluster auto-enters extended support at standard-support end",
+      "The output estimates the monthly delta and labels it an estimate",
+      "The output defers authoritative pricing to AWS Pricing and Cost Explorer"
+    ]
+  },
+  {
+    "id": "sequenced-plan",
+    "prompt": "Give me a safe, ordered upgrade plan for the flagged clusters.",
+    "expected_output": "The skill sequences the upgrade one minor version at a time (control plane, then add-ons, then node groups), recommends surge settings and a canary node group, and schedules completion ahead of the EOL date, prioritizing clusters already in or nearest to extended support.",
+    "assertions": [
+      "The output sequences control plane, then add-ons, then node groups",
+      "The output moves one minor version at a time and does not skip a minor version",
+      "The output prioritizes clusters already in or nearest to extended support",
+      "The output schedules completion ahead of the end-of-support date"
+    ]
+  }
+]

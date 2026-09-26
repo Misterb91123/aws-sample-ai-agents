@@ -14,6 +14,15 @@ Each skill contains:
 - **Reference tables** - thresholds, severity classifications, and comparison criteria.
 - **Output format** - what the skill should produce (reports, recommendations, action items).
 
+Every skill directory has a `SKILL.md` (the instructions the agent loads). Some
+skills are also packaged to the fuller reference standard with a `README.md`
+(overview, IAM prerequisites, example prompts, and a sample-code disclaimer), a
+`CHANGELOG.md`, and an `evals/` folder (`evals.json` with graded behavioral
+cases and `eval_queries.json` with should-trigger cases). The skill at
+[security-operations/aiml-access-chain-diagnosis](security-operations/aiml-access-chain-diagnosis/)
+is the worked example of this fuller standard; the extended-support and
+end-of-life skills referenced by agents 262-266 also follow it.
+
 ---
 
 ## Categories & Skills

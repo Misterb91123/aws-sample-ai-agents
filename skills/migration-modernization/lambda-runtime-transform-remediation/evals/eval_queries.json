@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Which Lambda functions are on deprecated runtimes and how do I remediate them with AWS Transform?",
+    "should_trigger": true
+  },
+  {
+    "query": "Trusted Advisor flagged deprecated Lambda runtimes - build a deadline-aware plan with approval gates and rollback.",
+    "should_trigger": true
+  },
+  {
+    "query": "Plan the python3.8 to a supported runtime upgrade for our functions using AWS Transform.",
+    "should_trigger": true
+  },
+  {
+    "query": "My Lambda function is timing out and I need to diagnose the cold-start latency.",
+    "should_trigger": false
+  },
+  {
+    "query": "Recommend provisioned concurrency settings to cut Lambda cost.",
+    "should_trigger": false
+  },
+  {
+    "query": "Audit my Lambda function IAM roles for over-broad permissions.",
+    "should_trigger": false
+  },
+  {
+    "query": "Which RDS databases are in extended support and what is the surcharge?",
+    "should_trigger": false
+  },
+  {
+    "query": "Plan an EKS cluster upgrade from 1.27 before end of support.",
+    "should_trigger": false
+  }
+]

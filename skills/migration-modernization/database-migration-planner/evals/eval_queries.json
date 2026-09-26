@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Plan a migration of our on-premises Oracle database to Aurora PostgreSQL.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need a minimal-downtime plan to move RDS MySQL to Aurora MySQL.",
+    "should_trigger": true
+  },
+  {
+    "query": "Assess schema conversion effort and cutover risk for a SQL Server to PostgreSQL migration.",
+    "should_trigger": true
+  },
+  {
+    "query": "My RDS instance has high CPU and slow queries - help me tune it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Recommend a backup and retention policy for my Aurora cluster.",
+    "should_trigger": false
+  },
+  {
+    "query": "Which RDS engine versions are in extended support and what is the surcharge?",
+    "should_trigger": false
+  },
+  {
+    "query": "Audit my database security groups and encryption settings.",
+    "should_trigger": false
+  },
+  {
+    "query": "Plan an EKS cluster upgrade before end of support.",
+    "should_trigger": false
+  }
+]
