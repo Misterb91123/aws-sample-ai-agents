@@ -18,6 +18,27 @@ when a task matches.
 
 ---
 
+## Disclaimer
+
+These agents and skills are provided as samples for illustrative and educational
+purposes only. They are not intended for production use as-is. Before deploying
+any agent or acting on its output in a production environment, perform your own
+due diligence: review each system prompt, the tools and IAM permissions it
+requires, and the skills it uses; validate its behavior in a non-production
+account first; and confirm it meets your organization's security, compliance,
+operational, and cost requirements. The agents in this collection are read-only
+and produce reports and recommendations; you remain responsible for reviewing
+those recommendations and for any change you choose to make as a result.
+
+This collection is provided "as is" without warranties of any kind, express or
+implied. You are responsible for your use of these materials and for your use of
+AWS DevOps Agent and other AWS services, including all associated costs. Refer to
+the [AWS DevOps Agent documentation](https://docs.aws.amazon.com/devopsagent/latest/userguide/)
+for authoritative guidance, and treat any cost, lifecycle, or pricing figures the
+agents produce as estimates to be verified against AWS Pricing and Cost Explorer.
+
+---
+
 ## Architecture at a glance
 
 A deployed custom agent is a system prompt plus a curated set of MCP tools,
@@ -128,7 +149,6 @@ deploy/                 Deployment options: Console, AWS CLI, Bash, CloudFormati
 agent-actions/          Optional directed actions: turn recommendations into approved changes
 policies/               Least-privilege read-only IAM starting policy
 schemas/                JSON schema for optional machine-readable recommendations
-scripts/                validate.py and generate_deploy_commands.py
 AGENT_TEMPLATE.md       Authoring template and best-practices checklist
 CATALOG.md              Browse agents and skills by operational domain and by AWS service
 DEPLOYMENT.md           Step-by-step deployment guide (Console-focused)
@@ -139,44 +159,33 @@ SECURITY.md             Security and guardrails framework
 
 ## Quick start
 
-1. **Validate the collection** (run this before deploying or after any edit):
+1. **Browse the collection.** Open [CATALOG.md](CATALOG.md) to find agents and
+   skills by operational domain and by AWS service, then look at the agent's
+   folder under `agents/` (its `system-prompt.md` and `agent-config.json`) and
+   the paired skills under `skills/`. Each `agent-config.json` lists the skills
+   that agent uses in its `skills` array.
 
-   ```bash
-   python scripts/validate.py
-   ```
+2. **Import the skills** an agent needs into your Agent Space (import from this
+   repository, upload as a ZIP, or create in the UI). Import an agent's skills
+   before or at the same time as creating the agent.
 
-   It checks that every file is pure ASCII, every `agent-config.json` is valid
-   and uses only known DevOps Agent tools, every system prompt has the required
-   sections in order, and every `SKILL.md` has valid `name`, `description`, and
-   `agent_type` frontmatter.
+3. **Create the agent** from its `system-prompt.md`, assign the tools listed in
+   its `agent-config.json`, assign its skills, and set its trigger.
 
-2. **Generate Chat deploy commands** for the agents you want:
-
-   ```bash
-   python scripts/generate_deploy_commands.py            # all agents
-   python scripts/generate_deploy_commands.py 01 02      # by agent number
-   python scripts/generate_deploy_commands.py cost       # by name fragment
-   python scripts/generate_deploy_commands.py --out deploy.txt
-   ```
-
-   Each block is ready to paste into DevOps Agent Chat to create the agent,
-   assign its tools and skills, and set its trigger.
-
-3. **Deploy.** Import skills from this repository, then create agents and assign
-   their tools. See [DEPLOYMENT.md](DEPLOYMENT.md) for the full walkthrough.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the full walkthrough, including Console,
+AWS CLI, infrastructure-as-code, and AI-assistant options.
 
 ---
 
 ## Deploying
 
 The workflow is the same regardless of which method you pick: get the repo onto
-GitHub and validate it, prepare the Agent Space, then create the two asset types
-(skills and custom agents), wire up triggers, and verify a run.
+GitHub, prepare the Agent Space, then create the two asset types (skills and
+custom agents), wire up triggers, and verify a run.
 
 ```mermaid
 flowchart TD
-    A[Clone repo] --> B[Run scripts/validate.py]
-    B --> C[Push to GitHub]
+    A[Clone repo] --> C[Push to GitHub]
     C --> D[Prepare Agent Space:<br/>connect accounts, tools,<br/>read-only IAM, GitHub link]
     D --> E{Choose a deployment path}
 
@@ -231,12 +240,12 @@ https://github.com/YOUR-ORG/YOUR-REPO/tree/main/skills/incident-management/blast
 ```
 
 **Agents** - create through Chat (recommended, because tools are only assignable
-in Chat) using the blocks from `generate_deploy_commands.py`, or import the
-`system-prompt.md` from GitHub and then assign tools in Chat afterwards.
+in Chat) from the agent's `system-prompt.md`, then assign the tools and set the
+trigger from its `agent-config.json`. You can also import the `system-prompt.md`
+from GitHub and assign tools in Chat afterwards.
 
 Because agent import reads only the system prompt, the tools and trigger from
-`agent-config.json` must be applied separately. The generator script produces
-exactly the Chat instructions to do that.
+`agent-config.json` must be applied separately in Chat.
 
 ---
 
@@ -248,8 +257,8 @@ depends on two independent gates, and both must pass:
 1. **The skill must be reachable by the agent.** A custom agent loads only the
    skills you assign to it, plus any skill whose `agent_type` is `Generic`
    (available to all agent types). If a skill is neither assigned nor `Generic`,
-   the agent can never load it. This is why each generated deploy block includes
-   an "Assign these skills" line and why every `SKILL.md` records its
+   the agent can never load it. This is why each `agent-config.json` lists the
+   skills to assign in its `skills` array and why every `SKILL.md` records its
    `agent_type`.
 
 2. **The agent must judge the skill relevant at runtime.** During an invocation
@@ -260,8 +269,8 @@ depends on two independent gates, and both must pass:
 
 To make activation reliable:
 
-- **Assign the intended skills.** Use the "Assign these skills" line from
-  `generate_deploy_commands.py`, or assign them in Chat, for example:
+- **Assign the intended skills.** Assign the skills listed in the agent's
+  `agent-config.json` `skills` array in Chat, for example:
 
   ```
   Assign the blast-radius-assessment and metric-correlation-investigator skills
@@ -351,15 +360,15 @@ flowchart TD
   [CATALOG.md](CATALOG.md).
 - To author a new agent or skill that matches the repository conventions, follow
   [AGENT_TEMPLATE.md](AGENT_TEMPLATE.md) and the skills library overview in
-  [skills/README.md](skills/README.md), then run `python scripts/validate.py`.
+  [skills/README.md](skills/README.md). See [CONTRIBUTING.md](CONTRIBUTING.md)
+  for the checks a contribution must pass.
 
 ---
 
 ## Contributing
 
-Contributions are welcome. Before opening a merge request, run
-`python scripts/validate.py` and confirm it passes. See
-[CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
+checks a contribution must pass, and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 

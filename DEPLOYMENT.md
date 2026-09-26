@@ -2,6 +2,8 @@
 
 This guide provides step-by-step instructions for deploying the custom agents and skills in this repository to AWS DevOps Agent.
 
+> **Disclaimer.** These agents and skills are samples provided for illustrative and educational purposes and are not intended for production use as-is. Before deploying any agent or acting on its output in production, perform your own due diligence: review the system prompt, tools, and IAM permissions each agent needs; validate it in a non-production account first; and confirm it meets your security, compliance, operational, and cost requirements. See the Disclaimer section in [README.md](README.md).
+
 ## Table of contents
 
 1. [Prerequisites](#prerequisites)
